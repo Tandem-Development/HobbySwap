@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Implements hook_uninstall().
+ */
+function hs_trade_uninstall(){
+  $bins = [
+    'node.type.item',
+    'taxonomy.vocabulary.item_categories',
+    'views.view.hs_item_grid',
+    'block.block.hstransactionnotifications'
+  ];
+  foreach($bins as $bin){
+    \Drupal::configFactory()->getEditable($bin)->delete();
+  }
+}

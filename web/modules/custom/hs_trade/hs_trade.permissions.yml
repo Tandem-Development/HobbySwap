@@ -1,0 +1,12 @@
+'delete transaction entity':
+  title: Delete transaction entity
+'add transaction entity':
+  title: Add transaction entity
+'view transaction entity':
+  title: View transaction entity
+'edit transaction entity':
+  title: Edit transaction entity
+'administer transaction entity':
+  title: Administer transaction settings
+'interact transaction requests':
+  title: Interact with transactions

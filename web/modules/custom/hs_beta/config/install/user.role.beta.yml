@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: beta
+label: 'Beta User'
+weight: -8
+is_admin: null
+permissions: {  }

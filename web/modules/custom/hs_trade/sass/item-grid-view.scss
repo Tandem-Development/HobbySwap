@@ -1,0 +1,227 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+.view-hs-item-grid{
+  position: relative;
+  font-size: 1rem;
+}
+
+//Styling for filter criteria form START
+.view-hs-item-grid {
+  .view-filters {
+    z-index: 20;
+    position: fixed;
+    top: 15vh;
+    bottom: 15vh;
+    left: 0;
+    max-width: 25rem;
+    padding: 0.8rem;
+    border-radius: 0 0.2rem 0.2rem 0;
+    border: 1px solid $hs-gray2;
+    background-color: $hs-gray1;
+    @media (max-width: 575.8px){
+      padding: 0.2rem;
+      .collapsed .filter-header .slideout-arrow{
+        font-size: 1.8rem;
+      }
+    }
+    .filter-header{
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      &::after{
+        content: '';
+        position: absolute;
+        inset: 80% 0 17% 0;
+        background-color: $hs-gray2;
+      }
+      h3{
+        color: $hs-gray4;
+        text-align: center;
+        padding: 0.25em;
+        font-weight: 600;
+        font-size: 2.4rem;
+      }
+      .slideout-arrow{
+        color: $hs-blue;
+        transition: color 0.1s linear;
+        &:hover{
+          cursor: pointer;
+          color: $hs-yellow;
+        }
+      }
+    }
+    .form-item{
+      width: 100%;
+      margin-top: 0;
+      label{
+        color: $hs-black;
+        font-weight: 600;
+        margin-left: 1em;
+      }
+    }
+    .form-item-field-item-value-value{
+      margin-bottom: 0.1em;
+    }
+    #edit-actions{
+      input{
+        margin-bottom: 0.2em;
+        width: 100%;
+      }
+    }
+    .collapsed{
+      width: 2rem;
+      .form-item, #edit-actions{
+        display: none;
+      }
+      .filter-header {
+        flex-direction: column-reverse;
+        &::after{
+          display: none;
+        }
+        .label {
+          font-size: 1rem;
+          transform: rotate(90deg);
+        }
+        .slideout-arrow{
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+//Styling for filter criteria form STOP
+
+
+//Styling for view grid START
+
+.view-hs-item-grid .view-content .views-row {
+  position: relative;
+  border-radius: 0.3em 0.3em 0.6em 0.6em;
+  border: 0.5em solid $hs-gray1;
+  border-bottom: 0.7em solid $hs-blue;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 3px 8px $hs-gray2;
+  }
+
+  .views-field-field-item-image {
+    display: block;
+    flex: 1;
+    position: relative;
+    height: inherit;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid $hs-gray1;
+
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 100% 5% -2% 5%;
+      border-radius: 100vmax;
+      background-color: $hs-gray1;
+    }
+
+    .field-content {
+      position: absolute;
+      inset: 0;
+      animation: fade 0.3s forwards;
+
+      img {
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .views-field-title {
+    margin: 0 1rem;
+    height: 3.75em;
+    text-align: center;
+    overflow: hidden;
+
+    .field-content a {
+      color: $hs-black;
+      font-size: 1.5em;
+      line-height: 0.8em;
+      text-decoration: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+
+  .views-field-field-item-value {
+    display: inline-block;
+    margin: 0 0 0.5rem 5%;
+    width: 40%;
+
+    .field-content {
+      font-size: 1.7em;
+    }
+  }
+
+  .views-field-uid {
+    display: inline-block;
+    width: 40%;
+    margin: 0 10% 0.5rem 0;
+    text-align: right;
+
+    .field-content a {
+      color: $hs-blue;
+      position: absolute;
+      right: 5%;
+      bottom: 0.5rem;
+    }
+  }
+}
+.view-hs-item-grid .view-empty{
+  text-align: center;
+  a{
+    font-weight: 600;
+  }
+}
+
+//Styling for view grid STOP
+
+//Styling for view pager START
+.view-hs-item-grid nav{
+  margin: 2em 0;
+  .pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.5em;
+    .pager__item{
+      display: flex;
+      a{
+        display: block;
+        color: $hs-blue;
+        span{
+          display: block;
+        }
+      }
+    }
+    .pager__item--next, .pager__item--last{
+      color: $hs-blue;
+    }
+    .active a{
+      color: white;
+      background-color: $hs-blue;
+      border: 1px solid $hs-blue;
+    }
+  }
+}
+//Styling for view pager STOP

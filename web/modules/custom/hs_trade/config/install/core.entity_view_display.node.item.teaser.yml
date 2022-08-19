@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.item.field_item_category
+    - field.field.node.item.field_item_condition
+    - field.field.node.item.field_item_description
+    - field.field.node.item.field_item_image
+    - field.field.node.item.field_item_in_person
+    - field.field.node.item.field_item_interest
+    - field.field.node.item.field_item_status
+    - field.field.node.item.field_item_value
+    - node.type.item
+  module:
+    - user
+id: node.item.teaser
+targetEntityType: node
+bundle: item
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_item_category: true
+  field_item_condition: true
+  field_item_description: true
+  field_item_image: true
+  field_item_in_person: true
+  field_item_interest: true
+  field_item_status: true
+  field_item_value: true
+  langcode: true
+  private_message_link: true

@@ -1,0 +1,158 @@
+#Creates a trade route for all nodes
+hs_trade.item_trade:
+  path: '/node/{id}/trade'
+  defaults:
+    _controller: 'Drupal\hs_trade\Controller\ItemTradeController::viewTrade'
+    _title_callback: 'Drupal\hs_trade\Controller\ItemTradeController::tradeTitle'
+  requirements:
+    _custom_access: 'Drupal\hs_trade\Controller\ItemTradeController::tradeAccess'
+
+#Displays current user's involved transactions as a local task
+hs_trade.user_view_transactions:
+  path: '/user/{user}/transactions'
+  defaults:
+    _controller: 'Drupal\hs_trade\Controller\UserTransactionViewController::viewUserTransactions'
+    _title: 'Your Transactions'
+  requirements:
+    _custom_access: 'Drupal\hs_trade\Controller\UserTransactionViewController::viewUserTransactionsAccess'
+  options:
+    no_cache: 'TRUE'
+
+hs_trade.user_view_transactions_alias:
+  path: '/user/transactions'
+  defaults:
+    _controller: 'Drupal\hs_trade\Controller\UserTransactionViewController::userTransactionsAlias'
+  requirements:
+    _permission: 'access content'
+
+#Routes for request interactions
+hs_trade.transaction_accept:
+  path: "/transaction/{hs_trade_transaction}/accept"
+  defaults:
+    _controller: 'Drupal\hs_trade\Controller\RequestInteractController::acceptRequest'
+  requirements:
+    _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::interactionAccess'
+  options:
+    no_cache: 'TRUE'
+
+hs_trade.transaction_decline:
+  path: "/transaction/{hs_trade_transaction}/decline"
+  defaults:
+    _controller: 'Drupal\hs_trade\Controller\RequestInteractController::declineRequest'
+  requirements:
+    _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::declinationAccess'
+  options:
+    no_cache: 'TRUE'
+
+hs_trade.transaction_counter:
+  path: "/transaction/{hs_trade_transaction}/counter"
+  defaults:
+    _controller: 'Drupal\hs_trade\Controller\RequestInteractController::counterRequest'
+  requirements:
+    _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::interactionAccess'
+  options:
+    no_cache: 'TRUE'
+
+hs_trade.transaction_confirm:
+  path: "/transaction/{hs_trade_transaction}/confirm"
+  defaults:
+    _controller: 'Drupal\hs_trade\Controller\RequestInteractController::confirmationRequest'
+  requirements:
+    _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::confirmationAccess'
+  options:
+    no_cache: 'TRUE'
+
+#Route that enables users to purchase HobbyCoin if their balance is insufficient
+hs_trade.purchase_hobbycoin:
+  path: "/transaction/{hs_trade_transaction}/purchase"
+  defaults:
+    _controller: 'Drupal\hs_trade\Controller\PurchaseHobbyCoinController::purchase'
+  requirements:
+    _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::confirmationAccess'
+
+#Routes for Transaction content entity
+entity.hs_trade_transaction.canonical:
+  path: '/transaction/{hs_trade_transaction}'
+  defaults:
+    _entity_view: 'hs_trade_transaction'
+    _title: 'Transaction content'
+  requirements:
+    _entity_access: 'hs_trade_transaction.view'
+
+entity.hs_trade_transaction.collection:
+  path: '/transaction/list'
+  defaults:
+    _entity_list: 'hs_trade_transaction'
+    _title: 'Transaction list'
+  requirements:
+    _permission: 'view transaction entity'
+  options:
+    _admin_route: TRUE
+
+hs_trade.transaction_add:
+  path: '/transaction/add'
+  defaults:
+    _entity_form: hs_trade_transaction.default
+    _title: 'Add transaction'
+  requirements:
+    _entity_create_access: 'hs_trade_transaction'
+  options:
+    _admin_route: TRUE
+
+hs_trade.transaction_offer_add:
+  path: '/transaction/offer/add'
+  defaults:
+    _entity_form: hs_trade_transaction.add_transaction
+    _title: 'Make offer'
+  requirements:
+    _entity_create_access: 'hs_trade_transaction'
+  options:
+    _admin_route: TRUE
+
+entity.hs_trade_transaction.edit_form:
+  path: '/transaction/{hs_trade_transaction}/edit'
+  defaults:
+    _entity_form: hs_trade_transaction.default
+    _title: 'Edit transaction'
+  requirements:
+    _entity_access: 'hs_trade_transaction.update'
+  options:
+    _admin_route: TRUE
+
+entity.hs_trade_transaction.delete_form:
+  path: '/transaction/{hs_trade_transaction}/delete'
+  defaults:
+    _entity_form: hs_trade_transaction.delete
+    _title: 'Delete transaction'
+  requirements:
+    _entity_access: 'hs_trade_transaction.delete'
+  options:
+    _admin_route: TRUE
+
+hs_trade.transaction_settings:
+  path: '/admin/structure/hs_trade_transaction_settings'
+  defaults:
+    _form: '\Drupal\hs_trade\Form\TransactionSettingsForm'
+    _title: 'Transaction settings'
+  requirements:
+    _permission: 'administer transaction entity'
+  options:
+    _admin_route: TRUE
+
+#Notification AJAX endpoint route
+hs_trade.ajax_callback:
+  path: '/hs-trade/ajax-callback/{op}'
+  defaults:
+    _controller: '\Drupal\hs_trade\Controller\AjaxController::ajaxCallback'
+  requirements:
+    _csrf_token: 'TRUE'
+    _user_is_logged_in: 'TRUE'
+
+
+hs_trade.form_elements:
+  path: '/form-elements'
+  defaults:
+    _form: '\Drupal\hs_trade\Form\FormElements'
+    _title: 'Form Elements'
+  requirements:
+    _permission: 'access content'

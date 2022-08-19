@@ -1,0 +1,10 @@
+bundle: hs
+excluded:
+  - user.settings
+  - field.field.user.user.field_checkbox
+  - field.field.user.user.user_picture
+  - field.storage.user.field_checkbox
+  - field.storage.user.user_picture
+  - pathauto.pattern.user
+  - core.entity_view_mode.user.token
+required: true

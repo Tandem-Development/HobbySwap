@@ -1,0 +1,20 @@
+name: Trade
+description: 'Provides trade functionality for HobbySwap'
+type: module
+version: 8.x-1.0
+package: HS
+core_version_requirement: '^8.9 || ^9'
+dependencies:
+  - 'drupal:block'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:options'
+  - 'drupal:path'
+  - 'drupal:taxonomy'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'viewsreference:viewsreference'

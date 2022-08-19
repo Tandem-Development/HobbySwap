@@ -1,0 +1,44 @@
+trade-page:
+  version: 1.x
+  css:
+    theme:
+      css/trade-page.css: {}
+  js:
+    js/trade-page.js: {}
+
+node--hs-item:
+  version: 1.x
+  css:
+    theme:
+      css/node--hs-item.css: {}
+  js:
+    js/item-display.js: {}
+
+hs-transactions:
+  version: 1.x
+  css:
+    theme:
+      css/hs-transactions.css: {}
+  js:
+    js/hs-transactions-ajax.js: {}
+
+item-grid-view:
+  version: 1.x
+  css:
+    theme:
+      css/item-grid-view.css: {}
+  js:
+    js/item-grid-view.js: {}
+
+ajax-update-notifications:
+  version: 1.x
+  css:
+    theme:
+      css/notifications-block.css: { }
+  js:
+    js/ajax-update-notifications.js: {}
+
+user-transactions-view:
+  version: 1.x
+  js:
+    js/user-transactions-page.js: { }

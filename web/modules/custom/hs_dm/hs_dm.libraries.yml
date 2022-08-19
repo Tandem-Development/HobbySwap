@@ -1,0 +1,13 @@
+inbox:
+  version: 1.x
+  css:
+    theme:
+      css/inbox.css: {}
+  js:
+    js/inbox-ajax.js: {}
+
+private-message-thread:
+  version: 1.x
+  css:
+    theme:
+      css/private-message-thread.css: {}

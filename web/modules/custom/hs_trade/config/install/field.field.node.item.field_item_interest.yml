@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_item_interest
+    - node.type.item
+id: node.item.field_item_interest
+field_name: field_item_interest
+entity_type: node
+bundle: item
+label: 'Items of Interest'
+description: 'Name some items that you are interested in trading for'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

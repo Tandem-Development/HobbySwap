@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_item_in_person
+    - node.type.item
+id: node.item.field_item_in_person
+field_name: field_item_in_person
+entity_type: node
+bundle: item
+label: In-Person
+description: 'By checking this box, the item will be marked as available for an in-person meetup and exchange of items'
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Available
+  off_label: 'Not Available'
+field_type: boolean

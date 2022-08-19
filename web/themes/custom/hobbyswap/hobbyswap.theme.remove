@@ -1,0 +1,133 @@
+<?php
+/**
+ * @file
+ * HobbySwap theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function hobbyswap_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+	if(!is_object($node)) {
+      		$node = \Drupal\node\Entity\Node::load($node);
+    	}
+    $content_type = $node->bundle();
+    if ($content_type == 'full_page' or $content_type == 'article') {
+	  $suggestions[] = 'page__fullwidth';
+	}
+  }
+  /*
+  $view = \Drupal::service('entity.manager')->getStorage('view')->load('portfolio_wide');
+  if ($view) {
+    $suggestions[] = 'page__fullwidth';
+  }
+  if (($views_page = views_get_page_view()) && $views_page->name === "portfolio_wide") {
+    $suggestions[] = 'page__fullwidth';
+    }
+  */
+  $request = \Drupal::routeMatch()->getRouteObject()->getDefault('view_id');
+  if (!empty($request) && $request == 'portfolio_wide' ) {
+    $suggestions[] = 'page__fullwidth';
+  }
+}
+
+/**
+ * Add color, menu and theme settings
+ */
+function hobbyswap_preprocess_page(&$variables) {
+  // Theme color
+  $color = theme_get_setting('theme_color');
+  if ($color != 'default') {
+    $variables['#attached']['library'][] = 'hobbyswap/'.$color.'-styling';
+  }
+
+  // Theme menu
+  $variables['mainmenu_sticky'] = theme_get_setting('menu_sticky');
+  $menu = theme_get_setting('theme_menu');
+  $variables['mainmenu_class'] = '';
+  if($menu == 'menu_transparant') {
+    $variables['mainmenu_class'] = 'absolute transparent';
+  }
+  elseif($menu == 'menuwhite') {
+    $variables['mainmenu_class'] = '';
+  }
+  elseif($menu == 'menudark') {
+    $variables['mainmenu_class'] = 'bg--dark';
+  }
+  else {
+    $variables['mainmenu_class'] = 'navbar-default';
+  }
+
+  $variables['mainmenu_transparent'] = '';
+
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if ($node->hasField('field_mainmenu_transparent')) {
+	  //var_dump($node->get('field_mainmenu_transparent')->getValue());
+	  $mainmenu_transparent = $node->get('field_mainmenu_transparent')->getValue();
+	  if($mainmenu_transparent[0]['value']) {
+	    $variables['mainmenu_transparent'] = 'bar--transparent bar--absolute';
+	  }
+	}
+  }
+}
+
+
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function hobbyswap_preprocess_html(&$variables) {
+  //if ($variables['menu_name'] === 'main') {
+  	$menu_action = theme_get_setting('menu_hover');
+  	$variables['mainmenu_hover'] = '';
+  	if($menu_action == 'menu_hover') {
+    		$variables['mainmenu_hover'] = 'dropdowns--hover';
+  	}
+  //}
+}
+
+/**
+ * Process block content
+ */
+function hobbyswap_theme_suggestions_block_alter(&$suggestions, $variables) {
+  // Load theme suggestions from Stack theme
+  foreach ($suggestions as &$suggestion) {
+    $suggestion = str_replace('hobbyswap_', 'stack_', $suggestion);
+  }
+
+  $content = $variables['elements']['content'];
+  if (isset($content['#block_content']) && $content['#block_content'] instanceof \Drupal\block_content\BlockContentInterface) {
+    $suggestions[] = 'block__' . $content['#block_content']->bundle();
+  }
+
+}
+
+/**
+ * Process block content
+ */
+function hobbyswap_preprocess_block(&$variables) {
+  $variables['base_path'] = base_path();
+
+
+}
+
+
+/**
+* Implements hook_form_alter() to add classes to the search form.
+*/
+function hobbyswap_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  /*if (in_array($form_id, ['search_block_form', 'search_form'])) {
+    $key = ($form_id == 'search_block_form') ? 'actions' : 'basic';
+
+    $form[$key]['submit']['#access'] = false;
+  }*/
+  if($form_id == 'simplenews-subscriptions-block-51c118f2-9da0-49c9-989e-546854732655') {
+    $form['mail']['und'][0]['value']['#title'] = '';
+    $form['mail']['und'][0]['value']['#attributes']['placeholder'] = t('EMAIL');
+  }
+}

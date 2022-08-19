@@ -1,0 +1,33 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function hs_credit_entity_base_field_info(EntityTypeInterface $entity_type)
+{
+  if ($entity_type->id() === 'user') {
+    $fields['hc_balance'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('HobbyCredit Balance'))
+      ->setDescription(t('A user\'s current HobbyCredit balance.'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'number_integer',
+      ])
+      ->setDefaultValue(0)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    return $fields;
+  }
+}
+
+function hs_credit_theme($existing, $type, $theme, $path){
+  return[
+    'field__user__hc_balance' => [
+      'base hook' => 'field',
+      'template' => 'field--user--hc-balance',
+    ]
+  ];
+}

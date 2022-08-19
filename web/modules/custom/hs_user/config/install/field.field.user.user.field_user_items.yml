@@ -1,0 +1,61 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_user_items
+    - views.view.user_items
+  module:
+    - user
+    - viewsreference
+id: user.user.field_user_items
+field_name: field_user_items
+entity_type: user
+bundle: user
+label: 'User Items'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    options:
+      title: 0
+      argument: ''
+    display_id: block_1
+    argument: null
+    title: 0
+    data: null
+    target_uuid: d45a7e89-a330-47ef-8900-d05b6c0d4010
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: 0
+  plugin_types:
+    block: block
+    default: 0
+    page: 0
+    feed: 0
+  preselect_views:
+    user_items: user_items
+    block_content: 0
+    blog_categories: 0
+    blog_lists: 0
+    blog_tags: 0
+    careers: 0
+    comment: 0
+    comments_recent: 0
+    content: 0
+    content_recent: 0
+    files: 0
+    frontpage: 0
+    hs_item_grid: 0
+    message: 0
+    portfolio_lists: 0
+    portfolio_related: 0
+    taxonomy_term: 0
+    user_admin_people: 0
+    watchdog: 0
+    who_s_new: 0
+    who_s_online: 0
+field_type: viewsreference

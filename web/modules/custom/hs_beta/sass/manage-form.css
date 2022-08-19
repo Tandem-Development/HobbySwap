@@ -1,0 +1,33 @@
+/* line 1, manage-form.scss */
+.region .hs-betaopen {
+  text-align: center;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+/* line 6, manage-form.scss */
+.region .hs-betaopen fieldset {
+  flex: 1;
+}
+/* line 9, manage-form.scss */
+.region .hs-betaopen fieldset .form-item label {
+  display: none;
+}
+/* line 14, manage-form.scss */
+.region .hs-betaopen h2 {
+  color: red;
+  font-size: 4em;
+  max-width: 30em;
+  line-height: 1em;
+  margin: 1.5em auto 0.5em auto;
+}
+/* line 21, manage-form.scss */
+.region .hs-betaopen #edit-open {
+  font-size: 3em;
+  color: green;
+}
+/* line 25, manage-form.scss */
+.region .hs-betaopen #edit-close {
+  font-size: 3em;
+  color: red;
+}

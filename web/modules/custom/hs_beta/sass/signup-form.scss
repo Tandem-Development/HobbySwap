@@ -1,0 +1,27 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+#block-hobbyswapbetasignupform{
+  .hs-betasignup{
+    text-align: center;
+    margin: 3em 20vw;
+    @media screen and (max-width: 1600px){
+      margin: 3em 10vw;
+    }@media screen and (max-width: 1000px) {
+    margin: 3em 5vw;
+    }
+    .form-item{
+      margin-top: 1em;
+      label{
+        text-align: left;
+        display: block;
+        font-size: 1.1em;
+        font-weight: 550;
+      }
+    }
+    .form-item-first-name, .form-item-last-name{
+      display: inline-block;
+      width: 49.8%;
+      margin: 0 auto;
+    }
+  }
+}

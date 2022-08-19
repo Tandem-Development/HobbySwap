@@ -1,0 +1,391 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+//Handles styling for hs_transaction theme
+.region-content{
+  position: relative;
+}
+
+/*Styling for transactions START*/
+.hs--transaction{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.8rem;
+  border-right: 8px solid $hs-gray1;
+  border-left: 8px solid $hs-gray1;
+  border-radius: 0.4em;
+  box-shadow: 2px 2px 4px grey;
+  .hs--transaction-header{
+    row-gap: 1rem;
+    margin: 1em 1.5em;
+    .transaction-id{
+      font-weight: 500;
+      font-size: 1em;
+      color: $hs-gray2;
+      margin: 0;
+    }
+    .transaction-members{
+      width: fit-content;
+      font-size: 1rem;
+      div{
+        width: fit-content;
+        margin: 0;
+        font-weight: bold;
+        a{
+          color: $hs-blue;
+          padding: 0.5em 1em;
+          border: 2px solid $hs-gray1;
+          border-radius: 0.3em;
+          transition: all 0.2s ease;
+          text-decoration: none;
+          &:hover{
+            background-color: $hs-gray1;
+          }
+        }
+      }
+    }
+  }
+
+  .hs--transaction-body{
+    padding: 0.75em;
+    .hs--requester-items{
+      display: flex;
+      flex-direction: column;
+      padding: 1em 0.2em;
+      .requester-item--link:hover{
+        text-decoration: none;
+      }
+      .offered{
+        position: relative;
+        font-size: 1.5em;
+        font-weight: 400;
+        color: white;
+        margin: 0 1em;
+        padding: 0.2em 1em;
+        width: auto;
+        background-color: $hs-blue;
+        border-radius: 0.3em 0.3em 0 0;
+        a{
+          color: white;
+          &:hover{
+            color: $hs-gray2;
+          }
+        }
+      }
+      .requester-item{
+        display: flex;
+        align-items: center;
+        background-color: $hs-gray1;
+        padding: 1em 0.5em;
+        margin: 0 0.5em 1em 0.5em;
+        border-radius: 0.3em;
+        border-left: 6px solid $hs-gray3;
+        transition: all 0.2s;
+        &:hover{
+          box-shadow: 1px 1px 10px $hs-gray2;
+          transform: translateY(-0.3em);
+        }
+        .requester-item--image{
+          position: relative;
+          flex-basis: 30%;
+          background-color: white;
+          border: 1px solid $hs-gray2;
+          &:before{
+            content: '';
+            display: block;
+            padding-bottom: 100%;
+          }
+          .image-spacer{
+            position: absolute;
+            inset: 0;
+            img{
+              object-fit: contain;
+              height: 100%;
+              width: 100%;
+            }
+          }
+        }
+        .requester-item--info{
+          flex-basis: 70%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding:  0 1em;
+          .requester-item--name{
+            font-size: 1.5em;
+            font-weight: 500;
+            padding-bottom: 0.5em;
+            border-bottom: 1px solid $hs-gray2;
+            margin-bottom: 0;
+          }
+          .requester-item--value{
+            font-size: 1.75em;
+            margin-top: 0.5em;
+          }
+        }
+      }
+      .residual{
+        text-align: center;
+        background-color: $hs-gray1;
+        padding: 1em 2em;
+        margin: 0 0.5em 1em 0.5em;
+        border-radius: 0.3em;
+        border-left: 6px solid $hs-yellow;
+        h3{
+          font-size: 2.5em;
+          margin: auto;
+        }
+      }
+    }
+    .hs--action-links{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      padding: 0 0.6em;
+      margin-bottom: 1em;
+      .transaction-status{
+        font-size: 1.2em;
+        padding: 0.5em 0.3em;
+        margin: 0.3em 0;
+        background-color: $hs-yellow;
+        border-radius: 0.2em;
+        color: $hs-black;
+        font-weight: 600;
+        text-transform: uppercase;
+        span{
+          color: $hs-blue;
+        }
+      }
+      .accept:hover, .confirm:hover{
+        background-color: green;
+      }
+      .decline:hover{
+        background-color: red;
+      }
+      .counter:hover{
+        background-color: $hs-gray4;
+      }
+      .message:hover{
+        background-color: $hs-gray4;
+      }
+      .action-link{
+        position: relative;
+        padding: 0.5em 1em;
+        margin: 0.3em 0;
+        background-color: $hs-blue;
+        border-radius: 0.2em;
+        text-align: center;
+        transition: all 0.2s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+        &:hover, &:focus{
+          margin: 0.3em 0.6em;
+        }
+        a{
+          color: white;
+          text-decoration: none;
+          &::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          }
+        }
+        img{
+          width: 1.2em;
+        }
+      }
+    }
+    .hs--responder-items{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 1em 0.2em;
+      .responder-item--link:hover{
+        text-decoration: none;
+      }
+      .wants{
+        position: relative;
+        font-size: 1.5em;
+        font-weight: 400;
+        color: white;
+        margin: 0 1em;
+        padding: 0.2em 1em;
+        width: auto;
+        background-color: $hs-blue;
+        border-radius: 0.3em 0.3em 0 0;
+        a{
+          color: white;
+          &:hover{
+            color: $hs-gray2;
+          }
+        }
+      }
+      .responder-item{
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        background-color: $hs-gray1;
+        padding: 1em 0.5em;
+        margin: 0 0.5em 1em 0.5em;
+        border-radius: 0.3em;
+        border-right: 6px solid $hs-gray3;
+        transition: all 0.2s;
+        &:hover{
+          box-shadow: 1px 1px 10px $hs-gray2;
+          transform: translateY(-0.3em);
+        }
+        .responder-item--image{
+          position: relative;
+          flex-basis: 30%;
+          background-color: white;
+          border: 1px solid $hs-gray2;
+          &:before{
+            content: '';
+            display: block;
+            padding-bottom: 100%;
+          }
+          .image-spacer{
+            position: absolute;
+            inset: 0;
+            img{
+              object-fit: contain;
+              height: 100%;
+              width: 100%;
+            }
+          }
+        }
+        .responder-item--info{
+          flex-basis: 70%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-end;
+          padding:  0 1em;
+          .responder-item--name{
+            width: 100%;
+            text-align: right;
+            font-size: 1.5em;
+            font-weight: 500;
+            padding-bottom: 0.5em;
+            border-bottom: 1px solid $hs-gray2;
+            margin-bottom: 0;
+          }
+          .responder-item--value{
+            font-size: 1.75em;
+            margin-top: 0.5em;
+          }
+        }
+      }
+      .residual{
+        text-align: center;
+        background-color: $hs-gray1;
+        padding: 1em 2em;
+        margin: 0 0.5em 1em 0.5em;
+        border-radius: 0.3em;
+        border-right: 6px solid $hs-yellow;
+        h3{
+          font-size: 2.5rem;
+          margin: auto;
+        }
+      }
+    }
+  }
+}
+/*Styling for transactions END*/
+
+/*Styling for user transaction view START*/
+.hs--no-transactions{
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.7em;
+  padding: 10% 20%;
+  border-radius: 0.3em;
+  border-left: 0.4em solid $hs-blue;
+  border-right: 0.4em solid $hs-blue;
+  box-shadow: 2px 2px 5px $hs-gray2;
+}
+.hs--transactions-tabs {
+  display: flex;
+  padding: 0 1em;
+  .hs--incoming--label {
+    flex: 1;
+    color: $hs-gray4;
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 600;
+    padding: 0.2em 0;
+    margin-bottom: 0;
+    background-color: $hs-gray1;
+    border-radius: 0.3em 0 0 0;
+    transition: all 0.25s cubic-bezier(0.95, 0.35, 0.04, 1.65), filter 0.15s linear;
+    &:hover{
+      cursor: pointer;
+      filter: brightness(0.9);
+    }
+    &.active{
+      background-color: $hs-blue;
+      color: white;
+    }
+    span{
+      background-color: white;
+      color: $hs-gray4;
+      border-radius: 0.2em;
+      display: inline-block;
+      line-height: 1em;
+      min-width: 1.5em;
+      padding: 0.1em 0.3em;
+      box-shadow: 0 0 3px $hs-gray2 inset;
+    }
+  }
+  .hs--outgoing--label {
+    flex: 1;
+    color: $hs-gray4;
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    background-color: $hs-gray1;
+    border-radius: 0 0.3em 0 0;
+    padding: 0.2em 0;
+    margin-bottom: 0;
+    transition: all 0.25s cubic-bezier(0.95, 0.35, 0.04, 1.65), filter 0.15s linear;
+    &:hover{
+      cursor: pointer;
+      filter: brightness(0.9);
+    }
+    &.active{
+      background-color: $hs-blue;
+      color: white;
+    }
+    span{
+      background-color: white;
+      color: $hs-gray4;
+      border-radius: 0.2em;
+      display: inline-block;
+      line-height: 1em;
+      min-width: 1.5em;
+      padding: 0.1em 0.3em;
+      box-shadow: 0 0 3px $hs-gray2 inset;
+    }
+  }
+}
+.hs--outgoing-container{
+  display: none;
+  margin-bottom: 6rem;
+}
+.hs--incoming-container{
+  margin-bottom: 6rem;
+}
+@media (max-width: 767.8px){
+  .hs--transactions-tabs{
+    flex-direction: column;
+    .hs--incoming--label{
+      border-radius: 0.3em 0.3em 0 0;
+    }
+    .hs--outgoing--label{
+      border-radius: 0;
+    }
+  }
+}
+/*Styling for user transaction view END*/

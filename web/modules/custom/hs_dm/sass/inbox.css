@@ -1,0 +1,161 @@
+/* line 3, inbox.scss */
+.hs-dm--inbox {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  font-size: 1rem;
+}
+/* line 8, inbox.scss */
+.hs-dm--inbox .inbox-title {
+  color: #303030;
+  font-size: 3em;
+  font-weight: 550;
+  border-bottom: 4px solid #F3F3F3;
+}
+/* line 14, inbox.scss */
+.hs-dm--inbox .dm-thread {
+  height: 5em;
+  display: flex;
+  background-color: #F3F3F3;
+  border-left: 0.4em solid #4888FF;
+  border-radius: 0.4em;
+  margin-bottom: 0.5em;
+  padding: 0 0.75em;
+}
+/* line 22, inbox.scss */
+.hs-dm--inbox .dm-thread.unread .newest-message .message {
+  font-weight: 600;
+  color: #303030;
+}
+/* line 26, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message {
+  display: flex;
+  position: relative;
+  flex-basis: 90%;
+}
+/* line 30, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+/* line 35, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .other-member {
+  display: flex;
+  flex-basis: 20%;
+  align-items: center;
+  padding: 0.6em 0;
+  position: relative;
+}
+/* line 41, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .other-member .user-image {
+  flex-basis: 25%;
+  position: relative;
+  border: 0.15em solid #B5B5B5;
+  border-radius: 100vmax;
+}
+/* line 46, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .other-member .user-image:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+/* line 51, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .other-member .user-image a {
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+/* line 55, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .other-member .user-image a img {
+  margin-bottom: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 100vmax;
+}
+/* line 64, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .other-member h3 {
+  flex-grow: 1;
+  margin: 0 1.5em 0 0.5em;
+  height: fit-content;
+  font-size: 1em;
+}
+/* line 69, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .other-member h3::after {
+  content: '';
+  position: absolute;
+  inset: 15% 0 15% 99%;
+  background-color: #B5B5B5;
+  border-radius: 0.5em;
+}
+/* line 78, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .newest-message {
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 80%;
+  align-items: center;
+  padding: 0.6em 0;
+  margin-left: 1em;
+}
+/* line 85, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .newest-message p {
+  margin-bottom: 0;
+  line-height: 1.2em;
+  height: fit-content;
+}
+/* line 93, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-message .newest-message .message-time {
+  width: fit-content;
+  padding: 0 0.5em;
+}
+/* line 99, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-links {
+  flex-basis: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* line 104, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-links > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #4888FF;
+  height: 60%;
+  margin: 0 0.2em;
+  border-radius: 0.3em;
+  transition: all 0.15s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+}
+/* line 114, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-links > div a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+/* line 119, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-links > div img {
+  margin: auto;
+  padding: 0.7em;
+  height: 100%;
+}
+/* line 125, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-links .dm-transaction:hover {
+  background-color: #505050;
+}
+/* line 128, inbox.scss */
+.hs-dm--inbox .dm-thread .dm-links .dm-delete:hover {
+  background-color: red;
+}
+/* line 133, inbox.scss */
+.hs-dm--inbox .no-threads h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.7em;
+  padding: 10% 20%;
+  border-radius: 0.3em;
+  border-left: 0.4em solid #4888FF;
+  border-right: 0.4em solid #4888FF;
+  box-shadow: 2px 2px 5px #B5B5B5;
+}

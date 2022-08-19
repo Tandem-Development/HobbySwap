@@ -1,0 +1,29 @@
+.region .hs-betaopen{
+  text-align: center;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  fieldset{
+    flex: 1;
+    .form-item{
+      label{
+        display: none;
+      }
+    }
+  }
+  h2{
+    color: red;
+    font-size: 4em;
+    max-width: 30em;
+    line-height: 1em;
+    margin: 1.5em auto 0.5em auto;
+  }
+  #edit-open{
+    font-size: 3em;
+    color: green;
+  }
+  #edit-close{
+    font-size: 3em;
+    color: red;
+  }
+}

@@ -1,0 +1,139 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+.hs-dm--inbox{
+  margin-top: 4rem;
+  margin-bottom: 5rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+  .inbox-title{
+    color: $hs-black;
+    font-size: 3em;
+    font-weight: 550;
+    border-bottom: 4px solid $hs-gray1;
+  }
+  .dm-thread{
+    height: 5rem;
+    background-color: $hs-gray1;
+    border-left: 0.4em solid $hs-blue;
+    border-radius: 0.4em;
+    margin-bottom: 0.5em;
+    padding: 0 0.75em;
+    flex-wrap: nowrap;
+    &.unread .newest-message .message{
+      font-weight: 600;
+      color: $hs-black;
+    }
+    .other-member{
+      display: flex;
+      align-items: center;
+      position: relative;
+      .user-image{
+        position: relative;
+        flex-basis: 57px;
+        border: 0.15em solid $hs-gray2;
+        border-radius: 100vmax;
+        &:before{
+          content: '';
+          display: block;
+          padding-bottom: 100%;
+        }
+        a{
+          display: block;
+          position: absolute;
+          inset: 0;
+          img{
+            margin-bottom: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 100vmax;
+          }
+        }
+      }
+      h3{
+        margin: 0 1.5em 0 0.5em;
+        height: fit-content;
+        font-size: 1em;
+        &::after{
+          content: '';
+          position: absolute;
+          inset: 15% 0 15% 99%;
+          background-color: $hs-gray2;
+          border-radius: 0.5em;
+        }
+        @media (max-width: 991.8px){
+          display: none;
+        }
+      }
+    }
+    .newest-message{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+      & > a::after{
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 100;
+      }
+      p{
+        margin-bottom: 0;
+      }
+      .message{
+        flex-grow: 1;
+        position: relative;
+        overflow-x: hidden;
+        white-space: nowrap;
+        padding-left: 0.3rem;
+        &::after{
+          content: '';
+          position: absolute;
+          inset: 0 0 0 80%;
+          background: linear-gradient(to right, transparent, $hs-gray1);
+        }
+      }
+      .message-time{
+        width: fit-content;
+        white-space: nowrap;
+        @media (max-width: 991.8px){
+          display: none;
+        }
+      }
+    }
+    .links{
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      column-gap: 0.4rem;
+      height: 100%;
+      & > div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 60%;
+        a{
+          display: block;
+          background-color: $hs-blue;
+          border-radius: 0.25em;
+          height: 100%;
+          padding: 0.5em;
+          transition: background-color 0.15s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+          img{
+            display: block;
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+      .dm-transaction a:hover{
+        background-color: $hs-gray4;
+      }
+      .dm-delete a:hover{
+        background-color: red;
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<?php
+
+function hs_user_theme($existing, $type, $theme, $path){
+  return[
+    'views_view_fields__user_items' => [
+      'base hook' => 'views_view_fields',
+      'template' => 'views-view-fields--user-items',
+    ],
+    'user__hobbyswap' => [
+      'base hook' => 'user',
+      'template' => 'user--hobbyswap',
+    ]
+  ];
+}
+
+function hs_user_theme_suggestions_alter(array &$suggestions, array $variables, $hook){
+  if($hook === 'views_view_fields' && $variables['view']->id() == 'user_items'){
+    $suggestions[] = 'views_view_fields__user_items';
+  }
+
+  if($hook === 'views_view_field' && $variables['view']->id() == 'user_items') {
+    $suggestions[] = 'views_view_field__user_item_image';
+  }
+
+  if($hook === 'user'){
+    $suggestions[] = 'user__hobbyswap';
+  }
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function hs_user_preprocess(&$variables, $hook){
+  if($hook === 'block' && $variables['elements']['#id'] == 'stack_local_tasks'){
+    $variables['#attached']['library'] = ['hs_user/user-local-tasks'];
+  }
+
+  if($hook === 'user' && $variables['elements']['#view_mode'] == 'full'){
+    $variables['#attached']['library'] = ['hs_user/user-view'];
+  }
+}
+
+/**
+ * Implements hook_entity_view_display_alter().
+ */
+function hs_user_entity_base_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type){
+
+  if($entity_type->id() == 'user') {
+    $fields['name']->setDisplayConfigurable('view', TRUE);
+  }
+
+}
+
+/**
+ * Implements hook_cron().
+ */
+function hs_user_cron(){
+  //Set proper default for user_items field
+  $view_uuid = \Drupal::configFactory()->getEditable('views.view.user_items')->get('uuid');
+  $field_user_items = \Drupal::configFactory()->getEditable('field.field.user.user.field_user_items');
+  $field_user_items->set('default_value.0.target_uuid', $view_uuid)->save();
+}

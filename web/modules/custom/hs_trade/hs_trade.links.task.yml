@@ -1,0 +1,20 @@
+transaction.settings_tab:
+  route_name: hs_trade.transaction_settings
+  title: Settings
+  base_route: hs_trade.transaction_settings
+
+transaction.view:
+  route_name: entity.hs_trade_transaction.canonical
+  base_route: entity.hs_trade_transaction.canonical
+  title: View
+
+transaction.page_edit:
+  route_name: entity.hs_trade_transaction.edit_form
+  base_route: entity.hs_trade_transaction.canonical
+  title: Edit
+
+transaction.delete_confirm:
+  route_name:  entity.hs_trade_transaction.delete_form
+  base_route:  entity.hs_trade_transaction.canonical
+  title: Delete
+  weight: 10

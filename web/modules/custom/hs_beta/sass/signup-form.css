@@ -1,0 +1,47 @@
+/* line 4, signup-form.scss */
+#block-hobbyswapbetasignupform .hs-betasignup {
+  margin: 3em 20vw;
+}
+@media screen and (max-width: 1600px) {
+  /* line 4, signup-form.scss */
+  #block-hobbyswapbetasignupform .hs-betasignup {
+    margin: 3em 10vw;
+  }
+}
+@media screen and (max-width: 1000px) {
+  /* line 4, signup-form.scss */
+  #block-hobbyswapbetasignupform .hs-betasignup {
+    margin: 3em 5vw;
+  }
+}
+/* line 11, signup-form.scss */
+#block-hobbyswapbetasignupform .hs-betasignup .form-item {
+  margin-top: 1em;
+}
+/* line 13, signup-form.scss */
+#block-hobbyswapbetasignupform .hs-betasignup .form-item label {
+  display: block;
+  font-size: 1.1em;
+  font-weight: 550;
+}
+/* line 19, signup-form.scss */
+#block-hobbyswapbetasignupform .hs-betasignup .form-item-first-name, #block-hobbyswapbetasignupform .hs-betasignup .form-item-last-name {
+  display: inline-block;
+  width: 49.8%;
+  margin: 0 auto;
+}
+/* line 25, signup-form.scss */
+#block-hobbyswapbetasignupform .hs-betasignup .btn-primary {
+  background-color: #4888FF;
+  font-size: 1.5em;
+  margin: 0.5em 0;
+  border: none;
+  transition: all 0.2s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+}
+/* line 31, signup-form.scss */
+#block-hobbyswapbetasignupform .hs-betasignup .btn-primary:hover, #block-hobbyswapbetasignupform .hs-betasignup .btn-primary:focus {
+  background-color: #FFDD47;
+  color: #303030;
+  width: 94%;
+  margin: 0.5em 3%;
+}

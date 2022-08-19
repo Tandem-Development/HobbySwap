@@ -1,0 +1,205 @@
+/*Styling for page structure START*/
+/* line 4, private-message-thread.scss */
+#private-message-page .private-message-thread > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/*Styling for page structure END*/
+/*Styling for delete thread link START*/
+/* line 12, private-message-thread.scss */
+#private-message-page .private_message_thread_delete_link_wrapper {
+  flex-basis: 30%;
+  margin: 2em 0;
+}
+/* line 15, private-message-thread.scss */
+#private-message-page .private_message_thread_delete_link_wrapper a {
+  border: 2px solid red;
+  background-color: white;
+  display: block;
+  width: fit-content;
+  padding: 0.5em 1em;
+  border-radius: 0.3em;
+  color: red;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+/* line 25, private-message-thread.scss */
+#private-message-page .private_message_thread_delete_link_wrapper a:hover {
+  background-color: red;
+  color: white;
+}
+
+/*Styling for delete thread link END*/
+/*Styling for thread members START*/
+/* line 34, private-message-thread.scss */
+#private-message-page .field--name-members {
+  margin: 2em 0;
+  flex-basis: 70%;
+  font-size: 1rem;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+/* line 41, private-message-thread.scss */
+#private-message-page .field--name-members .field--label {
+  margin-right: 0.5em;
+}
+/* line 44, private-message-thread.scss */
+#private-message-page .field--name-members .field__items {
+  display: flex;
+}
+/* line 46, private-message-thread.scss */
+#private-message-page .field--name-members .field__items .field--item {
+  margin-left: 0.5em;
+}
+/* line 48, private-message-thread.scss */
+#private-message-page .field--name-members .field__items .field--item a {
+  display: block;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border: 2px solid #F3F3F3;
+  border-radius: 0.3em;
+  transition: all 0.2s ease;
+}
+/* line 55, private-message-thread.scss */
+#private-message-page .field--name-members .field__items .field--item a:hover {
+  background-color: #F3F3F3;
+}
+
+/*Styling for thread members END*/
+/*Styling for load previous link START*/
+/* line 65, private-message-thread.scss */
+#load-previous-messages-button-wrapper {
+  text-align: center;
+}
+/* line 67, private-message-thread.scss */
+#load-previous-messages-button-wrapper a {
+  display: block;
+  color: #505050;
+  text-decoration: none;
+  padding: 0.3em 0.7em;
+  border: 2px solid #FFDD47;
+  border-radius: 0.5em;
+  margin: 1em 5em;
+  background-color: #FFDD47;
+  transition: all 0.2s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+}
+/* line 77, private-message-thread.scss */
+#load-previous-messages-button-wrapper a:hover {
+  margin: 1em 7em;
+  background-color: white;
+  border: 2px solid #F3F3F3;
+  color: #4888FF;
+}
+
+/*Styling for load previous link END*/
+/*Styling for private messages field START*/
+/* line 88, private-message-thread.scss */
+.private-message-thread-messages {
+  flex-basis: 100%;
+  border-top: 3px solid #F3F3F3;
+}
+
+/* line 92, private-message-thread.scss */
+#private-message-page .field--name-private-messages {
+  font-size: 1rem;
+  padding: 2em 0;
+}
+/* line 96, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message {
+  padding: 2px 0;
+}
+/* line 98, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message > div {
+  display: flex;
+  align-items: center;
+}
+/* line 102, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message > div:hover .field--name-created {
+  color: #B5B5B5;
+}
+/* line 107, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message .field--name-message {
+  font-weight: 500;
+  padding: 1em;
+  border-radius: 0.5em;
+  max-width: 50em;
+}
+/* line 112, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message .field--name-message img {
+  height: auto;
+  object-fit: contain;
+}
+/* line 117, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message .field--name-created {
+  flex-shrink: 1;
+  color: transparent;
+  margin: 0 2em;
+  transition: all 0.2s ease;
+}
+/* line 124, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message-author-other {
+  border: none;
+}
+/* line 126, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message-author-other > div {
+  flex-direction: row-reverse;
+  justify-content: left;
+}
+/* line 130, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message-author-other .field--name-message {
+  background-color: #F3F3F3;
+}
+/* line 134, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message-author-self {
+  border: none;
+}
+/* line 136, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message-author-self > div {
+  flex-direction: row;
+  justify-content: right;
+}
+/* line 140, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message-author-self .field--name-message {
+  background-color: #4888FF;
+  color: white;
+}
+/* line 143, private-message-thread.scss */
+#private-message-page .field--name-private-messages .private-message-wrapper .private-message-author-self .field--name-message a {
+  color: white;
+  font-weight: 550;
+}
+
+/*Styling for private messages field END*/
+/*Styling for private message form START*/
+/* line 154, private-message-thread.scss */
+#private-message-page .private-message-add-form {
+  flex-basis: 100%;
+  margin-top: 1em;
+}
+/* line 157, private-message-thread.scss */
+#private-message-page .private-message-add-form .form-actions {
+  text-align: center;
+}
+/* line 159, private-message-thread.scss */
+#private-message-page .private-message-add-form .form-actions .form-submit {
+  background-color: #4888FF;
+  width: 60%;
+  height: fit-content;
+  border: none;
+  font-size: 1.5em;
+  padding: 0;
+  margin-bottom: 3em;
+  transform: none;
+  transition: all 0.2s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+}
+/* line 169, private-message-thread.scss */
+#private-message-page .private-message-add-form .form-actions .form-submit:hover {
+  width: 58%;
+  background-color: #FFDD47;
+  color: #505050;
+}
+
+/*Styling for private message form START*/

@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * Default view template to display all the fields in a row.
+ *
+ * Available variables:
+ * - view: The view in use.
+ * - fields: A list of fields, each one contains:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - class: The safe class ID to use.
+ *   - handler: The Views field handler controlling this field.
+ *   - inline: Whether or not the field should be inline.
+ *   - wrapper_element: An HTML element for a wrapper.
+ *   - wrapper_attributes: List of attributes for wrapper element.
+ *   - separator: An optional separator that may appear before a field.
+ *   - label: The field's label text.
+ *   - label_element: An HTML element for a label wrapper.
+ *   - label_attributes: List of attributes for label wrapper.
+ *   - label_suffix: Colon after the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ *   - has_label_colon: A boolean indicating whether to display a colon after
+ *     the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ * - row: The raw result from the query, with all data it fetched.
+ *
+ * @see template_preprocess_views_view_fields()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div class="hs--user-item row align-items-center">
+  <div class="item-image col-lg-4">
+    {{ fields.field_item_image.content }}
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+  </div>
+  <div class="item-info col-lg-8">
+    <div class="section-1">
+      <h2 class="field-item-title">{{ fields.title.content }}</h2>
+      <h2 class="field-item-value hs--hobbycredit-after">{{- fields.field_item_value.content -}}</h2>
+    </div>
+    <div class="section-2 row justify-content-center">
+      <h6 class="field field-item-status col-md-3 col-12"><span>{{ fields.field_item_status.label }}:</span>{{ fields.field_item_status.content }}</h6>
+      <h6 class="field field-item-condition col-md-3 col-12"><span>{{ fields.field_item_condition.label }}:</span>{{ fields.field_item_condition.content }}</h6>
+      <h6 class="field field-item-created col-md-5 col-12"><span>{{ fields.created.label }}:</span>{{ fields.created.content }}</h6>
+    </div>
+    <div class="section-3">
+      <p class="field-item-description">{{ fields.field_item_description.content }}</p>
+    </div>
+  </div>
+</div>
+
+

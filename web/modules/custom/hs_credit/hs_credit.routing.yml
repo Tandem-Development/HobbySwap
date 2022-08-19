@@ -1,0 +1,17 @@
+hs_credit.users_balance_reset:
+  path: '/admin/balance/reset'
+  defaults:
+    _controller: '\Drupal\hs_credit\Controller\BalanceResetController::balanceReset'
+    _title: 'Reset User Balances'
+  options:
+    _admin_route: TRUE
+
+hs_credit.user_balance_alter:
+  path: '/admin/balance/alter'
+  defaults:
+    _form: '\Drupal\hs_credit\Form\BalanceAlterForm'
+    _title: 'Alter User Balance'
+  requirements:
+    _permission: 'access content'
+  options:
+    _admin_route: TRUE

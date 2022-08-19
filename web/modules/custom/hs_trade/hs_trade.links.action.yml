@@ -1,0 +1,6 @@
+hs_trade.transaction_add:
+  route_name: hs_trade.transaction_add
+  title: 'Add Transaction'
+  appears_on:
+    - entity.hs_trade_transaction.collection
+    - entity.hs_trade_transaction.canonical

@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Theme override for a form element label.
+ *
+ * Available variables:
+ * - title: The label's text.
+ * - title_display: Elements title_display setting.
+ * - required: An indicator for whether the associated form element is required.
+ * - attributes: A list of HTML attributes for the label.
+ *
+ * @see template_preprocess_form_element_label()
+ */
+#}
+{% if title is not empty or required -%}
+  <div class="item-teaser--container">
+    <div class="teaser-image">
+      {% for image in item.images %}
+        <div class="teaser-image-spacer">
+          <img src="{{ image }}">
+        </div>
+      {% endfor %}
+      <a class="prev">&#10094;</a>
+      <a class="next">&#10095;</a>
+    </div>
+    <div class="item-teaser--details">
+      <div class="item-title">
+        <h3>
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        </h3>
+      </div>
+      <div class="item-value">
+        <h3 class="hs--hobbycredit-after">{{ item.value }}</h3>
+      </div>
+    </div>
+  </div>
+{%- endif %}

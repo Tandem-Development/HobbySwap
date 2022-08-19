@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_item_status
+    - node.type.item
+  module:
+    - options
+id: node.item.field_item_status
+field_name: field_item_status
+entity_type: node
+bundle: item
+label: Status
+description: 'Indicates the current market status of the item'
+required: true
+translatable: false
+default_value:
+  -
+    value: Available
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,90 @@
+{#
+  !!!CUSTOM VARIABLES FOR OUTGOING OFFERS PASSED IN BY 'Drupal\hs_trade\Controller\UserTransactionViewController::viewUserTransactions'!!!
+
+  - transactions: Array of all outgoing trade offers
+    - transaction: An individual transaction (arbitrary)
+      - id: The transaction's ID
+      - url: The transaction's URL
+      - status: The transaction's status
+      - responder:
+        - url: The responding user's URL
+        - name: The responding user's display name
+      - requester:
+        - url: The requesting user's URL
+        - name: The requesting user's display name
+      - requester_items:
+        - url: The item's URL
+        - name: The item's name
+      - responder_items:
+        - url: The item's URL
+        - name: The item's name
+
+#}
+<div class="hs--offers-container">
+  {% for transaction in transactions %}
+    <div class="hs--transaction">
+      <h2 class="hs--transaction-id">Transaction #{{ transaction.id }}; Offered to
+        <a href="{{ transaction.responder.url }}">{{ transaction.responder.name }}</a></h2>
+      <div class="hs--transaction-body">
+        <div class="hs--requester-items">
+          <h3 class="offered">You offered:</h3>
+          {% for requester_item in transaction.requester_items %}
+            <a class="requester-item--link" href="{{ requester_item.url }}">
+              <div class="requester-item">
+                <div class="requester-item--image">
+                  <div class="image-spacer">
+                    <img src="{{ requester_item.image }}" alt="Item image">
+                  </div>
+                </div>
+                <div class="requester-item--info">
+                  <h3 class="requester-item--name">{{ requester_item.name }}</h3>
+                  <h3 class="requester-item--value">{{ requester_item.value }}<span>HC</span></h3>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+          {% if transaction.residual < 0 %}
+            <div class="residual">
+              <h3>+{{ transaction.residual|abs }}<span>HC</span></h3>
+            </div>
+          {% endif %}
+        </div>
+        <div class="hs--action-links">
+          <h3 class="transaction-status">STATUS: <span>{{ transaction.status }}</span></h3>
+          {% for link in transaction.action_links %}
+            <div class="action-link {{ link.text|lower }}">
+              <a href="{{ link.url }}">{{ link.text }}</a>
+              <img src="{{ link.icon_path }}">
+            </div>
+          {% endfor %}
+        </div>
+        <div class="hs--responder-items">
+          <h3 class="wants">You want:</h3>
+          {% for responder_item in transaction.responder_items %}
+            <a class="responder-item--link" href="{{ responder_item.url }}">
+              <div class="responder-item">
+                <div class="responder-item--info">
+                  <h3 class="responder-item--name">{{ responder_item.name }}</h3>
+                  <h3 class="responder-item--value">{{ responder_item.value }}<span>HC</span></h3>
+                </div>
+                <div class="responder-item--image">
+                  <div class="image-spacer">
+                    <img src="{{ responder_item.image }}" alt="Item image">
+                  </div>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+          {% if transaction.residual > 0 %}
+          <div class="residual">
+            <h3>+{{ transaction.residual|abs }}<span>HC</span></h3>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  {% if transactions is empty %}
+    <h3 class="hs--no-transactions">You haven't started any trades yet? Click <a href="/browse">here</a> to browse available items and start your first trade!</h3>
+  {% endif %}
+</div>

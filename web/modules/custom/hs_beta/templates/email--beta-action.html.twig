@@ -1,0 +1,76 @@
+<div class="mail">
+  <header>
+    <h1 class="email-title"><a href="http://hobby-swap.co">HobbySwap</a></h1>
+    <h2>BETA PROGRAM</h2>
+  </header>
+  <article>
+    <h2 class="app-info">Email: {{ email }}</h2>
+    <h2 class="app-info">Name: {{ name }}</h2>
+    <h2 class="app-info">Phone: {{ phone }}</h2>
+    <h2 class="app-info">Interview: {{ interview }}</h2>
+    <div class="action-links">
+      <a class="accept-link" href="{{ accept_path }}">ACCEPT</a>
+      <a class="reject-link" href="{{ reject_path }}">REJECT</a>
+    </div>
+  </article>
+</div>
+
+
+<style>
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  .mail{
+    font-family: Arial;
+  }
+  header{
+    padding: 1.5em;
+    background-color: #4888FF;
+    box-shadow: 1px 1px 4px #303030;
+  }
+  .email-title a{
+    color: white;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  header h2{
+    font-size: 0.8em;
+    color: white;
+  }
+  article{
+    color: #303030;
+  }
+  .app-info{
+    margin: 1em;
+    font-weight: 400;
+  }
+  .action-links{
+    margin: 2em auto;
+    width: max-content;
+    text-align: center;
+    background-color: #4888FF;
+    border-radius: 5px;
+  }
+  .action-links a{
+    display: inline-block;
+    border-radius: 5px;
+    padding: 1em;
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 2em;
+  }
+  .action-links a:hover{
+    background-color: white;
+    color: #303030;
+  }
+  .accept-link{
+    background-color: green;
+    margin: 1em 0.75em 1em 1.5em;
+  }
+  .reject-link{
+    background-color: red;
+    margin: 1em 1.5em 1em 0.75em;
+  }
+</style>

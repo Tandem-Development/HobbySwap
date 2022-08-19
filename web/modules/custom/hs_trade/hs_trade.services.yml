@@ -1,0 +1,6 @@
+services:
+  hs_trade.transaction_manager:
+    class: 'Drupal\hs_trade\TransactionManager'
+    arguments: ['@entity_type.manager', '@csrf_token', '@date.formatter', '@plugin.manager.mail']
+    tags:
+      - { name: transaction_manager, priority: -100 }

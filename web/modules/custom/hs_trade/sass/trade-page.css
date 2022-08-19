@@ -1,0 +1,405 @@
+/*Styling for requested trade item teaser start*/
+/* line 5, trade-page.scss */
+.region .item-container-requested {
+  flex: 1;
+  box-shadow: 1px 1px 10px #505050;
+  background-color: #F3F3F3;
+  border-radius: 0.3em;
+  margin: 1em;
+  padding: 2em;
+  display: flex;
+}
+/* line 13, trade-page.scss */
+.region .item-container-requested .item-images {
+  flex: 1;
+  position: relative;
+  width: 50%;
+  background-color: white;
+  border: 2px solid #B5B5B5;
+}
+/* line 19, trade-page.scss */
+.region .item-container-requested .item-images:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+/* line 24, trade-page.scss */
+.region .item-container-requested .item-images .image-spacer {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+/* line 31, trade-page.scss */
+.region .item-container-requested .item-images .image-spacer img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+/* line 37, trade-page.scss */
+.region .item-container-requested .item-images .fade {
+  animation: fade 0.3s forwards;
+}
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* line 48, trade-page.scss */
+.region .item-container-requested .item-images .prev,
+.region .item-container-requested .item-images .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s ease;
+  user-select: none;
+  text-decoration: none;
+}
+/* line 62, trade-page.scss */
+.region .item-container-requested .item-images .prev:hover,
+.region .item-container-requested .item-images .next:hover {
+  background-color: #505050;
+}
+/* line 66, trade-page.scss */
+.region .item-container-requested .item-images .next {
+  right: 0;
+  padding-right: 8px;
+  border-radius: 50px 0 0 50px;
+}
+/* line 71, trade-page.scss */
+.region .item-container-requested .item-images .prev {
+  padding-left: 8px;
+  border-radius: 0 50px 50px 0;
+}
+/* line 76, trade-page.scss */
+.region .item-container-requested .item-details {
+  flex: 1;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* line 82, trade-page.scss */
+.region .item-container-requested .item-details .item-title {
+  padding: 0.5em 0;
+  border-bottom: 2px solid #B5B5B5;
+}
+/* line 85, trade-page.scss */
+.region .item-container-requested .item-details .item-title h2 {
+  font-size: 2.5em;
+  color: #303030;
+  margin-bottom: 0;
+}
+/* line 92, trade-page.scss */
+.region .item-container-requested .item-details .item-value h2 {
+  margin-top: 0.4em;
+  margin-bottom: 0.6em;
+  font-size: 2.5em;
+}
+/* line 98, trade-page.scss */
+.region .item-container-requested .item-details .item-description {
+  max-height: 200px;
+  overflow: scroll;
+  background-color: white;
+  border: 1px solid #F3F3F3;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+/* line 105, trade-page.scss */
+.region .item-container-requested .item-details .item-description div {
+  padding: 10px;
+}
+/* line 110, trade-page.scss */
+.region .item-container-requested .item-details .item-owner span {
+  color: #303030;
+  font-weight: 500;
+}
+/* line 113, trade-page.scss */
+.region .item-container-requested .item-details .item-owner span a {
+  color: #4888FF;
+  margin-left: 0.2em;
+}
+
+/*Styling for requested trade item teaser stop*/
+/*Styling for owned items selection start*/
+/* line 125, trade-page.scss */
+.hs-trademake-offer-form {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  padding: 20px 0;
+}
+/* line 130, trade-page.scss */
+.hs-trademake-offer-form #edit-responder-item-selection--wrapper,
+.hs-trademake-offer-form #edit-requester-item-selection--wrapper {
+  flex: 1;
+  margin: 20px;
+  height: max-content;
+}
+/* line 135, trade-page.scss */
+.hs-trademake-offer-form #edit-responder-item-selection--wrapper legend,
+.hs-trademake-offer-form #edit-requester-item-selection--wrapper legend {
+  text-align: center;
+  background-color: #4888FF;
+  border-radius: 0.3em;
+  margin-bottom: 10px;
+}
+/* line 140, trade-page.scss */
+.hs-trademake-offer-form #edit-responder-item-selection--wrapper legend .fieldset-legend,
+.hs-trademake-offer-form #edit-requester-item-selection--wrapper legend .fieldset-legend {
+  display: block;
+  font-size: 1.6em;
+  font-weight: 600;
+  color: white;
+  padding: 1em;
+}
+/* line 146, trade-page.scss */
+.hs-trademake-offer-form #edit-responder-item-selection--wrapper legend .fieldset-legend::after,
+.hs-trademake-offer-form #edit-requester-item-selection--wrapper legend .fieldset-legend::after {
+  display: none;
+}
+/* line 152, trade-page.scss */
+.hs-trademake-offer-form #edit-responder-item-selection--wrapper .fieldset-wrapper .form-checkboxes,
+.hs-trademake-offer-form #edit-requester-item-selection--wrapper .fieldset-wrapper .form-checkboxes {
+  display: flex;
+  flex-direction: column-reverse;
+}
+/* line 155, trade-page.scss */
+.hs-trademake-offer-form #edit-responder-item-selection--wrapper .fieldset-wrapper .form-checkboxes .form-type-checkbox,
+.hs-trademake-offer-form #edit-requester-item-selection--wrapper .fieldset-wrapper .form-checkboxes .form-type-checkbox {
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  background-color: #F3F3F3;
+  border-radius: 0.3em;
+  border-left: 6px solid #4888FF;
+  transition: box-shadow 0.2s, margin 0.2s;
+  margin: 0 0 0.7em 0;
+}
+/* line 165, trade-page.scss */
+.hs-trademake-offer-form #edit-responder-item-selection--wrapper .fieldset-wrapper .form-checkboxes .form-type-checkbox:hover,
+.hs-trademake-offer-form #edit-requester-item-selection--wrapper .fieldset-wrapper .form-checkboxes .form-type-checkbox:hover {
+  box-shadow: 1px 1px 10px #505050;
+  animation: shift 0.4s forwards;
+}
+@keyframes shift {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(0.2em);
+  }
+}
+/* line 177, trade-page.scss */
+.hs-trademake-offer-form #edit-responder-item-selection--wrapper .fieldset-wrapper .form-checkboxes .form-type-checkbox input,
+.hs-trademake-offer-form #edit-requester-item-selection--wrapper .fieldset-wrapper .form-checkboxes .form-type-checkbox input {
+  margin: 0 10px;
+  width: 2.5em;
+  height: 2.5em;
+}
+/* line 186, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container {
+  display: flex;
+  flex-grow: 1;
+  padding: 1em 2em;
+}
+/* line 190, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .teaser-image {
+  position: relative;
+  width: 30%;
+  background-color: white;
+  border: 2px solid #B5B5B5;
+}
+/* line 195, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .teaser-image:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+/* line 200, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .teaser-image .teaser-image-spacer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+/* line 206, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .teaser-image .teaser-image-spacer img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+/* line 213, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .fade {
+  animation: fade 0.3s forwards;
+}
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* line 224, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .prev {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 8px;
+  padding-left: 4px;
+  border-radius: 0 50px 50px 0;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  transition: 0.3s ease;
+  user-select: none;
+  text-decoration: none;
+}
+/* line 239, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .prev:hover {
+  background-color: #505050;
+}
+/* line 243, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: auto;
+  margin-top: -22px;
+  padding: 8px;
+  padding-right: 4px;
+  border-radius: 50px 0 0 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  transition: 0.3s ease;
+  user-select: none;
+  text-decoration: none;
+}
+/* line 259, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .next:hover {
+  background-color: #505050;
+}
+/* line 263, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .item-teaser--details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1em;
+}
+/* line 269, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .item-teaser--details .item-title {
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid #B5B5B5;
+}
+/* line 272, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .item-teaser--details .item-title h3 {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+/* line 279, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .item-teaser--details .item-value h3 {
+  margin-top: 0.4em;
+  font-size: 1.75rem;
+}
+/* line 285, trade-page.scss */
+.hs-trademake-offer-form .item-teaser--container .hs-trade-no-items {
+  text-align: center;
+}
+/* line 289, trade-page.scss */
+.hs-trademake-offer-form .form-item-enforce-residual {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+/* line 295, trade-page.scss */
+.hs-trademake-offer-form .form-item-enforce-residual input {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 0.3rem;
+}
+/* line 300, trade-page.scss */
+.hs-trademake-offer-form .form-item-enforce-residual label {
+  color: #303030;
+  font-size: 2rem;
+  border-radius: 0.15em;
+}
+/* line 305, trade-page.scss */
+.hs-trademake-offer-form .form-item-enforce-residual .description {
+  flex-basis: 100%;
+  text-align: center;
+}
+
+/*Styling for owned items selection stop*/
+/*Styling for residual counter selection start*/
+/* line 314, trade-page.scss */
+.responder-residual,
+.requester-residual {
+  text-align: center;
+  background-color: #F3F3F3;
+  width: 100%;
+  padding: 1em 2em;
+  border-radius: 0.3em;
+  border-left: 6px solid #FFDD47;
+}
+/* line 322, trade-page.scss */
+.responder-residual h3,
+.requester-residual h3 {
+  color: #FFDD47;
+  font-size: 2.5em;
+  font-weight: 900;
+  text-shadow: 1px 1px #B5B5B5;
+  margin: 0;
+}
+/* line 329, trade-page.scss */
+.responder-residual ::before,
+.requester-residual ::before {
+  content: "+";
+  vertical-align: top;
+  text-shadow: 1px 1px #B5B5B5;
+  padding-left: 0.2em;
+}
+/* line 335, trade-page.scss */
+.responder-residual ::after,
+.requester-residual ::after {
+  content: " HC";
+  font-size: 0.5em;
+  vertical-align: top;
+  text-shadow: none;
+  padding-left: 0.2em;
+}
+/* line 342, trade-page.scss */
+.responder-residual .fade-out,
+.requester-residual .fade-out {
+  animation: fade-out 0.5s;
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+/*Styling for residual counter selection stop*/

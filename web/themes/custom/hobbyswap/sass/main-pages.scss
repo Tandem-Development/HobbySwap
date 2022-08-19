@@ -1,0 +1,200 @@
+@import 'colors.scss';
+
+//Home styling START
+#about-p2 {
+  .hs-card{
+    padding: 1em;
+    border-radius: 0.5em;
+    min-height: 700px;
+    max-height: 700px;
+    border-bottom: 0.7em solid $hs-yellow;
+    margin-bottom: 25px;
+    transition: all 0.4s ease;
+    &:hover{
+      box-shadow: 1px 20px 30px rgba(0, 0, 0, 0.4);
+      transform: translateY(-20px);
+    }
+    img{
+      width: 100%;
+      padding: 2em;
+      object-fit: contain;
+      max-height: 385px;
+    }
+  }
+}
+
+#beta-testing .content-wrapper .field--name-field-paragraph-content{
+  height: 100%;
+  padding: 2rem 3rem;
+}
+//Home styling END
+
+//About styling START
+#hobbycredit{
+  min-height: 40rem;
+  .tabbed-content{
+    .tabs{
+      margin: 1rem 0;
+      border: 1px solid white;
+      .tab{
+        margin-bottom: 0;
+        padding: 0.7rem 0;
+        border-radius: 0;
+        transition: all 0.3s linear;
+        position: relative;
+        &.active{
+          color: $hs-black;
+          background-color: $hs-gray1;
+        }
+      }
+    }
+  }
+}
+
+#subscriptions{
+  .subscription-card{
+    background-color: $hs-gray1;
+    border-radius: 0.5rem;
+    border-bottom: 0.7rem solid $hs-yellow;
+    margin: 0 3rem;
+    margin-bottom: 2rem;
+    padding: 2.5rem;
+    transition: all 0.4s ease;
+    &:hover{
+      box-shadow: 1px 20px 30px rgba(0, 0, 0, 0.4);
+      transform: translateY(-20px);
+    }
+    h2{
+      margin: 1rem 0 0 0;
+      color: $hs-black;
+      font-weight: bold;
+    }
+    h5{
+      color: $hs-black;
+      border-bottom: 1px solid $hs-gray3;
+      padding-bottom: 1.5rem;
+    }
+    ul{
+      width: fit-content;
+      margin: auto;
+      padding-left: 0;
+      li{
+        list-style: none;
+        font-size: 1.5rem;
+        &::before{
+          content: '✓ ';
+          color: seagreen;
+        }
+      }
+    }
+  }
+}
+
+#why-subscriptions{
+  .subscription-accordion{
+    display: flex;
+    flex-direction: column;
+    border-left: 0.7rem solid $hs-yellow;
+    border-radius: 0.5rem;
+    background-color: $hs-gray1;
+    .accordion-fold{
+      position: relative;
+      padding: 1rem 0 2rem 0;
+      transition: all 0.3s ease;
+      &::before{
+        content: '';
+        position: absolute;
+        inset: 100% 0 -10px 0;
+        background: linear-gradient(to bottom, $hs-gray2, transparent);
+      }
+      &::after{
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
+      h3{
+        color: $hs-black;
+        text-align: center;
+        padding: 0.7rem 0;
+        margin-bottom: 0;
+      }
+      p{
+        color: $hs-gray3;
+        padding: 0 5vw;
+        height: 0;
+        margin: 0;
+        overflow-y: hidden;
+        transition: height 0.3s ease;
+      }
+      &:last-child{
+        border: none;
+        &::before{
+          background: none;
+        }
+      }
+      &.active{
+        p{
+          height: fit-content;
+        }
+      }
+    }
+  }
+}
+
+#faq{
+  .question{
+    border-left: 0.7rem solid $hs-gray4;
+    background-color: $hs-gray1;
+    border-radius: 0.6rem;
+    padding: 0.5rem 2rem;
+    margin-bottom: 1rem;
+    p:first-child{
+      color: $hs-black;
+      font-weight: bold;
+      margin: 1rem 0 0 0;
+    }
+  }
+}
+
+
+#meet-the-team{
+  @media (max-width: 767.8px){
+    h2{
+      margin-bottom: 3rem;
+    }
+  }
+  .employee-card{
+    display: flex;
+    align-items: center;
+    max-height: 10rem;
+    margin-bottom: -2rem;
+    @media (max-width: 767.8px){
+      margin-bottom: 2.5rem;
+    }
+    &.right{
+      justify-content: right;
+      flex-direction: row-reverse;
+      .info{
+        text-align: right;
+        margin-right: 0.7rem;
+      }
+    }
+    &.left{
+      justify-content: left;
+      .info{
+        margin-left: 0.7rem;
+      }
+    }
+    img{
+      border: 0.4rem solid white;
+      border-radius: 100vmax;
+      height: 10rem;
+      width: 10rem;
+      @media (max-width: 767.8px){
+        height: 6rem;
+        width: 6rem;
+      }
+    }
+  }
+}
+//About styling END

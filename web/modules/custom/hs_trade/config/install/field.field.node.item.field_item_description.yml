@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_item_description
+    - node.type.item
+id: node.item.field_item_description
+field_name: field_item_description
+entity_type: node
+bundle: item
+label: Description
+description: 'Provides a brief description of the item being listed'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

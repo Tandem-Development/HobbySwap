@@ -1,0 +1,220 @@
+/* line 4, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info {
+  margin: 3rem 0;
+  background-color: #F3F3F3;
+  border-radius: 0.2rem;
+  padding: 0.8rem;
+}
+/* line 9, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info .info-1 {
+  text-align: center;
+  width: fit-content;
+}
+/* line 12, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info .info-1 .field--name-user-picture img {
+  border: 4px solid #4888FF;
+  border-radius: 100%;
+}
+/* line 17, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info .info-2 {
+  text-align: left;
+  width: fit-content;
+}
+/* line 20, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info .info-2 .field--name-name {
+  color: #303030;
+  font-size: 2rem;
+}
+@media (max-width: 767.8px) {
+  /* line 20, ../sass/user-view.scss */
+  #block-hobbyswap-content article .user-info .info-2 .field--name-name {
+    text-align: center;
+    margin-top: 0.7rem;
+  }
+}
+/* line 28, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info .info-2 .form-item {
+  font-size: 1rem;
+  margin: 0;
+}
+/* line 32, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info .info-2 .form-item .label {
+  font-weight: normal;
+}
+@media (max-width: 767.8px) {
+  /* line 28, ../sass/user-view.scss */
+  #block-hobbyswap-content article .user-info .info-2 .form-item {
+    text-align: center;
+  }
+}
+/* line 39, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info .info-2 .field--name-hc-balance {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-top: 1px solid #B5B5B5;
+  width: fit-content;
+}
+/* line 45, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info .info-2 .field--name-hc-balance .field--label {
+  font-size: 1.75rem;
+  margin-right: 0.5em;
+  color: #303030;
+}
+/* line 50, ../sass/user-view.scss */
+#block-hobbyswap-content article .user-info .info-2 .field--name-hc-balance .field--item h2 {
+  font-size: 1.75rem;
+}
+
+/* line 58, ../sass/user-view.scss */
+.field--name-field-user-items {
+  margin: 0 1rem;
+}
+/* line 60, ../sass/user-view.scss */
+.field--name-field-user-items .field__label {
+  position: relative;
+  font-size: 2rem;
+  padding: 0.5em 2em;
+  margin: 0.2em 0.3em;
+  background-color: #4888FF;
+  width: fit-content;
+  border-radius: 0.3em 0.3em 0 0;
+  color: white;
+}
+/* line 72, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item {
+  border-right: 0.5rem solid #F3F3F3;
+  border-left: 0.5rem solid #F3F3F3;
+  border-radius: 0.3rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  box-shadow: 0 2px 4px #B5B5B5;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+/* line 80, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item:hover {
+  box-shadow: 0 6px 4px #B5B5B5;
+  transform: translateY(-0.3em);
+}
+/* line 84, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image {
+  position: relative;
+  padding: 0;
+}
+/* line 87, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image ul {
+  position: relative;
+  background-color: white;
+  border: 1px solid #B5B5B5;
+  margin-bottom: 0;
+}
+/* line 92, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image ul::before {
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
+/* line 97, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image ul li {
+  display: none;
+  position: absolute;
+  margin: 0;
+  inset: 0;
+}
+/* line 102, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image ul li img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+/* line 109, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image .prev, .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image .next {
+  cursor: pointer;
+  position: absolute;
+  top: 48.5%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s ease;
+  user-select: none;
+  text-decoration: none;
+  opacity: 0.6;
+  background-color: #505050;
+}
+/* line 125, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image .prev {
+  border-radius: 0 100vmax 100vmax 0;
+  padding-left: 10px;
+}
+/* line 129, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image .next {
+  right: 0;
+  border-radius: 100vmax 0 0 100vmax;
+  padding-right: 10px;
+}
+/* line 135, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info {
+  padding: 0 1rem;
+}
+/* line 137, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-bottom: 1px solid #B5B5B5;
+}
+/* line 144, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 .field-item-title {
+  margin-bottom: 0;
+  flex-basis: 80%;
+}
+/* line 148, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 .field-item-value {
+  font-size: 2rem;
+}
+@media (max-width: 991.8px) {
+  /* line 137, ../sass/user-view.scss */
+  .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 {
+    justify-content: center;
+  }
+  /* line 153, ../sass/user-view.scss */
+  .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 .field-item-title {
+    text-align: center;
+    flex-basis: 100%;
+    overflow-x: hidden;
+    font-size: 1.8rem;
+  }
+}
+/* line 164, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-2 {
+  margin: 1rem 0;
+}
+/* line 166, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-2 h6 {
+  font-size: 1rem;
+  border-left: 1px solid #505050;
+  padding-left: 0.2em;
+}
+/* line 170, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-2 h6 span {
+  font-weight: bold;
+  color: #505050;
+}
+/* line 176, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-3 {
+  max-height: 280px;
+  overflow: hidden;
+  position: relative;
+}
+/* line 180, ../sass/user-view.scss */
+.field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-3::after {
+  content: '';
+  position: absolute;
+  inset: 85% 0 0 0;
+  background: linear-gradient(to top, white, transparent);
+}

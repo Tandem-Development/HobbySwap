@@ -1,0 +1,7 @@
+global-styling:
+  version: 8.0
+  css:
+    theme:
+      css/hs-theme.css: {weight: 1000}
+  js:
+    js/scripts.js: {}

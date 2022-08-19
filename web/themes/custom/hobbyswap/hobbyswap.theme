@@ -1,0 +1,58 @@
+<?php
+
+use Drupal\Component\Render\FormattableMarkup;
+
+/**
+ * Implements hook_theme().
+ */
+function hobbyswap_theme($existing, $type, $theme, $path){
+
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function hobbyswap_library_info_alter(&$libraries, $extension){
+  if($extension === 'bootstrap'){
+    foreach($libraries['framework']['css']['base'] as $name => $attributes){
+      $libraries['framework']['css']['base'][$name]['weight'] = -5;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function hobbyswap_preprocess(&$variables, $hook){
+
+  //Attribute insertion for menu item icons
+  if($hook === 'menu' || $hook === 'menu__account' || $hook === 'menu__main') {
+    foreach ($variables['items'] as &$item) {
+      $attributes = $item['url']->getOption('attributes');
+      if(isset($attributes['data-icon'])) {
+        if($attributes['show-name'] === 'hide'){
+          $item['attributes']->addClass('link-icon')->setAttribute('data-icon', $attributes['data-icon'].'.svg');
+          $item['title'] = '';
+        }else{
+          $item['attributes']->addClass('link-full')->setAttribute('data-icon', $attributes['data-icon'].'.svg');
+        }
+      }else{
+        $item['attributes']->addClass('link-text');
+      }
+    }
+  }
+
+  //Make page container fluid if viewing full page node
+  if($hook === 'page'){
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      if(!is_object($node)) {
+        $node = \Drupal\node\Entity\Node::load($node);
+      }
+      $content_type = $node->bundle();
+      if($content_type == 'full_page' or $content_type == 'article') {
+        $variables['container'] = 'container-fluid';
+      }
+    }
+  }
+
+}

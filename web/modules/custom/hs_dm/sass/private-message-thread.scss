@@ -1,0 +1,185 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+/*Styling for page structure START*/
+#private-message-page .private-message-thread > div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  @media (max-width: 575.8px){
+    justify-content: center;
+  }
+}
+/*Styling for page structure END*/
+
+/*Styling for thread members START*/
+#private-message-page .field--name-members{
+  margin: 0.5em 0;
+  font-size: 1rem;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  .field--label{
+    margin-right: 0.5em;
+  }
+  .field__items{
+    display: flex;
+    .field__item{
+      margin-left: 0.5em;
+      a{
+        display: block;
+        text-decoration: none;
+        padding: 0.5em 1em;
+        border: 2px solid $hs-gray1;
+        border-radius: 0.3em;
+        transition: all 0.2s ease;
+        &:hover{
+          background-color: $hs-gray1;
+          color: $hs-gray4;
+        }
+      }
+    }
+  }
+}
+/*Styling for thread members END*/
+
+/*Styling for load previous link START*/
+#load-previous-messages-button-wrapper{
+  text-align: center;
+  a{
+    display: block;
+    color: $hs-gray4;
+    text-decoration: none;
+    padding: 0.3em 0.7em;
+    border: 2px solid $hs-yellow;
+    border-radius: 0.5em;
+    margin: 1em 5em;
+    background-color: $hs-yellow;
+    transition: all 0.2s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+    &:hover{
+      margin: 1em 7em;
+      background-color: white;
+      border: 2px solid $hs-gray1;
+      color: $hs-blue;
+    }
+  }
+}
+/*Styling for load previous link END*/
+
+/*Styling for private messages field START*/
+.private-message-thread-messages{
+  flex-basis: 100%;
+  border-top: 3px solid $hs-gray1;
+}
+#private-message-page .field--name-private-messages{
+  font-size: 1rem;
+  padding: 2em 0;
+  .private-message-wrapper{
+    .private-message{
+      padding: 2px 0;
+      & > div{
+        display: flex;
+        align-items: center;
+        &:hover{
+          .field--name-created{
+            color: $hs-gray2;
+          }
+        }
+      }
+      .field--name-message{
+        font-weight: 500;
+        padding: 1em;
+        margin: 0.2rem 0;
+        border-radius: 0.5em;
+        max-width: 50em;
+        *{
+          font-size: 1rem;
+          margin-bottom: 0;
+        }
+      }
+      .field--name-created{
+        flex-shrink: 1;
+        color: transparent;
+        margin: 0 2em;
+        transition: all 0.2s ease;
+      }
+    }
+    .private-message-author-other{
+      border: none;
+      & > div{
+        flex-direction: row-reverse;
+        justify-content: left;
+      }
+      .field--name-message{
+        background-color: $hs-gray1;
+      }
+    }
+    .private-message-author-self{
+      border: none;
+      & > div{
+        flex-direction: row;
+        justify-content: right;
+      }
+      .field--name-message{
+        background-color: $hs-blue;
+        color: white;
+        a{
+          color: white;
+          font-weight: 550;
+        }
+      }
+    }
+  }
+}
+/*Styling for private messages field END*/
+
+/*Styling for private message form START*/
+#private-message-page .private-message-add-form{
+  flex-basis: 100%;
+  margin-top: 1em;
+  .form-actions{
+    text-align: center;
+    .form-submit{
+      background-color: $hs-blue;
+      color: white;
+      border: none;
+      border-radius: 0.2em;
+      font-size: 1.5rem;
+      font-weight: 600;
+      padding: 0.5em 3em;
+      margin: auto;
+      text-align: center;
+      transition: all 0.25s ease;
+      &:hover{
+        background-color: $hs-gray1;
+        color: $hs-gray4;
+        transform: translateY(-0.1em);
+        box-shadow: 0 0.3em 10px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+}
+/*Styling for private message form START*/
+
+/*Styling for delete thread link START*/
+#private-message-page .private_message_thread_delete_link_wrapper {
+  margin-left: 0.5rem;
+  a {
+    border: 2px solid red;
+    background-color: white;
+    display: block;
+    width: fit-content;
+    padding: 0.5em 1em;
+    border-radius: 0.3em;
+    color: red;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    &:hover{
+      background-color: red;
+      color: white;
+    }
+  }
+}
+/*Styling for delete thread link END*/

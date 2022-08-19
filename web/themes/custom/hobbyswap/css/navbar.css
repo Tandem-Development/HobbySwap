@@ -1,0 +1,120 @@
+/* line 3, ../sass/navbar.scss */
+ul.nav, ul.navbar-nav {
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 767.8px) {
+  /* line 3, ../sass/navbar.scss */
+  ul.nav, ul.navbar-nav {
+    flex-direction: column;
+  }
+}
+
+/* line 10, ../sass/navbar.scss */
+.nav-link {
+  color: #4888FF;
+}
+
+/* line 14, ../sass/navbar.scss */
+li.nav-item {
+  position: relative;
+  display: block;
+  height: fit-content;
+  width: fit-content;
+  line-height: 0;
+  padding: 0.5em 2em;
+  margin: 0 0.2em;
+  border-radius: 0.4rem;
+  border: 2px solid #F3F3F3;
+  transition: all .15s ease;
+}
+/* line 25, ../sass/navbar.scss */
+li.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 95%;
+  right: 50%;
+  bottom: -5%;
+  left: 50%;
+  transition: left .15s ease, right .15s ease;
+  background-color: #FFDD47;
+  border-radius: 2px;
+}
+/* line 36, ../sass/navbar.scss */
+li.nav-item:hover {
+  background-color: #F3F3F3;
+  border: 2px solid #F3F3F3;
+}
+/* line 39, ../sass/navbar.scss */
+li.nav-item:hover::before {
+  left: 10%;
+  right: 10%;
+}
+/* line 44, ../sass/navbar.scss */
+li.nav-item .nav-link {
+  font-weight: 600;
+}
+@media (max-width: 767.8px) {
+  /* line 14, ../sass/navbar.scss */
+  li.nav-item {
+    margin-top: 0.4rem;
+    width: 18rem;
+    text-align: center;
+  }
+}
+
+/* line 55, ../sass/navbar.scss */
+.nav-item.link-icon .nav-link {
+  position: absolute;
+  inset: 0;
+}
+/* line 59, ../sass/navbar.scss */
+.nav-item.link-icon img {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: 0;
+}
+
+/* line 66, ../sass/navbar.scss */
+.nav-item.link-text {
+  line-height: 1.5rem;
+  padding: 0.5em 1em;
+}
+/* line 69, ../sass/navbar.scss */
+.nav-item.link-text .nav-link {
+  display: block;
+  height: 1.5rem;
+  margin: 0;
+  padding: 0;
+  color: #4888FF;
+  text-transform: uppercase;
+}
+
+/* line 79, ../sass/navbar.scss */
+.nav-item.link-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 1em;
+}
+/* line 84, ../sass/navbar.scss */
+.nav-item.link-full img {
+  height: 1.5rem;
+  margin: 0;
+}
+/* line 88, ../sass/navbar.scss */
+.nav-item.link-full .nav-link {
+  display: block;
+  height: auto;
+  line-height: 1em;
+  padding: 0;
+  margin-left: 0.5em;
+  color: #4888FF;
+  text-transform: uppercase;
+}
+/* line 96, ../sass/navbar.scss */
+.nav-item.link-full .nav-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}

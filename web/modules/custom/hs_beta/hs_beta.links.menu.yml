@@ -1,0 +1,6 @@
+hs_beta.manage:
+  title: 'Manage Beta'
+  route_name: hs_beta.manage
+  menu_name: admin
+  parent: system.admin
+  description: 'Manage the beta program'

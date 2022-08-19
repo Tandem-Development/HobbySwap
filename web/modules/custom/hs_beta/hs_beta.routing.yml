@@ -1,0 +1,27 @@
+hs_beta.reject_account:
+  path: '/beta/{uid}/reject'
+  defaults:
+    _controller: 'Drupal\hs_beta\Controller\BetaUserController::reject'
+  requirements:
+    _permission: 'administer users'
+  options:
+    _admin_route: TRUE
+
+hs_beta.accept_account:
+  path: '/beta/{uid}/accept'
+  defaults:
+    _controller: 'Drupal\hs_beta\Controller\BetaUserController::accept'
+  requirements:
+    _permission: 'administer users'
+  options:
+    _admin_route: TRUE
+
+hs_beta.manage:
+  path: '/beta/manage'
+  defaults:
+    _title: 'Manage Beta'
+    _form: 'Drupal\hs_beta\Form\BetaManageForm'
+  requirements:
+    _permission: 'administer users'
+  options:
+    _admin_route: TRUE

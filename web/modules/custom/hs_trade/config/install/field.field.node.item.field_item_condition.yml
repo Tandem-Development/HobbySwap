@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_item_condition
+    - node.type.item
+  module:
+    - options
+id: node.item.field_item_condition
+field_name: field_item_condition
+entity_type: node
+bundle: item
+label: Condition
+description: 'This will indicate the condition of the item to any interested traders'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

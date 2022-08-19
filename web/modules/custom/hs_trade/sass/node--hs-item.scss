@@ -1,0 +1,140 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+/*Styling for item display start*/
+.region-content .node{
+  margin-top: 3em;
+  .node__content{
+    .item-images{
+      position: relative;
+      border: 2px solid $hs-gray1;
+      padding: 0;
+      .field__items {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        &::before{
+          content: '';
+          display: block;
+          padding-bottom: 100%;
+        }
+        .field__item{
+          position: absolute;
+          inset: 0;
+          img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+      .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 49.2%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.3s ease;
+        user-select: none;
+        text-decoration: none;
+        opacity: 0.6;
+        background-color: $hs-gray4;
+      }
+      .prev {
+        padding-left: 8px;
+        border-radius: 0 100vmax 100vmax 0;
+      }
+      .next {
+        right: 0;
+        padding-right: 8px;
+        border-radius: 100vmax 0 0 100vmax;
+      }
+    }
+    .item-details{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid $hs-gray1;
+      border-left: none;
+      padding: 1rem;
+      .details{
+        .field--name-title {
+          position: relative;
+          display: block;
+          line-height: 40px;
+          font-size: 40px;
+          padding-bottom: 0.5em;
+          &::after{
+            content: '';
+            position: absolute;
+            inset: 100% 0% -2% 0%;
+            background-color: $hs-gray4;
+          }
+        }
+        .field--name-field-item-value{
+          font-size: 2rem;
+          margin: 0.6em 0;
+        }
+        .field--name-field-item-interest{
+          .field__item::before{
+            content: '- ';
+          }
+        }
+      }
+      .hs-item-trade-link{
+        text-align: center;
+        width: 100%;
+        #hs-item-trade-link-field {
+          display: block;
+          text-decoration: none;
+          font-size: 1.8rem;
+          width: auto;
+          padding: 1em 0;
+          margin: 0.2em;
+          background-color: $hs-blue;
+          border-radius: 0.2em;
+          color: white;
+          font-weight: bold;
+          transition: all 0.2s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+          &:hover {
+            color: $hs-black;
+            background-color: $hs-yellow;
+            margin: 0.2em 0.7em;
+          }
+        }
+      }
+    }
+    .item-description{
+      max-height: 400px;
+      overflow-y: scroll;
+      border: 2px solid $hs-gray1;
+      border-top: none;
+      padding: 0.5rem;
+    }
+  }
+  footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4em;
+    article {
+      margin-right: 10px;
+      .field--name-user-picture {
+        width: fit-content;
+        a img {
+            min-height: 100px;
+            min-width: 100px;
+            border: 4px solid $hs-blue;
+            border-radius: 100%;
+        }
+      }
+    }
+    .node__submitted .quickedit-field a {
+      font-weight: 600;
+    }
+  }
+}
+/*Styling for item display end*/

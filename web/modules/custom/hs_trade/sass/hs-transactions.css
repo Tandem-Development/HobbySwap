@@ -1,0 +1,448 @@
+/* line 4, hs-transactions.scss */
+.region-content {
+  position: relative;
+}
+
+/*Styling for transactions START*/
+/* line 9, hs-transactions.scss */
+.hs--transaction {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.8rem;
+  border-right: 8px solid #F3F3F3;
+  border-left: 8px solid #F3F3F3;
+  border-radius: 0.4em;
+  box-shadow: 2px 2px 4px grey;
+}
+/* line 18, hs-transactions.scss */
+.hs--transaction .hs--transaction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1em 1.5em;
+}
+/* line 23, hs-transactions.scss */
+.hs--transaction .hs--transaction-header .transaction-id {
+  width: fit-content;
+  font-weight: 500;
+  font-size: 1em;
+  color: #B5B5B5;
+  margin: 0;
+}
+/* line 30, hs-transactions.scss */
+.hs--transaction .hs--transaction-header .transaction-members {
+  font-size: 1rem;
+}
+/* line 32, hs-transactions.scss */
+.hs--transaction .hs--transaction-header .transaction-members div {
+  width: fit-content;
+  margin: 0;
+  font-weight: bold;
+}
+/* line 36, hs-transactions.scss */
+.hs--transaction .hs--transaction-header .transaction-members div a {
+  color: #4888FF;
+  padding: 0.5em 1em;
+  border: 2px solid #F3F3F3;
+  border-radius: 0.3em;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+/* line 43, hs-transactions.scss */
+.hs--transaction .hs--transaction-header .transaction-members div a:hover {
+  background-color: #F3F3F3;
+}
+/* line 51, hs-transactions.scss */
+.hs--transaction .hs--transaction-body {
+  display: flex;
+  padding: 0.75em;
+}
+/* line 54, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  padding: 0.2em;
+}
+/* line 59, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item--link:hover {
+  text-decoration: none;
+}
+/* line 62, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .offered {
+  position: relative;
+  font-size: 1.5em;
+  font-weight: 400;
+  color: white;
+  margin: 0 1em;
+  padding: 0.2em 1em;
+  width: auto;
+  background-color: #4888FF;
+  border-radius: 0.3em 0.3em 0 0;
+}
+/* line 72, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .offered a {
+  color: white;
+}
+/* line 74, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .offered a:hover {
+  color: #B5B5B5;
+}
+/* line 79, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item {
+  display: flex;
+  background-color: #F3F3F3;
+  padding: 1em 2em;
+  margin: 0 0.5em 1em 0.5em;
+  border-radius: 0.3em;
+  border-left: 6px solid #4888FF;
+  transition: all 0.2s;
+}
+/* line 87, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item:hover {
+  box-shadow: 1px 1px 10px #B5B5B5;
+  transform: translateY(-0.3em);
+}
+/* line 91, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item .requester-item--image {
+  position: relative;
+  width: 30%;
+  background-color: white;
+  border: 2px solid #B5B5B5;
+}
+/* line 96, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item .requester-item--image:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+/* line 101, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item .requester-item--image .image-spacer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+/* line 107, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item .requester-item--image .image-spacer img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+/* line 114, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item .requester-item--info {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1em;
+}
+/* line 120, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item .requester-item--info .requester-item--name {
+  font-size: 1.5em;
+  font-weight: 500;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid #B5B5B5;
+  margin-bottom: 0;
+}
+/* line 127, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .requester-item .requester-item--info .requester-item--value {
+  font-size: 1.75em;
+  margin-top: 0.5em;
+}
+/* line 133, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .residual {
+  text-align: center;
+  background-color: #F3F3F3;
+  padding: 1em 2em;
+  margin: 0 0.5em 1em 0.5em;
+  border-radius: 0.3em;
+  border-left: 6px solid #FFDD47;
+}
+/* line 140, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--requester-items .residual h3 {
+  font-size: 2.5em;
+  margin: auto;
+}
+/* line 146, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  margin: 0 0.3em;
+  padding: 0 0.3em;
+}
+/* line 154, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .transaction-status {
+  font-size: 1.2em;
+  padding: 0.5em 0.3em;
+  margin: 0.3em 0;
+  background-color: #FFDD47;
+  border-radius: 0.2em;
+  color: #303030;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+/* line 163, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .transaction-status span {
+  color: #4888FF;
+}
+/* line 167, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .accept:hover, .hs--transaction .hs--transaction-body .hs--action-links .confirm:hover {
+  background-color: green;
+}
+/* line 170, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .decline:hover {
+  background-color: red;
+}
+/* line 173, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .counter:hover {
+  background-color: #505050;
+}
+/* line 176, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .message:hover {
+  background-color: #505050;
+}
+/* line 179, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .action-link {
+  position: relative;
+  padding: 0.5em 1em;
+  margin: 0.3em 0;
+  background-color: #4888FF;
+  border-radius: 0.2em;
+  text-align: center;
+  transition: all 0.2s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+}
+/* line 187, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .action-link:hover, .hs--transaction .hs--transaction-body .hs--action-links .action-link:focus {
+  margin: 0.3em 0.6em;
+}
+/* line 190, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .action-link a {
+  color: white;
+  text-decoration: none;
+}
+/* line 193, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .action-link a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+/* line 202, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--action-links .action-link img {
+  width: 1.2em;
+}
+/* line 207, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+/* line 212, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item--link:hover {
+  text-decoration: none;
+}
+/* line 215, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .wants {
+  position: relative;
+  font-size: 1.5em;
+  font-weight: 400;
+  color: white;
+  margin: 0 1em;
+  padding: 0.2em 1em;
+  width: auto;
+  background-color: #4888FF;
+  border-radius: 0.3em 0.3em 0 0;
+}
+/* line 225, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .wants a {
+  color: white;
+}
+/* line 227, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .wants a:hover {
+  color: #B5B5B5;
+}
+/* line 232, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item {
+  display: flex;
+  justify-content: right;
+  background-color: #F3F3F3;
+  padding: 1em 2em;
+  margin: 0 0.5em 1em 0.5em;
+  border-radius: 0.3em;
+  border-right: 6px solid #4888FF;
+  transition: all 0.2s;
+}
+/* line 241, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item:hover {
+  box-shadow: 1px 1px 10px #B5B5B5;
+  transform: translateY(-0.3em);
+}
+/* line 245, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--image {
+  position: relative;
+  width: 30%;
+  background-color: white;
+  border: 2px solid #B5B5B5;
+}
+/* line 250, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--image:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+/* line 255, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--image .image-spacer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+/* line 261, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--image .image-spacer img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+/* line 268, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--info {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0 1em;
+}
+/* line 275, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--info .responder-item--name {
+  width: 100%;
+  text-align: right;
+  font-size: 1.5em;
+  font-weight: 500;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid #B5B5B5;
+  margin-bottom: 0;
+}
+/* line 284, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--info .responder-item--value {
+  font-size: 1.75em;
+  margin-top: 0.5em;
+}
+/* line 290, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .residual {
+  text-align: center;
+  background-color: #F3F3F3;
+  padding: 1em 2em;
+  margin: 0 0.5em 1em 0.5em;
+  border-radius: 0.3em;
+  border-right: 6px solid #FFDD47;
+}
+/* line 297, hs-transactions.scss */
+.hs--transaction .hs--transaction-body .hs--responder-items .residual h3 {
+  font-size: 2.5rem;
+  margin: auto;
+}
+
+/*Styling for transactions END*/
+/*Styling for user transaction view START*/
+/* line 308, hs-transactions.scss */
+.hs--no-transactions {
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.7em;
+  padding: 10% 20%;
+  border-radius: 0.3em;
+  border-left: 0.4em solid #4888FF;
+  border-right: 0.4em solid #4888FF;
+  box-shadow: 2px 2px 5px #B5B5B5;
+}
+
+/* line 318, hs-transactions.scss */
+.hs--transactions-tabs {
+  display: flex;
+  padding: 0 1em;
+}
+/* line 321, hs-transactions.scss */
+.hs--transactions-tabs .hs--incoming--label {
+  flex: 1;
+  color: #505050;
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 600;
+  padding: 0.2em 0;
+  margin-bottom: 0;
+  background-color: #F3F3F3;
+  border-radius: 0.3em 0 0 0;
+  transition: all 0.25s cubic-bezier(0.95, 0.35, 0.04, 1.65), filter 0.15s linear;
+}
+/* line 332, hs-transactions.scss */
+.hs--transactions-tabs .hs--incoming--label:hover {
+  cursor: pointer;
+  filter: brightness(0.9);
+}
+/* line 336, hs-transactions.scss */
+.hs--transactions-tabs .hs--incoming--label.active {
+  background-color: #4888FF;
+  color: white;
+}
+/* line 340, hs-transactions.scss */
+.hs--transactions-tabs .hs--incoming--label span {
+  background-color: white;
+  color: #505050;
+  border-radius: 0.2em;
+  display: inline-block;
+  line-height: 1em;
+  min-width: 1.5em;
+  padding: 0.1em 0.3em;
+  box-shadow: 0 0 3px #B5B5B5 inset;
+}
+/* line 351, hs-transactions.scss */
+.hs--transactions-tabs .hs--outgoing--label {
+  flex: 1;
+  color: #505050;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+  background-color: #F3F3F3;
+  border-radius: 0 0.3em 0 0;
+  padding: 0.2em 0;
+  margin-bottom: 0;
+  transition: all 0.25s cubic-bezier(0.95, 0.35, 0.04, 1.65), filter 0.15s linear;
+}
+/* line 362, hs-transactions.scss */
+.hs--transactions-tabs .hs--outgoing--label:hover {
+  cursor: pointer;
+  filter: brightness(0.9);
+}
+/* line 366, hs-transactions.scss */
+.hs--transactions-tabs .hs--outgoing--label.active {
+  background-color: #4888FF;
+  color: white;
+}
+/* line 370, hs-transactions.scss */
+.hs--transactions-tabs .hs--outgoing--label span {
+  background-color: white;
+  color: #505050;
+  border-radius: 0.2em;
+  display: inline-block;
+  line-height: 1em;
+  min-width: 1.5em;
+  padding: 0.1em 0.3em;
+  box-shadow: 0 0 3px #B5B5B5 inset;
+}
+
+/* line 382, hs-transactions.scss */
+.hs--outgoing-container {
+  display: none;
+}
+
+/*Styling for user transaction view END*/

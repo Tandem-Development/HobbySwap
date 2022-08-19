@@ -1,0 +1,39 @@
+{#
+  This template is called in Drupal\hs_trade\Controller\PurchaseHobbyCoinController
+
+  !!!VALUES THAT RELATE TO THE DESIRED 'item' NODE!!!
+  - item: Array that contains all item values
+    - title: The item's title
+    - value: The item's value
+    - image_path: Path of the item's primary image
+    - description: The item's description
+    - responder: User info of the item's owner
+      - name: The user's display name
+      - path: The path to view the user's account
+
+#}
+<div class="item-container-requested row">
+  <div class="item-images col-md-6 col-12">
+    {% for image in item.images %}
+    <div class="image-spacer fade field--item">
+      <img src="{{ image.image_path }}">
+    </div>
+    {% endfor %}
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+  </div>
+  <div class="item-details col-md-6 col-12">
+    <div class="item-title">
+      <h2>{{ item.title }}</h2>
+    </div>
+    <div class="item-value">
+      <h2 class="hs--hobbycredit-after">{{ item.value }}</h2>
+    </div>
+    <div class="item-description">
+      <div>{{ item.description }}</div>
+    </div>
+    <div class="item-owner">
+      <span>OWNER:<a href="/{{ item.responder.path }}" target="_blank">{{ item.responder.name }}</a></span>
+    </div>
+  </div>
+</div>

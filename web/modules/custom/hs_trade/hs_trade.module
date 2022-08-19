@@ -1,0 +1,226 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Component\Render\FormattableMarkup;
+
+/**
+ * Implements hook_theme().
+ * - Create item_trade theme
+ * - Create user_view_requests theme
+ * - Create user_view_offers theme
+ * - Create node__hs_item theme suggestion
+ */
+function hs_trade_theme($existing, $type, $theme, $path) {
+  return[
+    'item_trade' => [
+      'variables' => [
+        'item' => NULL,
+      ],
+    ],
+    'hs_transaction' => [
+      'variables' => [
+        'mode' => NULL,
+        'transactions' => NULL,
+      ],
+    ],
+    'notifications_block' => [
+      'variables' => [],
+    ],
+    'node__hs_item' => [
+      'base hook' => 'node',
+      'template' => 'node--hs-item',
+    ],
+    'form_element_label__teaser' => [
+      'base hook' => 'form_element_label',
+      'template' => 'form-element-label--teaser',
+    ],
+    'form__make_offer' => [
+      'base hook' => 'form',
+      'template' => 'form--make-offer',
+    ],
+    'views_view_unformatted__hs_item_grid' => [
+      'base hook' => 'views_view_unformatted',
+      'template' => 'views-view-unformatted--hs-item-grid',
+    ],
+    'views_exposed_form__hs_item_grid' => [
+      'base hook' => 'views_exposed_form',
+      'template' => 'views-exposed-form--hs-item-grid'
+    ]
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ * - Includes 'node__hs_item' suggestion for 'node' hook
+ * - Includes 'form_element_label__teaser' suggestion for 'form_element_label' hook
+ */
+function hs_trade_theme_suggestions_alter(array &$suggestions, array $variables, $hook){
+
+  //Include node__hs_item theme suggestion
+  // - Only do so if the owner isn't viewing it and the node is type 'item'
+  if($hook === 'node') {
+    //Set proper default for user_items field
+    $view_uuid = \Drupal::configFactory()->getEditable('views.view.user_items')->get('uuid');
+    $field_user_items = \Drupal::configFactory()->getEditable('field.field.user.user.field_user_items');
+    $field_user_items->set('default_value.0.target_uuid', $view_uuid)->save();
+
+
+    $node = $variables['elements']['#node'];
+    if($node->bundle() === 'item'){
+      //If the current node is of type 'item', add a theme suggestion for a custom template
+      if($variables['elements']['#view_mode'] === 'full'){
+        $suggestions[] = 'node__hs_item';
+      }
+    }
+  }
+
+  //Include field_element_label__teaser theme suggestion for 'form_element_label' hook
+  // - Only include the suggestion for trade offer forms to prevent errors on admin pages
+  if($hook === 'form_element_label' && !empty($variables['element']['#id'])) {
+    if(str_contains($variables['element']['#id'], 'edit-responder-item-selection') || str_contains($variables['element']['#id'], 'edit-requester-item-selection')){
+      $suggestions[] = 'form_element_label__teaser';
+    }
+  }
+
+  //replace normal form template with custom 'Make Offer' form
+  if($hook === 'form' && $variables['element']['#form_id'] === 'hs_trade.make_offer_form'){
+    $suggestions[] = 'form__make_offer';
+  }
+
+  //Replace the hs_item_grid view content and filter templates
+  if($hook === 'views_view_unformatted' && $variables['view']->id() === 'hs_item_grid'){
+    $suggestions[] = 'views_view_unformatted__hs_item_grid';
+  }
+  if($hook === 'views_exposed_form' && $variables['form']['#id'] === 'views-exposed-form-hs-item-grid-page-1'){
+    $suggestions[] = 'views_exposed_form__hs_item_grid';
+  }
+
+}
+
+
+
+/**
+ * Implements hook_preprocess().
+ * - Attaches a library to 'node' and passes in additional variables
+ * - Attaches a library to 'views_view_grid'
+ */
+function hs_trade_preprocess(&$variables, $hook) {
+
+
+
+  //Attach 'hs_trade/trade-page' library to 'item' nodes
+  if($hook === 'node') {
+    $node = $variables['elements']['#node'];
+    if($node->bundle() === 'item'){
+      //If the current node is of type 'item'
+      //- Pass the path for the trade button to the node template
+      //- Attach the custom library 'trade-page'
+      $variables['trade_route'] = $node->id().'/trade';
+      $variables['#attached']['library'] = ['hs_trade/trade-page'];
+      //If the current node is of type 'item', add library for node item
+      if($variables['elements']['#view_mode'] === 'full'){
+        $variables['#attached']['library'] = ['hs_trade/node--hs-item'];
+      }
+      //Hide the trade button on item nodes when viewed by author
+      if($node->getOwner()->id() === \Drupal::currentUser()->id()){
+        $variables['is_owner'] = TRUE;
+      }
+    }
+  }
+
+  //Attach 'hs_trade/item-grid-view' library to grid views
+  if($hook === 'views_view') {
+    if($variables['view']->id() === 'hs_item_grid') {
+      $variables['#attached']['library'] = ['hs_trade/item-grid-view'];
+    };
+  }
+
+  //Insert hobbycredit value class into node value field
+  if($hook === 'field' && $variables['element']['#field_name'] === 'field_item_value'){
+    $variables['attributes']['class'][] = 'hs--hobbycredit-after';
+  }
+
+}
+
+/**
+ * Implements template_preprocess_HOOK().
+ * - Passes in additional variables to the template for custom 'form_element_label__teaser'
+ * - Attaches library to 'form_element_label__teaser'
+ */
+function template_preprocess_form_element_label__teaser(&$variables) {
+  //Retrieve the relevant item entity before getting/passing its title, url, and value
+  if(!empty($variables['title']['#markup']) && gettype($variables['title']['#markup'] == 'string')){
+    $id = $variables['title']['#markup'];
+    $item = \Drupal::entityTypeManager()->getStorage('node')->load($id);
+
+    //Get image file entity
+    $image_ids = array_column($item->get('field_item_image')->getValue(), 'target_id');
+    $images = array_map(function($image){
+      return $image->createFileUrl();
+    }, \Drupal::entityTypeManager()->getStorage('file')->loadMultiple($image_ids));
+
+    $variables['item'] = [
+      'title' => $item->getTitle(),
+      'url' => $item->toUrl(),
+      'value' => $item->get('field_item_value')->value,
+      'images' => $images,
+    ];
+  }
+
+  //Attach library 'hs_trade/trade-page'
+  $variables['#attached']['library'] = ['hs_trade/trade-page'];
+}
+
+
+
+/**
+ * Implements hook_entity_base_field_info().
+ * - Adds 'unread_transactions' field for transaction interaction notification system
+ */
+function hs_trade_entity_base_field_info(EntityTypeInterface $entity_type){
+  if ($entity_type->id() === 'user') {
+    $fields['unread_transactions'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Unread Transactions'))
+      ->setDescription(t('IDs of unread transactions that the user is involved in.'))
+      ->setCardinality(99)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    return $fields;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ * - Disables the ability to delete items if they're involved in a transaction
+ */
+function hs_trade_form_alter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+  if($form_id === 'node_item_delete_form'){
+    $nid = $form['actions']['cancel']['#url']->getRouteParameters()['node'];
+    if(\Drupal::service('hs_trade.transaction_manager')->isItemInTransaction($nid) !== FALSE){
+      $involved_transactions = \Drupal::service('hs_trade.transaction_manager')->isItemInTransaction($nid);
+      $transaction_placeholders = [];
+      $error_message = '<h3 style="color: red">This item is part of active transactions and cannot be deleted until these transactions have been declined or confirmed: ';
+      foreach($involved_transactions as $tid){
+        $error_message .= '<a href="/user/transactions"> @'.$tid.' </a>';
+        $transaction_placeholders['@'.$tid] = $tid;
+      }
+      $error_message .= '</h3>';
+      $form['#title'] = new FormattableMarkup($error_message, $transaction_placeholders);
+      unset($form['actions']['submit'], $form['description']);
+    }
+  }
+}
+
+/**
+ * Implements hook_mail()
+ */
+function hs_trade_mail($key, &$message, $params){
+  $message['headers']['Content-Type'] = SWIFTMAILER_FORMAT_HTML;
+  switch($key){
+    case 'transaction_summary':
+      $message['subject'] = 'Transaction Summary #'.$params['tid'];
+      $message['body'][] = twig_render_template('/modules/custom/hs_trade/templates/email--transaction-summary.html.twig', $params);
+      break;
+  }
+}

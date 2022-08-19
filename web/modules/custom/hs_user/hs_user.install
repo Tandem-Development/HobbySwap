@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function hs_user_install(){
+  //Set user_items view to all user_items fields for existing users
+  $entity_manager = \Drupal::entityTypeManager()->getStorage('user');
+  $query = $entity_manager->getQuery();
+  $results = $query->condition('uid', 0, '>')->execute();
+  $users = $entity_manager->loadMultiple($results);
+  foreach($users as $user){
+    $user->get('field_user_items')->setValue([
+      'target_id' => 'user_items',
+      'display_id' => 'block_1',
+      'argument' => NULL,
+      'title' => 0,
+      'data' => NULL,
+    ]);
+    $user->save();
+  }
+
+  \Drupal::messenger()->addWarning('Even though you have installed hs_user, YOU STILL NEED TO RUN CRON AND FLUSH ALL CACHES TO COMPLETE INSTALLATION!');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function hs_user_uninstall(){
+  $bins = [
+    'field.field.user.user.field_user_items',
+    'field.storage.user.field_user_items',
+    'views.view.user_items',
+  ];
+  foreach($bins as $bin){
+    \Drupal::configFactory()->getEditable($bin)->delete();
+  }
+}

@@ -1,0 +1,44 @@
+<?php
+
+use Drupal\Core\Render\Markup;
+
+/**
+ * Implements hook_uninstall().
+ */
+function hs_beta_uninstall(){
+  \Drupal::configFactory()->getEditable('user.role.beta')->delete();
+  \Drupal::configFactory()->getEditable('block.block.hobbyswapbetasignup')->delete();
+}
+
+/**
+ * Implements hook_mail().
+ */
+function hs_beta_mail($key, &$message, $params) {
+  $message['headers']['Content-Type'] = SWIFTMAILER_FORMAT_HTML;
+  switch($key) {
+    case 'register':
+      $message['subject'] = "HobbySwap | Beta Registration";
+      $message['body'][] = twig_render_template('/modules/custom/hs_beta/templates/email--beta-register.html.twig', []);
+      break;
+    case 'app_action':
+      $message['subject'] = "HS Beta Application | ".$params['email'];
+      $message['body'][] = twig_render_template('/modules/custom/hs_beta/templates/email--beta-action.html.twig', $params);
+      break;
+    case 'app_accept':
+      $message['subject'] = "HobbySwap | Beta Application Accepted";
+      $message['body'][] = twig_render_template('/modules/custom/hs_beta/templates/email--beta-accepted.html.twig', []);
+      break;
+    case 'app_reject':
+      $message['subject'] = "HobbySwap | Beta Application Rejected";
+      $message['body'][] = twig_render_template('/modules/custom/hs_beta/templates/email--beta-rejected.html.twig', []);
+      break;
+    case 'beta_open':
+      $message['subject'] = "HobbySwap | Beta Program Open!!!";
+      $message['body'][] = twig_render_template('/modules/custom/hs_beta/templates/email--beta-open.html.twig', $params);
+      break;
+    case 'beta_close':
+      $message['subject'] = "HobbySwap | Beta Program Closed";
+      $message['body'][] = twig_render_template('/modules/custom/hs_beta/templates/email--beta-close.html.twig', []);
+      break;
+  }
+}

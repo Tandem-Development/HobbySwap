@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - hs_trade
+    - user
+  theme:
+    - hobbyswap
+id: hstransactionnotifications
+theme: hobbyswap
+region: footer
+weight: 0
+provider: null
+plugin: hs_trade_transaction_notifications
+settings:
+  id: hs_trade_transaction_notifications
+  label: 'HS Transaction Notifications'
+  label_display: '0'
+  provider: hs_trade
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated
+      beta: beta
+      administrator: administrator

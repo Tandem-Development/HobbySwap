@@ -1,0 +1,30 @@
+<h2 class="inbox-title">Direct Messages</h2>
+{% for thread in threads %}
+<div class="dm-thread{{ thread.unread ? ' unread' : '' }} row" data-thread-id="{{ thread.id }}">
+  <div class="other-member col-2 p-0">
+    <div class="user-image">
+      <a href="/user/{{ thread.other_member.id }}"><img src="{{ thread.other_member.image }}"></a>
+    </div>
+    <h3>{{ thread.other_member.name }}</h3>
+  </div>
+  <div class="newest-message col-lg-8 col-7 p-0">
+    <a href="/private-messages/{{ thread.id }}"></a>
+    <p class="message">{{ thread.newest_message }}</p>
+    <p class="message-time">{{ thread.newest_message_time }}</p>
+  </div>
+  <div class="links col-lg-2 col-3 p-0">
+    {% if thread.transaction is not empty %}
+    <div class="dm-transaction">
+      <a href="/user/transactions">
+        <img src="/sites/default/files/icons/notifications.svg">
+      </a>
+    </div>
+    {% endif %}
+    <div class="dm-delete">
+      <a href="/private-messages/{{ thread.id }}/delete">
+        <img src="/sites/default/files/icons/delete.svg">
+      </a>
+    </div>
+  </div>
+</div>
+{% endfor %}

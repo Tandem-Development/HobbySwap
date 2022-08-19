@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Item Categories'
+vid: item_categories
+description: 'Provides a category taxonomy for "Item" nodes'
+weight: 0

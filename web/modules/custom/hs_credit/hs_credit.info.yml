@@ -1,0 +1,6 @@
+name: Credit
+description: 'Provides HobbyCredit balances for user entities'
+type: module
+version: 8.x-1.0
+package: HS
+core_version_requirement: '^8.9 || ^9'

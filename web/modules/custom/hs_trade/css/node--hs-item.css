@@ -1,0 +1,156 @@
+/*Styling for item display start*/
+/* line 4, ../sass/node--hs-item.scss */
+.region-content .node {
+  margin-top: 3em;
+}
+/* line 7, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-images {
+  position: relative;
+  border: 2px solid #F3F3F3;
+  padding: 0;
+}
+/* line 11, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-images .field__items {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+/* line 15, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-images .field__items::before {
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
+/* line 20, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-images .field__items .field__item {
+  position: absolute;
+  inset: 0;
+}
+/* line 23, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-images .field__items .field__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* line 30, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-images .prev, .region-content .node .node__content .item-images .next {
+  cursor: pointer;
+  position: absolute;
+  top: 49.2%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s ease;
+  user-select: none;
+  text-decoration: none;
+  opacity: 0.6;
+  background-color: #505050;
+}
+/* line 46, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-images .prev {
+  padding-left: 8px;
+  border-radius: 0 100vmax 100vmax 0;
+}
+/* line 50, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-images .next {
+  right: 0;
+  padding-right: 8px;
+  border-radius: 100vmax 0 0 100vmax;
+}
+/* line 56, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid #F3F3F3;
+  border-left: none;
+  padding: 1rem;
+}
+/* line 64, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-details .details .field--name-title {
+  position: relative;
+  display: block;
+  line-height: 40px;
+  font-size: 40px;
+  padding-bottom: 0.5em;
+}
+/* line 70, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-details .details .field--name-title::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0% -2% 0%;
+  background-color: #505050;
+}
+/* line 77, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-details .details .field--name-field-item-value {
+  font-size: 2rem;
+  margin: 0.6em 0;
+}
+/* line 82, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-details .details .field--name-field-item-interest .field__item::before {
+  content: '- ';
+}
+/* line 87, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-details .hs-item-trade-link {
+  text-align: center;
+  width: 100%;
+}
+/* line 90, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-details .hs-item-trade-link #hs-item-trade-link-field {
+  display: block;
+  text-decoration: none;
+  font-size: 1.8rem;
+  width: auto;
+  padding: 1em 0;
+  margin: 0.2em;
+  background-color: #4888FF;
+  border-radius: 0.2em;
+  color: white;
+  font-weight: bold;
+  transition: all 0.2s cubic-bezier(0.95, 0.35, 0.04, 1.65);
+}
+/* line 102, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-details .hs-item-trade-link #hs-item-trade-link-field:hover {
+  color: #303030;
+  background-color: #FFDD47;
+  margin: 0.2em 0.7em;
+}
+/* line 110, ../sass/node--hs-item.scss */
+.region-content .node .node__content .item-description {
+  max-height: 400px;
+  overflow-y: scroll;
+  border: 2px solid #F3F3F3;
+  border-top: none;
+  padding: 0.5rem;
+}
+/* line 118, ../sass/node--hs-item.scss */
+.region-content .node footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4em;
+}
+/* line 123, ../sass/node--hs-item.scss */
+.region-content .node footer article {
+  margin-right: 10px;
+}
+/* line 125, ../sass/node--hs-item.scss */
+.region-content .node footer article .field--name-user-picture {
+  width: fit-content;
+}
+/* line 127, ../sass/node--hs-item.scss */
+.region-content .node footer article .field--name-user-picture a img {
+  min-height: 100px;
+  min-width: 100px;
+  border: 4px solid #4888FF;
+  border-radius: 100%;
+}
+/* line 135, ../sass/node--hs-item.scss */
+.region-content .node footer .node__submitted .quickedit-field a {
+  font-weight: 600;
+}
+
+/*Styling for item display end*/

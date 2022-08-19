@@ -1,0 +1,97 @@
+{#
+!!!CUSTOM VARIABLES FOR INCOMING REQUESTS PASSED IN BY 'Drupal\hs_trade\Controller\UserTransactionViewController::viewUserTransactions'!!!
+
+- transactions: Array of all incoming trade requests
+  - transaction: An individual transaction (arbitrary)
+    - id: The transaction's ID
+    - url: The transaction's URL
+    - status: The transaction's status
+    - responder:
+      - url: The responding user's URL
+      - name: The responding user's display name
+    - requester:
+      - url: The requesting user's URL
+      - name: The requesting user's display name
+    - requester_items:
+      - url: The item's URL
+      - name: The item's name
+    - responder_items:
+      - url: The item's URL
+      - name: The item's name
+
+#}
+{% for transaction in transactions %}
+<div class="hs--transaction">
+  <div class="hs--transaction-header row align-items-center justify-content-between">
+    <h2 class="transaction-id col-md-8 col-12">Transaction #{{ transaction.id }}; Offered by
+      <a href="{{ transaction.requester.url }}">{{ transaction.requester.name }}</a> on {{ transaction.created }}</h2>
+    <div class="transaction-members">
+      <div>Members <a href="{{ transaction.responder.url }}">{{ transaction.responder.name }}</a> <a href="{{ transaction.requester.url }}">{{ transaction.requester.name }}</a></div>
+    </div>
+  </div>
+  <div class="hs--transaction-body row justify-content-center">
+    <div class="hs--requester-items col-lg-5 col-12">
+      <h3 class="offered"><a href="{{ transaction.requester.url }}">{{ transaction.requester.name }}</a> offered:</h3>
+      {% for requester_item in transaction.requester_items %}
+        <a class="requester-item--link" href="{{ requester_item.url }}">
+          <div class="requester-item">
+            <div class="requester-item--image">
+              <div class="image-spacer">
+                <img src="{{ requester_item.image }}" alt="Item image">
+              </div>
+            </div>
+            <div class="requester-item--info">
+              <h3 class="requester-item--name">{{ requester_item.name }}</h3>
+              <h3 class="requester-item--value  hs--hobbycredit-after">{{ requester_item.value }}</h3>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+      {% if transaction.residual < 0 %}
+        <div class="residual">
+          <h3 class="hs--hobbycredit-after">+{{ transaction.residual|abs }}</h3>
+        </div>
+      {% endif %}
+    </div>
+    <div class="hs--action-links col-lg-2 col-sm-6 col-8 order-lg-0 order-3">
+      <h3 class="transaction-status">STATUS: <span>{{ transaction.status }}</span></h3>
+      {% for link in transaction.action_links %}
+        <div class="action-link {{ link.text|lower }}">
+          <a href="{{ link.url }}">{{ link.text }}</a>
+          <img src="{{ link.icon_path }}">
+        </div>
+      {% endfor %}
+    </div>
+    <div class="hs--responder-items col-lg-5 col-12">
+      <h3 class="wants"><a href="{{ transaction.requester.url }}">{{ transaction.requester.name }}</a> requested:</h3>
+      {% for responder_item in transaction.responder_items %}
+        <a class="responder-item--link" href="{{ responder_item.url }}">
+          <div class="responder-item">
+            <div class="responder-item--info">
+              <h3 class="responder-item--name">{{ responder_item.name }}</h3>
+              <h3 class="responder-item--value hs--hobbycredit-after">{{ responder_item.value }}</h3>
+            </div>
+            <div class="responder-item--image">
+              <div class="image-spacer">
+                <img src="{{ responder_item.image }}" alt="Item image">
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+      {% if transaction.residual > 0 %}
+        <div class="residual">
+          <h3 class="hs--hobbycredit-after">+{{ transaction.residual|abs }}</h3>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% if transactions is empty %}
+  {% if mode == 'incoming' %}
+  <h3 class="hs--no-transactions">Nothing to see here! It looks like no one's made any offers on your items.</h3>
+  {% elseif mode == 'outgoing' %}
+  <h3 class="hs--no-transactions">You haven't started any trades yet? Click <a href="/browse">here</a> to browse available items and start your first trade!</h3>
+  {% endif %}
+{% endif %}

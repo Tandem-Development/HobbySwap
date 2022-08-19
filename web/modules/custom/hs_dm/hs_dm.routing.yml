@@ -1,0 +1,8 @@
+hs_dm.ajax_callback:
+  path: '/hs-dm/ajax-callback/{op}'
+  defaults:
+    _controller: '\Drupal\hs_dm\Controller\AjaxController::ajaxCallback'
+  requirements:
+    _csrf_token: 'TRUE'
+    _user_is_logged_in: 'TRUE'
+    _permission: 'use private messaging system,access user profiles'

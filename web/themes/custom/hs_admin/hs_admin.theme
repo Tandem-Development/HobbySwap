@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Implements hook_preprocess().
+ */
+function hs_admin_preprocess(&$variables, $hook){
+  //Refresh available icons for attribute selection
+  if($hook === 'form' && $variables['element']['#id'] === 'menu-link-content-menu-link-content-form'){
+    //Retrieve all the SVGs from the menu_icons directory and prepare it as a list of yaml options
+    $files = array_map(function($file){
+      return basename($file, '.svg');
+    },scandir('sites/default/files/menu_icons'));
+    unset($files[0], $files[1]);
+    $options = array_combine(array_values($files), array_values($files));
+
+    //Set the data-icons options and save the bin
+    $bin = \Drupal::configFactory()->getEditable('menu_link_attributes.config');
+    $bin->set('attributes.data-icon.options', $options)->save();
+  }
+}

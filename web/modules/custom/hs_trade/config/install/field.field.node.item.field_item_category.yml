@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_item_category
+    - node.type.item
+    - taxonomy.vocabulary.item_categories
+id: node.item.field_item_category
+field_name: field_item_category
+entity_type: node
+bundle: item
+label: Category
+description: 'The category in which your item best fits'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      item_categories: item_categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

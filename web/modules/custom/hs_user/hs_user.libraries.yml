@@ -1,0 +1,13 @@
+user-local-tasks:
+  version: 1.x
+  css:
+    theme:
+      css/user-local-tasks.css: {}
+
+user-view:
+  version: 1.x
+  css:
+    theme:
+      css/user-view.css: {}
+  js:
+    js/user-view.js: {}

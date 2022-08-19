@@ -1,0 +1,5 @@
+services:
+  hs_dm.route_subscriber:
+    class: 'Drupal\hs_dm\Routing\RouteSubscriber'
+    tags:
+      - { name: event_subscriber }

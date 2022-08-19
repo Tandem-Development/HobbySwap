@@ -1,0 +1,283 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+/*Styling for requested trade item teaser start*/
+.region {
+  .item-container-requested {
+    flex: 1;
+    background-color: $hs-gray1;
+    border-radius: 0.2em;
+    padding: 2em;
+    margin-top: 2rem;
+    .item-images {
+      position: relative;
+      background-color: white;
+      border: 2px solid $hs-gray2;
+      padding: 0;
+      &:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+      }
+      .image-spacer {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        img {
+          object-fit: contain;
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .fade {
+        animation: fade 0.3s forwards;
+      }
+      @keyframes fade {
+        from {
+          opacity: 0.4;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 49%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.3s ease;
+        user-select: none;
+        text-decoration: none;
+        opacity: 0.6;
+        background-color: $hs-gray4;
+      }
+      .prev {
+        padding-left: 8px;
+        border-radius: 0 50px 50px 0;
+      }
+      .next {
+        right: 0;
+        padding-right: 8px;
+        border-radius: 50px 0 0 50px;
+      }
+    }
+    .item-details {
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .item-title {
+        padding: 0.5em 0;
+        border-bottom: 2px solid $hs-gray2;
+        h2 {
+          font-size: 2.5em;
+          color: $hs-black;
+          margin-bottom: 0;
+        }
+      }
+      .item-value {
+        h2 {
+          margin-top: 0.4em;
+          margin-bottom: 0.6em;
+          font-size: 2.5em;
+        }
+      }
+      .item-description {
+        max-height: 200px;
+        overflow: scroll;
+        background-color: white;
+        border: 1px solid $hs-gray1;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        div {
+          padding: 10px;
+        }
+      }
+      .item-owner {
+        span {
+          color: $hs-black;
+          font-weight: 500;
+          a {
+            color: $hs-blue;
+            margin-left: 0.2em;
+          }
+        }
+      }
+    }
+  }
+}
+/*Styling for requested trade item teaser stop*/
+
+/*Styling for item selection start*/
+.hs-trademake-offer-form {
+  border-radius: 5px;
+  padding: 20px 0;
+  #edit-responder-item-selection--wrapper,
+  #edit-requester-item-selection--wrapper {
+    height: max-content;
+    border: none;
+    margin-top: 2rem;
+    legend {
+      text-align: center;
+      background-color: $hs-blue;
+      border-radius: 0.3em;
+      .fieldset-legend {
+        display: block;
+        font-size: 1.6em;
+        font-weight: 600;
+        color: white;
+        padding: 1em;
+        &::after {
+          display: none;
+        }
+      }
+    }
+    .fieldset-wrapper {
+      padding: 1rem 0;
+      .form-checkboxes {
+        display: flex;
+        flex-direction: column-reverse;
+        .form-type-checkbox {
+          position: relative;
+          display: flex;
+          flex-direction: row-reverse;
+          align-items: center;
+          background-color: $hs-gray1;
+          border-radius: 0.3em;
+          border-left: 6px solid $hs-blue;
+          transition: box-shadow 0.2s, margin 0.2s;
+          margin: 0 0 0.7em 0;
+          &:hover {
+            box-shadow: 1px 1px 10px $hs-gray4;
+            animation: shift 0.4s forwards;
+            @keyframes shift {
+              0% {
+                transform: translate(0);
+              }
+              100% {
+                transform: translate(0.2em);
+              }
+            }
+          }
+          input {
+            margin: 0 10px;
+            width: 2.5em;
+            height: 2.5em;
+          }
+        }
+      }
+    }
+  }
+  .item-teaser--container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    padding: 1em 0.5em;
+    .teaser-image {
+      position: relative;
+      flex-basis: 30%;
+      width: 100%;
+      background-color: white;
+      border: 1px solid $hs-gray2;
+      &:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+      }
+      .teaser-image-spacer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        img {
+          object-fit: contain;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+    .prev {
+      display: none;
+    }
+    .next {
+      position: absolute;
+      inset: 0;
+      color: transparent;
+    }
+    .item-teaser--details {
+      flex-basis: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 1em;
+      .item-title {
+        padding-bottom: 0.5em;
+        border-bottom: 1px solid $hs-gray2;
+        h3 {
+          font-size: 1.5em;
+          font-weight: 500;
+          margin-bottom: 0;
+        }
+      }
+      .item-value {
+        h3 {
+          margin-top: 0.4em;
+          font-size: 1.75rem;
+        }
+      }
+    }
+    .hs-trade-no-items {
+      text-align: center;
+    }
+  }
+  .form-item-enforce-residual {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    input{
+      width: 2rem;
+      height: 2rem;
+      margin: 0 0.3rem;
+    }
+    label {
+      color: $hs-black;
+      font-size: 2rem;
+      border-radius: 0.15em;
+    }
+    .description{
+      flex-basis: 100%;
+      text-align: center;
+      margin: 0 1rem;
+    }
+  }
+  #edit-submit{
+    font-size: 1.5rem;
+    width: fit-content;
+  }
+}
+/*Styling for item selection stop*/
+
+/*Styling for residual counter selection start*/
+.responder-residual, .requester-residual {
+  display: flex;
+  justify-content: center;
+  background-color: $hs-gray1;
+  width: 100%;
+  padding: 1em 2em;
+  border-radius: 0.3em;
+  border-left: 6px solid $hs-yellow;
+  h3 {
+    font-size: 2.5em;
+  }
+}
+/*Styling for residual counter selection stop*/

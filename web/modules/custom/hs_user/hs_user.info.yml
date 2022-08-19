@@ -1,0 +1,17 @@
+name: User
+description: 'Provides custom user properties, pages, and styling for HobbySwap users'
+type: module
+version: 8.x-1.0
+package: HS
+core_version_requirement: '^8.9 || ^9'
+dependencies:
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:node'
+  - 'drupal:options'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'hs_trade:hs_trade'
+  - 'pathauto:pathauto'
+  - 'viewsreference:viewsreference'

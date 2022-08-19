@@ -1,0 +1,11 @@
+signup-form:
+  version: 1.x
+  css:
+    theme:
+      css/signup-form.css: {}
+
+manage-form:
+  version: 1.x
+  css:
+    theme:
+      css/manage-form.css: {}
