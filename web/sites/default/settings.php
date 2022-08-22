@@ -44,3 +44,5 @@ $databases['default']['default'] = array (
   'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 );
 $settings['hash_salt'] = 'dD7B3FND-lziEmkVA22nDKiQeWhoSkdJVbgR8d6VEmPXSOOL0szNVdwZMzKMFxLFiZduH7fhgA';
+
+$config['system.logging']['error_level'] = 'verbose';
