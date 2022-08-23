@@ -1,0 +1,69 @@
+# Documentation: https://dev.docs.agile.coop/docs/environment/intro
+
+name: hobbyswap # Insert the project name here in the format [client][project], i.e. ethimain.
+recipe: drupal9
+config:
+  webroot: web
+  php: '7.4'
+  composer_version: 2
+proxy:
+  mailhog:
+    - mail.hobbyswap.lndo.site # Change projectname to the same as the name key above.
+  adminer:
+    - adminer.hobbyswap.lndo.site # Change projectname to the same as the name key above.
+services:
+  appserver:
+    overrides:
+      environment:
+        DRUSH_OPTIONS_ROOT: '/app/web'
+        DRUSH_OPTIONS_URI: 'http://hobbyswap.lndo.site'
+        DTT_BASE_URL: 'http://hobbyswap.lndo.site'
+        BROWSERTEST_OUTPUT_DIRECTORY: '/app/web/sites/simpletest/browser_output'
+        SYMFONY_DEPRECATIONS_HELPER: 'disabled'
+        DTT_HTML_OUTPUT_DIRECTORY: '/app/web/sites/simpletest/browser_output'
+        BROWSERTEST_OUTPUT_BASE_URL: 'http://hobbyswap.lndo.site/'
+  database:
+    creds:
+      user: admin
+      password: MEGAMIND
+      database: hobbyswapdb
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+    portforward: true
+  adminer:
+    type: compose
+    services:
+      image: dehy/adminer
+      command: '/bin/s6-svscan /etc/services.d'
+    portforward: true
+tooling:
+  composer:
+    service: appserver
+    cmd: '/usr/local/bin/composer'
+  behat:
+    service: appserver
+    cmd: '/app/bin/behat'
+  phpunit:
+    service: appserver
+    cmd: '/app/bin/phpunit'
+  phix:
+    service: appserver
+    cmd: '/app/bin/phpcbf --standard=vendor/drupal/coder/coder_sniffer/Drupal,vendor/drupal/coder/coder_sniffer/DrupalPractice --extensions=php,module,inc --report=full'
+  drush:
+    service: appserver
+    cmd: '/app/bin/drush'
+  drupal:
+    service: appserver
+    cmd: '/app/bin/drupal'
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for apache.
+    cmd: "docker-php-ext-enable xdebug && /etc/init.d/apache2 reload"
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for apache.
+    cmd: "rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload"
+    user: root

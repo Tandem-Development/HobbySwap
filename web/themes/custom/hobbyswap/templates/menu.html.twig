@@ -46,7 +46,7 @@
 
     <li{{ item.attributes.addClass('nav-item') }}>
       {% if item.attributes.hasClass('link-icon') or item.attributes.hasClass('link-full')%}
-        <img src="/sites/default/files/menu_icons/{{ item.attributes['data-icon'] }}">
+        <img src="/themes/custom/hobbyswap/menu_icons/{{ item.attributes['data-icon'] }}">
       {% endif %}
       {{ link(item.title, item.url, { 'class': classes_link }) }}
       {% if item.below %}

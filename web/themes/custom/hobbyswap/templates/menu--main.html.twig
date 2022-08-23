@@ -64,7 +64,7 @@ We call a macro which calls itself to render the full tree.
   %}
   <li{{ item.attributes.addClass(list_item_classes) }}>
     {% if item.attributes.hasClass('link-icon') or item.attributes.hasClass('link-full')%}
-      <img src="/sites/default/files/menu_icons/{{ item.attributes['data-icon'] }}">
+      <img src="/themes/custom/hobbyswap/menu_icons/{{ item.attributes['data-icon'] }}">
     {% endif %}
     {% if menu_level == 0 and item.below %}
       {{ link(item.title, item.url, { 'class': link_class, 'role': 'button', 'data-bs-toggle': 'dropdown', 'aria-expanded': 'false', 'title': ('Expand menu' | t) ~ ' ' ~ item.title }) }}
