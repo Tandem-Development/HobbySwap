@@ -30,7 +30,13 @@ function hs_user_uninstall(){
   $bins = [
     'field.field.user.user.field_user_items',
     'field.storage.user.field_user_items',
+    'field.field.user.user.field_phone',
+    'field.storage.user.field_phone',
     'views.view.user_items',
+    'user.role.2fa',
+    'user.role.subscribed',
+    'hs_user.subscriptions',
+    'hs_user.authentication_codes'
   ];
   foreach($bins as $bin){
     \Drupal::configFactory()->getEditable($bin)->delete();
