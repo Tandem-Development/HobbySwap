@@ -599,6 +599,15 @@ input.btn-gray4{
   border-color: white;
 }
 
+form{
+  margin-top: 1.5rem;
+}
+form.form--widget{
+  background-color: $hs-gray1;
+  border-radius: 0.2rem;
+  padding: 2rem;
+}
+
 // 9 - Tabbed Content Switcher
 .tabbed-content{
   .tabs{

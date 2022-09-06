@@ -1,4 +1,4 @@
-name: Direct Message
+name: 'HS Direct Message'
 description: 'Builds off of the private messages module with custom built pages'
 type: module
 version: 9.x-1.0

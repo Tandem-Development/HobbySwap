@@ -1,4 +1,4 @@
-name: Trade
+name: 'HS Trade'
 description: 'Provides trade functionality for HobbySwap'
 type: module
 version: 8.x-1.0

@@ -1,0 +1,7 @@
+# time in seconds before code invalidation
+code_timeout: 600
+# all codes should follow this standard:
+# uid:
+#   code: 123456
+#   last_attempt: 1234567890
+codes:

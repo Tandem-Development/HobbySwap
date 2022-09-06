@@ -1,4 +1,4 @@
-name: Credit
+name: 'HS Credit'
 description: 'Provides HobbyCredit balances for user entities'
 type: module
 version: 8.x-1.0

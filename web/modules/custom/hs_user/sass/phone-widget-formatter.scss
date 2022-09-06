@@ -1,0 +1,18 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+.input--wrapper{
+   display: flex;
+   align-items: center;
+   .country-code{
+      display: block;
+      text-align: center;
+      border-radius: 0.2rem 0 0 0.2rem;
+      font-weight: bold;
+      color: $hs-gray4;
+      background-color: $hs-yellow;
+      width: 2rem;
+   }
+   .input--phone.form-text{
+      width: auto;
+   }
+}

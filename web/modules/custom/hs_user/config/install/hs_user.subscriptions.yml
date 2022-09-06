@@ -1,0 +1,14 @@
+# Structure of subscription plans
+# machine_name:
+#   label: (Displays in place of the machine name)
+#   cost: (in HC)
+#   duration: (in months)
+subscriptions:
+  month:
+    label: 'Monthly'
+    cost: 4
+    duration: 1
+  year:
+    label: 'Yearly'
+    cost: 40
+    duration: 12

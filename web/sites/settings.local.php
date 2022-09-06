@@ -167,3 +167,5 @@ $config['system.logging']['error_level'] = 'verbose';$databases['default']['defa
     'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 );
 $settings['hash_salt'] = 'g2Fgl_zZRbdQbJtAVryvSAAe2GMOCeSOjC6qO88o1QEhpyRfZuYjpPPWcjtZKIP0dlZrX4fgMQ';
+
+$settings['trusted_host_patterns'][] = '^hobbyswap\.lndo\.site$';

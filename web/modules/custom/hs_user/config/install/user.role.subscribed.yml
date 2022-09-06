@@ -1,9 +1,9 @@
 langcode: en
 status: true
 dependencies: {  }
-id: beta
-label: 'Beta User'
-weight: -8
+id: subscribed
+label: 'Subscribed User'
+weight: -7
 is_admin: null
 permissions:
   - 'browse published items'

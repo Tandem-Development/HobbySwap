@@ -1,4 +1,4 @@
-name: User
+name: 'HS User'
 description: 'Provides custom user properties, pages, and styling for HobbySwap users'
 type: module
 version: 8.x-1.0

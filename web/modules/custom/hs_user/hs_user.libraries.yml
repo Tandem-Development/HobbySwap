@@ -11,3 +11,11 @@ user-view:
       css/user-view.css: {}
   js:
     js/user-view.js: {}
+
+phone-widget-formatter:
+  version: 1.x
+  css:
+    theme:
+      css/phone-widget-formatter.css: {weight: 100}
+  js:
+    js/phone-widget-formatter.js: {}

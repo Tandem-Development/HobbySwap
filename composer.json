@@ -48,7 +48,10 @@
         "drupal/token": "^1.11",
         "drupal/viewsreference": "^2.0@beta",
         "drupal/menu_link_attributes": "^1.2",
-        "drupal/video_embed_field": "^2.4"
+        "drupal/video_embed_field": "^2.4",
+        "drupal/address": "^1.11",
+        "drupal/sms_twilio": "^2.0@alpha",
+        "drupal/dynamic_entity_reference": "^1.16"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2"

@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Form\FormStateInterface;
+
 function hs_user_theme($existing, $type, $theme, $path){
   return[
     'views_view_fields__user_items' => [
@@ -44,11 +46,9 @@ function hs_user_preprocess(&$variables, $hook){
  * Implements hook_entity_view_display_alter().
  */
 function hs_user_entity_base_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type){
-
   if($entity_type->id() == 'user') {
     $fields['name']->setDisplayConfigurable('view', TRUE);
   }
-
 }
 
 /**
@@ -56,7 +56,23 @@ function hs_user_entity_base_field_info_alter(&$fields, \Drupal\Core\Entity\Enti
  */
 function hs_user_cron(){
   //Set proper default for user_items field
-  $view_uuid = \Drupal::configFactory()->getEditable('views.view.user_items')->get('uuid');
-  $field_user_items = \Drupal::configFactory()->getEditable('field.field.user.user.field_user_items');
+  $config_factory = \Drupal::configFactory();
+  $view_uuid = $config_factory->getEditable('views.view.user_items')->get('uuid');
+  $field_user_items = $config_factory->getEditable('field.field.user.user.field_user_items');
   $field_user_items->set('default_value.0.target_uuid', $view_uuid)->save();
+
+  //Delete expired 2-factor authentication codes
+  $code_config = $config_factory->getEditable('hs_user.authentication_codes');
+  $code_data = $code_config->getRawData();
+  foreach($code_data['codes'] as $uid => $code){
+    if(\Drupal::time()->getCurrentTime() - $code['registered'] >= $code_data['code_timeout']){
+      $code_config->clear('codes.'.$uid);
+    }
+  }
+  $code_config->save();
+
+}
+
+function hs_user_entity_type_alter(&$entity_types){
+  $entity_types['user']->setFormClass('register', 'Drupal\hs_user\Form\RegisterForm');
 }

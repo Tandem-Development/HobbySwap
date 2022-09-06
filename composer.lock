@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "40c591ea1974363216f40b2033de0ee3",
+    "content-hash": "a11384138f4ec457b239a7754a1c9151",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -123,6 +123,70 @@
                 "source": "https://github.com/Chi-teck/drupal-code-generator/tree/2.5.3"
             },
             "time": "2022-03-31T17:15:11+00:00"
+        },
+        {
+            "name": "commerceguys/addressing",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/commerceguys/addressing.git",
+                "reference": "8b1bcd45971733e8f4224e539cb92838f18c4d06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/commerceguys/addressing/zipball/8b1bcd45971733e8f4224e539cb92838f18c4d06",
+                "reference": "8b1bcd45971733e8f4224e539cb92838f18c4d06",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/collections": "^1.2",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "mikey179/vfsstream": "^1.6.10",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.6",
+                "symfony/validator": "^4.4 || ^5.4 || ^6.0"
+            },
+            "suggest": {
+                "symfony/validator": "to validate addresses"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CommerceGuys\\Addressing\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bojan Zivanovic"
+                },
+                {
+                    "name": "Damien Tournoud"
+                }
+            ],
+            "description": "Addressing library powered by CLDR and Google's address data.",
+            "keywords": [
+                "address",
+                "internationalization",
+                "localization",
+                "postal"
+            ],
+            "support": {
+                "issues": "https://github.com/commerceguys/addressing/issues",
+                "source": "https://github.com/commerceguys/addressing/tree/v1.4.1"
+            },
+            "time": "2022-08-09T11:42:51+00:00"
         },
         {
             "name": "composer/installers",
@@ -1856,6 +1920,79 @@
             "time": "2022-05-31T18:46:25+00:00"
         },
         {
+            "name": "drupal/address",
+            "version": "1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/address.git",
+                "reference": "8.x-1.11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/address-8.x-1.11.zip",
+                "reference": "8.x-1.11",
+                "shasum": "1cb40fb1a43e88041b888ac8fb6aa77a45ac85fb"
+            },
+            "require": {
+                "commerceguys/addressing": "^1.4.0",
+                "drupal/core": "^9.2 || ^10",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "drupal/token": "^1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.11",
+                    "datestamp": "1659989858",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "Centarro",
+                    "homepage": "https://www.drupal.org/user/3661446"
+                },
+                {
+                    "name": "dww",
+                    "homepage": "https://www.drupal.org/user/46549"
+                },
+                {
+                    "name": "googletorp",
+                    "homepage": "https://www.drupal.org/user/386230"
+                },
+                {
+                    "name": "jsacksick",
+                    "homepage": "https://www.drupal.org/user/972218"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                }
+            ],
+            "description": "Provides functionality for storing, validating and displaying international postal addresses.",
+            "homepage": "http://drupal.org/project/address",
+            "support": {
+                "source": "https://git.drupalcode.org/project/address"
+            }
+        },
+        {
             "name": "drupal/admin_toolbar",
             "version": "3.1.1",
             "source": {
@@ -2721,6 +2858,69 @@
             "homepage": "https://www.drupal.org/project/drift",
             "support": {
                 "source": "https://git.drupalcode.org/project/drift"
+            }
+        },
+        {
+            "name": "drupal/dynamic_entity_reference",
+            "version": "1.16.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/dynamic_entity_reference.git",
+                "reference": "8.x-1.16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/dynamic_entity_reference-8.x-1.16.zip",
+                "reference": "8.x-1.16",
+                "shasum": "4155c11eac17ccd485888e6e5c52858358726415"
+            },
+            "require": {
+                "drupal/core": "^9.3",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "drupal/diff": "1.x-dev",
+                "mglaman/phpstan-drupal": "^1.1",
+                "phpstan/phpstan": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.16",
+                    "datestamp": "1644273068",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Lee Rowlands",
+                    "homepage": "https://www.drupal.org/u/larowlan",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Jibran Ijaz",
+                    "homepage": "https://www.drupal.org/u/jibran",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
+                }
+            ],
+            "description": "Provides a field that allows an entity-reference field to reference more than one entity type.",
+            "homepage": "http://drupal.org/project/dynamic_entity_reference",
+            "support": {
+                "source": "http://cgit.drupalcode.org/dynamic_entity_reference",
+                "issues": "http://drupal.org/project/dynamic_entity_reference",
+                "irc": "irc://irc.freenode.org/drupal-contribute"
             }
         },
         {
@@ -3664,6 +3864,135 @@
             "homepage": "https://www.drupal.org/project/redirect",
             "support": {
                 "source": "https://git.drupalcode.org/project/redirect"
+            }
+        },
+        {
+            "name": "drupal/sms_twilio",
+            "version": "2.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/sms_twilio.git",
+                "reference": "2.0.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/sms_twilio-2.0.0-alpha1.zip",
+                "reference": "2.0.0-alpha1",
+                "shasum": "c26d64c69b2cb233518c17caaaf5d4df26cda254"
+            },
+            "require": {
+                "drupal/core": "^8.9 || ^9",
+                "drupal/smsframework": "^1.0 || ^2.0@alpha",
+                "twilio/sdk": "5.4.*"
+            },
+            "suggest": {
+                "drupal/smsframework": "Provides integration with SMS Framework"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0-alpha1",
+                    "datestamp": "1639674232",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\sms_twilio\\": "src"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Rockwell",
+                    "homepage": "https://twitter.com/chrisrockwell",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Daniel Phin",
+                    "homepage": "http://danielph.in",
+                    "email": "pro@danielph.in",
+                    "role": "Developer"
+                },
+                {
+                    "name": "mcpuddin",
+                    "homepage": "https://www.drupal.org/user/564834"
+                },
+                {
+                    "name": "spheresh",
+                    "homepage": "https://www.drupal.org/user/624860"
+                },
+                {
+                    "name": "univate",
+                    "homepage": "https://www.drupal.org/user/279264"
+                }
+            ],
+            "description": "Integrates Twilio with SMS Framework.",
+            "homepage": "https://www.drupal.org/project/sms_twilio",
+            "support": {
+                "source": "http://cgit.drupalcode.org/sms_twilio",
+                "issues": "https://www.drupal.org/project/issues/sms_twilio"
+            }
+        },
+        {
+            "name": "drupal/smsframework",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/smsframework.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/smsframework-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "52690a6d7198d67f28b0b9a480524a5c5792df14"
+            },
+            "require": {
+                "drupal/core": "^8.9 || ^9"
+            },
+            "require-dev": {
+                "drupal/dynamic_entity_reference": "*",
+                "drupal/sms": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.1",
+                    "datestamp": "1660843251",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "almaudoh",
+                    "homepage": "https://www.drupal.org/user/488082"
+                },
+                {
+                    "name": "batje",
+                    "homepage": "https://www.drupal.org/user/2696"
+                },
+                {
+                    "name": "dpi",
+                    "homepage": "https://www.drupal.org/user/81431"
+                }
+            ],
+            "homepage": "https://www.drupal.org/project/smsframework",
+            "support": {
+                "source": "https://git.drupalcode.org/project/smsframework"
             }
         },
         {
@@ -8950,6 +9279,56 @@
             "time": "2022-08-12T06:43:37+00:00"
         },
         {
+            "name": "twilio/sdk",
+            "version": "5.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twilio/twilio-php.git",
+                "reference": "354b5859cc7386642b8842a8b9e3dee01e957235"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/354b5859cc7386642b8842a8b9e3dee01e957235",
+                "reference": "354b5859cc7386642b8842a8b9e3dee01e957235",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "apigen/apigen": "^4.1",
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Twilio\\": "Twilio/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Twilio API Team",
+                    "email": "api@twilio.com"
+                }
+            ],
+            "description": "A PHP wrapper for Twilio's API",
+            "homepage": "http://github.com/twilio/twilio-php",
+            "keywords": [
+                "api",
+                "sms",
+                "twilio"
+            ],
+            "support": {
+                "issues": "https://github.com/twilio/twilio-php/issues",
+                "source": "https://github.com/twilio/twilio-php/tree/5.4.2"
+            },
+            "time": "2016-10-12T17:28:31+00:00"
+        },
+        {
             "name": "typo3/phar-stream-wrapper",
             "version": "v3.1.7",
             "source": {
@@ -12931,7 +13310,8 @@
         "drupal/drift": 10,
         "drupal/formblock": 10,
         "drupal/insert_block": 10,
-        "drupal/viewsreference": 10
+        "drupal/viewsreference": 10,
+        "drupal/sms_twilio": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -12940,5 +13320,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

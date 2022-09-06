@@ -1,0 +1,7 @@
+hs_user.two_factor_authentication:
+  path: '/user/authenticate'
+  defaults:
+    _form: '\Drupal\hs_user\Form\TwoFactorAuthenticationForm'
+    _title: '2-Factor Authentication'
+  requirements:
+    _custom_access: '\Drupal\hs_user\Form\TwoFactorAuthenticationForm::customAccess'

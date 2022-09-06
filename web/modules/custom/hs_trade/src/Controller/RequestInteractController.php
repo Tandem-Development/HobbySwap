@@ -56,7 +56,7 @@ class RequestInteractController extends ControllerBase {
     $status = $transaction->getStatus();
 
     //Don't even consider transaction status if the current user doesn't have the right permission and isn't the responder
-    if($account->hasPermission('interact transaction requests') && $account->id() === $transaction->getResponder()->id()){
+    if($account->hasPermission('use trade system') && $account->id() === $transaction->getResponder()->id()){
       //Simple way of managing all possible transaction statuses
       switch ($status){
         //Allow interaction if pending or if pending counter offer
@@ -111,7 +111,7 @@ class RequestInteractController extends ControllerBase {
     $transaction = $this->transactionManager->getTransaction($hs_trade_transaction);
 
     //Don't even consider transaction status if the current user doesn't have the right permission
-    if($account->hasPermission('interact transaction requests')){
+    if($account->hasPermission('use trade system')){
       switch ($transaction->getStatus()){
         //After acceptance, the requester must be the first to confirm
         //Once the requester has confirmed the transaction, the responder must complete final confirmation

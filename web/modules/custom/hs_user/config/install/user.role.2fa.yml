@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: 2fa
+label: 2FA
+weight: -8
+is_admin: null
+permissions:
+  - 'browse published items'
+  - 'manage own subscription'
