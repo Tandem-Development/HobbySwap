@@ -4,8 +4,15 @@ entity.hs_trade_transaction.collection:
   menu_name: admin
   parent: system.admin
   description: 'List transactions'
+
 hs_trade_transaction.admin.structure.settings:
   title: 'Transaction settings'
   description: 'Configure transaction entity'
   route_name:  hs_trade.transaction_settings
   parent: system.admin_structure
+
+hs_trade.admin:
+  title: 'HobbySwap'
+  description: 'Configure HobbySwap specific settings'
+  route_name: hs_trade.admin
+  parent: system.admin_config

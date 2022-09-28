@@ -1,0 +1,5 @@
+name: 'HS Square'
+type: module
+package: 'HS'
+core_version_requirement: ^8 || ^9
+description: 'Integrates Square payment processing into HobbySwap'

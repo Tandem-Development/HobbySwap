@@ -1,0 +1,83 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+body{
+  background-color: $hs-gray1 !important;
+}
+
+#block-hobbyswap-content{
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 1.5rem;
+  justify-content: center;
+  h1{
+    color: $hs-black;
+    font-weight: 500;
+    flex-basis: 100%;
+    margin: 0;
+  }
+  fieldset, .checkout-summary--wrapper{
+    background-color: white;
+    border-radius: 1.3rem;
+    border: none;
+    box-shadow: 0 2px 5px #00000044;
+    margin: 0;
+    legend {
+      background: none;
+      border: none;
+      margin-top: 0.8rem;
+      .fieldset-legend {
+        color: $hs-black;
+        font-weight: 400;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+form#hs-usersubscription-payment-form{
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  @media (max-width: 767.8px){
+    order: 2;
+  }
+  fieldset#edit-cards--wrapper{
+    width: fit-content;
+    #edit-cards{
+      width: fit-content;
+      .form-item{
+        position: relative;
+        margin-top: 1rem;
+        input{
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          z-index: 10;
+        }
+        label{
+          position: relative;
+          z-index: 0;
+        }
+      }
+    }
+  }
+  .checkout-summary--wrapper{
+    padding: 1rem;
+    legend{
+      border-bottom: 2px solid $hs-gray2;
+    }
+    .checkout-info{
+      .total{
+        color: $hs-black;
+        font-weight: 500;
+      }
+    }
+  }
+  #edit-submit{
+    font-size: 1.2rem;
+    border-radius: 1.3rem;
+    margin: 0;
+  }
+}
+form#hs-squareadd-card-form{
+  flex: 1;
+}

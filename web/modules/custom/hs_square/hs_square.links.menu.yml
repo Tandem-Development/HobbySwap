@@ -1,0 +1,11 @@
+hs_square.configure_square_settings:
+  title: 'Configure Square'
+  description: 'Configure settings for Square payment processor'
+  route_name: hs_square.admin_configure
+  parent: hs_trade.admin
+
+hs_square.manage_customers:
+  title: 'Square Customers'
+  description: 'Manage customers stored through the Square API'
+  route_name: hs_square.manage_customers
+  parent: entity.user.collection

@@ -1,0 +1,31 @@
+/* line 3, ../sass/square.scss */
+#card-button {
+  width: 100%;
+  border-radius: 1.3em;
+  border: none;
+  padding: 0.4em 4em;
+  margin-bottom: 0.4em;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+/* line 14, ../sass/square.scss */
+#payment-status-container span {
+  display: block;
+  text-align: center;
+  padding: 0.75em;
+  margin-top: 1rem;
+  border-radius: 0.4rem;
+  font-weight: bold;
+}
+/* line 22, ../sass/square.scss */
+#payment-status-container.is-success span {
+  color: #007500;
+  border: 2px solid #007500;
+}
+/* line 26, ../sass/square.scss */
+#payment-status-container.is-failure span {
+  color: #cc0023;
+  border: 2px solid #cc0023;
+}

@@ -1,0 +1,6 @@
+<form id="payment-form">
+    <div id="card-container"></div>
+    <button id="card-button" type="button">Pay ${{ amount|number_format(2, '.', ',') }}</button>
+</form>
+<div id="payment-status-container"></div>
+{{ attach_library('hs_square/square') }}

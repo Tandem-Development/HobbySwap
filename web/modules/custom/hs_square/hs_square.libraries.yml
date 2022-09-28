@@ -1,0 +1,29 @@
+square:
+  version: 1.x
+  js:
+    https://sandbox.web.squarecdn.com/v0/square.js: {type: external, minified: true }
+    js/square.js: {}
+  css:
+    theme:
+      css/square.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+customer-view:
+  version: 1.x
+  css:
+    theme:
+      css/customer-view.css: {}
+
+payment-form:
+  version: 1.x
+  css:
+    theme:
+      css/payment-form.css: {}
+
+card:
+  version: 1.x
+  css:
+    theme:
+      css/card.css: {}

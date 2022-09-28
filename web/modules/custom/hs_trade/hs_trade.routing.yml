@@ -149,10 +149,13 @@ hs_trade.ajax_callback:
     _user_is_logged_in: 'TRUE'
 
 
-hs_trade.form_elements:
-  path: '/form-elements'
+hs_trade.admin:
+  path: '/admin/config/hobbyswap'
   defaults:
-    _form: '\Drupal\hs_trade\Form\FormElements'
-    _title: 'Form Elements'
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'HobbySwap'
   requirements:
-    _permission: 'access content'
+    _permission: 'administer transaction entity'
+  options:
+    _admin_route: TRUE
+

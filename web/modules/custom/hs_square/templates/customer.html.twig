@@ -1,0 +1,21 @@
+<div class="customer--container">
+    <h3>Customer Info</h3>
+    <p><span>Full Name: </span>{{ customer.getGivenName }} {{ customer.getFamilyName }}</p>
+    <p><span>Nickname: </span>{{ customer.getNickname }}</p>
+    <p><span>Created At: </span>{{ customer.getCreatedAt }}</p>
+    <p><span>Email Address: </span>{{ customer.getEmailAddress }}</p>
+    <p><span>Phone Number: </span>{{ customer.getPhoneNumber }}</p>
+    <p><span>Address: </span>{{ customer.getAddress }}</p>
+    <p><span>Birthday: </span>{{ customer.getBirthday }}</p>
+    <p><span>HobbySwap UID: </span>{{ customer.getReferenceId }}</p>
+    <p><span>Company Name: </span>{{ customer.getCompanyName }}</p>
+    <p><span>Note: </span>{{ customer.getNote }}</p>
+    <h3>Cards</h3>
+    {% for card in cards %}
+    <div class="card-teaser">
+        <h5 class="card-brand">{{ card.getCardBrand }}</h5>
+        <h5 class="card-last-4">**** **** **** {{ card.getLast4 }}</h5>
+        <h5 class="card-expiration-date">Expires {{ card.getExpMonth }}/{{ card.getExpYear|slice(2, 3) }}</h5>
+    </div>
+    {% endfor %}
+</div>

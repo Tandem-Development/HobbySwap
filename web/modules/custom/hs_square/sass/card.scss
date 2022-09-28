@@ -1,0 +1,50 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+.card--wrapper{
+  background-color: white;
+  border-radius: 0.8rem;
+  border: 4px outset $hs-gray2;
+  width: 300px;
+  height: 170px;
+  box-shadow: 0 2px 7px #00000066;
+  position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.4rem;
+    background-image: linear-gradient(to top left, transparent 50%, rgb(210, 210, 210));
+  }
+  img.bg-image{
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    margin: 20px 81px;
+  }
+  .card--info{
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    p{
+      margin: 0;
+      color: $hs-black;
+      font-family: "American Typewriter", Helvetica, sans-serif;
+    }
+    .brand{
+      text-align: left;
+      font-size: 1.3rem;
+    }
+    .last-4{
+      text-align: center;
+      font-size: 1.6rem;
+      color: $hs-black;
+    }
+    .expiration-date{
+      text-align: right;
+    }
+  }
+}

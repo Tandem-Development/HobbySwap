@@ -3,6 +3,8 @@
 namespace Drupal\hs_user\Form;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\hs_square\SquareManagerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Form handler for the user register forms.
@@ -98,6 +100,10 @@ class RegisterForm extends \Drupal\user\AccountForm {
     // Save has no return value so this cannot be tested.
     // Assume save has gone through correctly.
     $account->save();
+
+    //Create square customer profile
+    \Drupal::service('hs_square.square_manager')->createCustomer($account->id());
+    \Drupal::service('cache_tags.invalidator')->invalidateTags(['manage_square_customers']);
 
     $form_state->set('user', $account);
     $form_state->setValue('uid', $account->id());

@@ -5,3 +5,21 @@ hs_user.two_factor_authentication:
     _title: '2-Factor Authentication'
   requirements:
     _custom_access: '\Drupal\hs_user\Form\TwoFactorAuthenticationForm::customAccess'
+
+hs_user.subscription_form:
+  path: '/user/subscribe'
+  defaults:
+    _form: '\Drupal\hs_user\Form\SubscriptionForm'
+    _title: 'Subscriptions'
+  requirements:
+    _role: '2fa'
+
+hs_user.admin_manage_subscriptions:
+  path: '/admin/config/manage-subscriptions'
+  defaults:
+    _form: '\Drupal\hs_user\Form\ManageSubscriptionsForm'
+    _title: 'Manage Subscriptions'
+  requirements:
+    _role: 'administrator'
+  options:
+    _admin_route: true

@@ -219,6 +219,7 @@ p{
 
 //Navbar
 #navbar-container{
+  background-color: white;
   box-shadow: 0 2px 5px #30303088;
   z-index: 100;
   position: relative;
@@ -570,7 +571,7 @@ input.btn-blue, input.btn-primary{
     background-color: $hs-gray1;
   }
 }
-input.btn-yellow, .btn-secondary{
+input.btn-yellow, input.btn-secondary{
   color: $hs-gray4;
   background-color: $hs-yellow;
   &:hover, &:focus{
@@ -606,6 +607,11 @@ form.form--widget{
   background-color: $hs-gray1;
   border-radius: 0.2rem;
   padding: 2rem;
+}
+
+input.form-submit.is-disabled, button.is-disabled{
+  background-color: $hs-gray2;
+  color: $hs-gray3;
 }
 
 // 9 - Tabbed Content Switcher

@@ -1,0 +1,9 @@
+<div class="checkout-summary--wrapper">
+    <legend>
+        <span class="fieldset-legend">Checkout Summary</span>
+    </legend>
+    <div class="checkout-info">
+        <p class="contents">{{ mode }}: {{ requested }} - ${{ cost|number_format(2, '.', ',')}}</p>
+        <h4 class="total">Total: ${{ cost|number_format(2, '.', ',') }}</h4>
+    </div>
+</div>

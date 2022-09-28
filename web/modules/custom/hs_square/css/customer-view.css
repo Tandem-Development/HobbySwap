@@ -1,0 +1,36 @@
+/* line 2, ../sass/customer-view.scss */
+.customer--container p {
+  border-bottom: 1px solid grey;
+}
+/* line 3, ../sass/customer-view.scss */
+.customer--container p span {
+  font-weight: bold;
+}
+/* line 8, ../sass/customer-view.scss */
+.customer--container .card-teaser {
+  padding: 1rem;
+  background-color: #e8e8e8;
+  border-radius: 0.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  width: 200px;
+  box-shadow: -2px 2px 4px #00000044;
+}
+/* line 17, ../sass/customer-view.scss */
+.customer--container .card-teaser h5 {
+  margin: 0;
+}
+/* line 20, ../sass/customer-view.scss */
+.customer--container .card-teaser .card-brand {
+  flex-basis: 25%;
+}
+/* line 23, ../sass/customer-view.scss */
+.customer--container .card-teaser .card-last-4 {
+  flex-basis: 75%;
+  text-align: right;
+}
+/* line 27, ../sass/customer-view.scss */
+.customer--container .card-teaser .card-expiration-date {
+  width: fit-content;
+}

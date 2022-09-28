@@ -1,0 +1,32 @@
+<?php
+
+function hs_square_theme($existing, $type, $theme, $path){
+  return[
+    'customer' => [
+      'variables' => [
+        'customer' => NULL,
+        'cards' => NULL,
+      ],
+    ],
+    'square__web_payment_form' => [
+      'variables' => [
+        'amount' => NULL
+      ]
+    ],
+    'square__web_card_form' => [
+      'variables' => []
+    ],
+    'card' => [
+      'variables' => [
+        'card' => NULL,
+      ],
+    ],
+    'checkout_summary' => [
+      'variables' => [
+        'mode' => NULL,
+        'requested' => NULL,
+        'cost' => NULL,
+      ]
+    ]
+  ];
+}

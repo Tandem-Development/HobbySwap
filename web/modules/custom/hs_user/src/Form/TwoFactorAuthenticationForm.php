@@ -8,6 +8,8 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\Entity\User;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\hs_square\SquareManagerInterface;
+use Psr\Container\ContainerInterface;
 
 class TwoFactorAuthenticationForm extends ConfigFormBase{
 
@@ -18,6 +20,12 @@ class TwoFactorAuthenticationForm extends ConfigFormBase{
     parent::__construct($configFactory);
     $this->user = \Drupal::currentUser()->id();
     $this->code_config = $this->configFactory->getEditable('hs_user.authentication_codes');
+  }
+
+  public static function create(ContainerInterface $container){
+    return new static(
+      $container->get('config.factory'),
+    );
   }
 
   //Only allow authentication by users who haven't already done so
@@ -136,6 +144,7 @@ class TwoFactorAuthenticationForm extends ConfigFormBase{
       $user->addRole('2fa');
       $user->save();
       $form_state->setRedirect('user.page');
+
       \Drupal::messenger()->addStatus('Your account has been authenticated!');
     } elseif ($trigger['#value'] === 'Resend' || $trigger['#value'] === 'Send Code') {
       //Store the authentication code in configuration

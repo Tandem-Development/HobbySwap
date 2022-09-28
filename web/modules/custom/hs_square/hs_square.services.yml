@@ -1,0 +1,4 @@
+services:
+  hs_square.square_manager:
+    class: '\Drupal\hs_square\SquareManager'
+    arguments: ['@config.factory']

@@ -1,0 +1,72 @@
+@import '../../../../themes/custom/hobbyswap/sass/colors.scss';
+
+#hs-usersubscription-form{
+  #edit-subscription-plans{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    .form-item{
+      position: relative;
+      padding: 2rem;
+      border: 1px solid $hs-gray2;
+      border-radius: 0 1rem 1rem 1rem;
+      width: 365px;
+      min-height: 425px;
+      &::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 80px;
+        width: 80px;
+        background-color: $hs-yellow;
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+      }
+      input{
+        position: absolute;
+        bottom: 10%;
+        left: 45%;
+        right: 45%;
+      }
+      label{
+        text-align: center;
+        .subscription-plan-details{
+          h2{
+            color: $hs-black;
+            margin-bottom: 0;
+          }
+          ul{
+            text-align: left;
+            margin-bottom: 3rem;
+            li{
+              list-style: none;
+              &::before{
+                content: '✓ ';
+                color: seagreen;
+              }
+            }
+          }
+          &.current-plan::after{
+            content: 'Your Current Plan';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: $hs-blue;
+            color: white;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem 0;
+          }
+        }
+      }
+    }
+  }
+  h6{
+    margin: 2rem 0;
+  }
+  #edit-submit{
+    font-size: 1.75rem;
+  }
+}

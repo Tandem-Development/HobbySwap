@@ -19,3 +19,9 @@ phone-widget-formatter:
       css/phone-widget-formatter.css: {weight: 100}
   js:
     js/phone-widget-formatter.js: {}
+
+subscription-form:
+  version: 1.x
+  css:
+    theme:
+      css/subscription-form.css: {}

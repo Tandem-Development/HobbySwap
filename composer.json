@@ -51,7 +51,9 @@
         "drupal/video_embed_field": "^2.4",
         "drupal/address": "^1.11",
         "drupal/sms_twilio": "^2.0@alpha",
-        "drupal/dynamic_entity_reference": "^1.16"
+        "drupal/dynamic_entity_reference": "^1.16",
+        "drupal/form_mode_control": "^2.1",
+        "square/square": "21.1.0.20220823"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2"

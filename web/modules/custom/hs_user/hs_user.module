@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\user\Entity\User;
 
 function hs_user_theme($existing, $type, $theme, $path){
   return[
@@ -11,7 +12,7 @@ function hs_user_theme($existing, $type, $theme, $path){
     'user__hobbyswap' => [
       'base hook' => 'user',
       'template' => 'user--hobbyswap',
-    ]
+    ],
   ];
 }
 
@@ -55,13 +56,18 @@ function hs_user_entity_base_field_info_alter(&$fields, \Drupal\Core\Entity\Enti
  * Implements hook_cron().
  */
 function hs_user_cron(){
-  //Set proper default for user_items field
+
+  /**
+   * Set proper default for user_items view reference field
+   */
   $config_factory = \Drupal::configFactory();
   $view_uuid = $config_factory->getEditable('views.view.user_items')->get('uuid');
   $field_user_items = $config_factory->getEditable('field.field.user.user.field_user_items');
   $field_user_items->set('default_value.0.target_uuid', $view_uuid)->save();
 
-  //Delete expired 2-factor authentication codes
+  /**
+   * Delete expired 2-factor authentication codes
+   */
   $code_config = $config_factory->getEditable('hs_user.authentication_codes');
   $code_data = $code_config->getRawData();
   foreach($code_data['codes'] as $uid => $code){
@@ -71,6 +77,45 @@ function hs_user_cron(){
   }
   $code_config->save();
 
+  /**
+   * Check users for expired subscriptions
+   */
+  //Load subscription and square manager services
+  $subscription_manager = \Drupal::service('hs_user.subscription_manager');
+  $square_manager = \Drupal::service('hs_square.square_manager');
+
+  //Query all uids that are currently subscribed and are not anonymous
+  $uids = \Drupal::entityQuery('user')
+    ->condition('uid', 0, '>')
+    ->condition('roles', 'subscribed', 'CONTAINS')
+    ->execute();
+  $updated_users = [];
+  foreach($uids as $uid){
+    //Use the subscription manager to check each subscribed uid to see if their subscription has expired (returns boolean)
+    $is_expired = $subscription_manager->isUserSubscriptionExpired($uid);
+    if($is_expired){
+      //Load the user if their subscription has expired
+      $user = User::load($uid);
+      $card_id = $square_manager->getDefaultCardIdByUid($uid);
+      if($card_id !== null){
+        //Renew the subscription
+        $current_plan = $user->get('field_subscription')->value;
+        $plan_cost = $subscription_manager->getPlanData($current_plan)['cost'];
+        $api_response = $square_manager->createPayment($card_id, $plan_cost, $uid);
+        if($api_response->isSuccess()){
+          $updated_users[] = $uid;
+        }
+      }else{
+        //Deactivate the subscription
+        $subscription_manager->removeUserSubscription($uid);
+      }
+    }
+  }
+  if(empty($updated_users)){
+    \Drupal::messenger()->addStatus('No expired subscriptions detected');
+  }else{
+    \Drupal::messenger()->addStatus('Subscriptions renewed for the following users: '.implode(', ', $updated_users));
+  }
 }
 
 function hs_user_entity_type_alter(&$entity_types){

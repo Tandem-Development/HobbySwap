@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_subscription_updated
+  module:
+    - user
+id: user.user.field_subscription_updated
+field_name: field_subscription_updated
+entity_type: user
+bundle: user
+label: 'Subscription Updated'
+description: 'Keeps track of when the user''s subscription was last updated to manage active subscriptions and payments'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1663250249
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

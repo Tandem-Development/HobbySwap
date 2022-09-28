@@ -1,0 +1,5 @@
+hs_user.manage_subscriptions:
+  title: 'Manage Subscriptions'
+  description: 'Configure subscription plans'
+  route_name: hs_user.admin_manage_subscriptions
+  parent: hs_trade.admin

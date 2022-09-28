@@ -1,0 +1,63 @@
+hs_square.admin_configure:
+  path: '/admin/config/square'
+  defaults:
+    _form: '\Drupal\hs_square\Form\ConfigureSquareSettingsForm'
+    _title: 'Configure Square'
+  requirements:
+    _role: 'administrator'
+  options:
+    _admin_route: true
+
+hs_square.manage_customers:
+  path: '/admin/people/customers'
+  defaults:
+    _controller: '\Drupal\hs_square\Controller\ManageCustomersController::displayCustomers'
+    _title: 'Manage Customers'
+  requirements:
+    _role: 'administrator'
+  options:
+    _admin_route: true
+
+hs_square.view_customer:
+  path: '/admin/people/customers/{squareid}/view'
+  defaults:
+    _controller: '\Drupal\hs_square\Controller\CustomerViewController::viewCustomer'
+    _title_callback: '\Drupal\hs_square\Controller\CustomerViewController::viewCustomerTitle'
+  requirements:
+    _role: 'administrator'
+  options:
+    _admin_route: true
+
+hs_square.delete_customer:
+  path: '/admin/people/customers/{squareid}/delete'
+  defaults:
+    _controller: '\Drupal\hs_square\Controller\CustomerViewController::deleteCustomer'
+  requirements:
+    _role: 'administrator'
+  options:
+    _admin_route: true
+
+hs_square.payment:
+  path: '/payment'
+  defaults:
+    _controller: '\Drupal\hs_square\Controller\PaymentController::payment'
+  methods: [POST]
+  requirements:
+    _access: 'TRUE'
+
+hs_square.payment_form:
+  path: '/pay'
+  defaults:
+    _controller: '\Drupal\hs_square\Controller\PaymentFormController::render'
+    _title: 'Pay'
+  requirements:
+    _role: '2fa'
+    _permission: 'manage own subscription'
+
+hs_square.add_card:
+  path: '/add-card'
+  defaults:
+    _controller: '\Drupal\hs_square\Controller\AddCardController::addCard'
+  methods: [POST]
+  requirements:
+    _access: 'TRUE'

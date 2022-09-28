@@ -1,0 +1,31 @@
+.customer--container{
+  p{
+    span{
+      font-weight: bold;
+    }
+    border-bottom: 1px solid grey;
+  }
+  .card-teaser{
+    padding: 1rem;
+    background-color: #e8e8e8;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+    width: 200px;
+    box-shadow: -2px 2px 4px #00000044;
+    h5{
+      margin: 0;
+    }
+    .card-brand{
+      flex-basis: 25%;
+    }
+    .card-last-4{
+      flex-basis: 75%;
+      text-align: right;
+    }
+    .card-expiration-date{
+      width: fit-content;
+    }
+  }
+}
