@@ -1,7 +1,6 @@
 square:
   version: 1.x
   js:
-    https://sandbox.web.squarecdn.com/v0/square.js: {type: external, minified: true }
     js/square.js: {}
   css:
     theme:

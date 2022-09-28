@@ -97,3 +97,6 @@
 #/.env
 
 .sass-cache/
+
+# To fix an update script bug, viewsreference will not be ignored
+!/web/modules/contrib/viewsreference/*

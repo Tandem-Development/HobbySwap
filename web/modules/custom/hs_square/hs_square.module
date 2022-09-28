@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Implements hook_theme()
+ */
 function hs_square_theme($existing, $type, $theme, $path){
   return[
     'customer' => [
@@ -29,4 +32,29 @@ function hs_square_theme($existing, $type, $theme, $path){
       ]
     ]
   ];
+}
+
+
+/**
+ * Implements hook_library_info_alter()
+ */
+function hs_square_library_info_alter(&$libraries, $extension){
+  //Dynamically sets the url for Square's CDN
+  if(isset($libraries['square'])){
+    $environment = \Drupal::configFactory()->get('hs_square.settings')->get('environment');
+    switch($environment){
+      case 'production':
+        $libraries['square']['js']['https://web.squarecdn.com/v0/square.js'] = [
+          'type' => 'external',
+          'minified' => 1
+        ];
+        break;
+      case 'sandbox':
+      default:
+        $libraries['square']['js']['https://sandbox.web.squarecdn.com/v0/square.js'] = [
+          'type' => 'external',
+          'minified' => 1
+        ];
+    }
+  }
 }
