@@ -1,4 +1,4 @@
 services:
   hs_user.subscription_manager:
     class: 'Drupal\hs_user\SubscriptionManager'
-    arguments: ['@entity_type.manager', '@current_user', '@config.factory']
+    arguments: ['@entity_type.manager', '@current_user', '@config.factory', '@datetime.time']

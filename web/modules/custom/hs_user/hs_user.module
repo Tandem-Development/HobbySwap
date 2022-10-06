@@ -1,8 +1,10 @@
 <?php
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\Entity\User;
 
+/**
+ * Implements hook_user_theme()
+ */
 function hs_user_theme($existing, $type, $theme, $path){
   return[
     'views_view_fields__user_items' => [
@@ -16,6 +18,9 @@ function hs_user_theme($existing, $type, $theme, $path){
   ];
 }
 
+/**
+ * Implements hook_theme_suggestions_alter()
+ */
 function hs_user_theme_suggestions_alter(array &$suggestions, array $variables, $hook){
   if($hook === 'views_view_fields' && $variables['view']->id() == 'user_items'){
     $suggestions[] = 'views_view_fields__user_items';
@@ -40,6 +45,7 @@ function hs_user_preprocess(&$variables, $hook){
 
   if($hook === 'user' && $variables['elements']['#view_mode'] == 'full'){
     $variables['#attached']['library'] = ['hs_user/user-view'];
+    $variables['current_user'] = \Drupal::currentUser()->id();
   }
 }
 
@@ -57,17 +63,13 @@ function hs_user_entity_base_field_info_alter(&$fields, \Drupal\Core\Entity\Enti
  */
 function hs_user_cron(){
 
-  /**
-   * Set proper default for user_items view reference field
-   */
+  /** Set proper default for user_items view reference field */
   $config_factory = \Drupal::configFactory();
   $view_uuid = $config_factory->getEditable('views.view.user_items')->get('uuid');
   $field_user_items = $config_factory->getEditable('field.field.user.user.field_user_items');
   $field_user_items->set('default_value.0.target_uuid', $view_uuid)->save();
 
-  /**
-   * Delete expired 2-factor authentication codes
-   */
+  /** Delete expired 2-factor authentication codes */
   $code_config = $config_factory->getEditable('hs_user.authentication_codes');
   $code_data = $code_config->getRawData();
   foreach($code_data['codes'] as $uid => $code){
@@ -77,9 +79,7 @@ function hs_user_cron(){
   }
   $code_config->save();
 
-  /**
-   * Check users for expired subscriptions
-   */
+  /** Check users for expired subscriptions */
   //Load subscription and square manager services
   $subscription_manager = \Drupal::service('hs_user.subscription_manager');
   $square_manager = \Drupal::service('hs_square.square_manager');
@@ -96,14 +96,16 @@ function hs_user_cron(){
     if($is_expired){
       //Load the user if their subscription has expired
       $user = User::load($uid);
-      $card_id = $square_manager->getDefaultCardIdByUid($uid);
-      if($card_id !== null){
+      $customer = $square_manager->retrieveCustomerByUid($uid);
+      $card_index = $square_manager->getDefaultCardIndex($customer);
+      if($card_index !== null){
         //Renew the subscription
+        $card_id = $customer->getCards()[$card_index]->getId();
         $current_plan = $user->get('field_subscription')->value;
         $plan_cost = $subscription_manager->getPlanData($current_plan)['cost'];
-        $api_response = $square_manager->createPayment($card_id, $plan_cost, $uid);
+        $api_response = $square_manager->createPayment($card_id, $plan_cost, $customer);
         if($api_response->isSuccess()){
-          $updated_users[] = $uid;
+          $updated_users[] = $user->getDisplayName();
         }
       }else{
         //Deactivate the subscription
@@ -118,6 +120,10 @@ function hs_user_cron(){
   }
 }
 
+/**
+ * Implements hook_entity_type_alter()
+ */
 function hs_user_entity_type_alter(&$entity_types){
+  //Change the namespacing for the user registration form to add custom behavior
   $entity_types['user']->setFormClass('register', 'Drupal\hs_user\Form\RegisterForm');
 }

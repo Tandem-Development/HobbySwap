@@ -12,7 +12,15 @@ hs_user.subscription_form:
     _form: '\Drupal\hs_user\Form\SubscriptionForm'
     _title: 'Subscriptions'
   requirements:
-    _role: '2fa'
+    _role: '2fa+administrator'
+
+hs_user.subscription_cancel_form:
+  path: '/user/subscribe/cancel'
+  defaults:
+    _form: '\Drupal\hs_user\Form\SubscriptionCancelForm'
+    _title: 'Cancel Subscription'
+  requirements:
+    _role: 'subscribed+administrator'
 
 hs_user.admin_manage_subscriptions:
   path: '/admin/config/manage-subscriptions'

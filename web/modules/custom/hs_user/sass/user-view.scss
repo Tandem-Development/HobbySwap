@@ -1,5 +1,15 @@
 @import '../../../../themes/custom/hobbyswap/sass/colors.scss';
 
+@keyframes rainbowbarf {
+  0% {background: radial-gradient(circle at top left, red 0, orange, yellow, green, blue, purple 100%);}
+  16% {background: radial-gradient(circle at top left,  orange 0, yellow, green, blue, purple, red 100%);}
+  33% {background: radial-gradient(circle at top left,  yellow 0, green, blue, purple, red, orange 100%);}
+  49% {background: radial-gradient(circle at top left,  green 0, blue, purple, red, orange, yellow 100%);}
+  65% {background: radial-gradient(circle at top left,  blue 0, purple, red, orange, yellow, green 100%);}
+  82% {background: radial-gradient(circle at top left,  purple 0, red, orange, yellow, green, blue 100%);}
+  100% {background: radial-gradient(circle at top left, red 0, orange, yellow, green, blue, purple 100%);}
+}
+
 #block-hobbyswap-content article{
   .user-info{
     margin: 3rem 0;
@@ -17,16 +27,64 @@
     .info-2{
       text-align: left;
       width: fit-content;
-      .field--name-name{
-        color: $hs-black;
-        font-size: 2rem;
+      .name--subscription{
+        display: flex;
+        align-items: center;
+        flex-flow: row wrap;
+        gap: 0.3rem;
         @media (max-width: 767.8px){
-          text-align: center;
+          justify-content: center;
           margin-top: 0.7rem;
         }
+        .field--name-name{
+          color: $hs-black;
+          font-size: 2rem;
+          height: fit-content;
+          @media (max-width: 767.8px){
+            flex-basis: 100%;
+            text-align: center;
+          }
+        }
+        .subscription--wrapper{
+          background-color: $hs-black;
+          font-size: 1rem;
+          border-radius: 0.4em;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+          &.supporter{
+            animation: rainbowbarf 0.4s linear 0s infinite normal;
+            .field--name-field-subscription{
+              color: white;
+            }
+          }
+          .field--name-field-subscription{
+            font-weight: bold;
+            line-height: 1em;
+            color: $hs-blue;
+            padding: 0.5em 1em;
+          }
+        }
+        .dropdown{
+          background-color: $hs-black;
+          font-size: 1rem;
+          border-radius: 0.4em;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+          &.supporter{
+            animation: rainbowbarf 0.4s linear 0s infinite normal;
+            .dropdown-toggle{
+              color: white;
+            }
+          }
+          .dropdown-toggle{
+            color: $hs-blue;
+            padding: 0.3em 1em;
+            &:focus{
+              box-shadow: none;
+            }
+          }
+        }
+
       }
       .form-item{
-
         font-size: 1rem;
         margin: 0;
         .label{
@@ -53,6 +111,10 @@
       }
     }
   }
+}
+
+.field-subscription--container{
+
 }
 
 .field--name-field-user-items{

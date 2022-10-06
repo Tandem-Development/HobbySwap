@@ -4,7 +4,12 @@
   font-size: 1rem;
 }
 
-/* line 10, ../sass/item-grid-view.scss */
+/* line 9, ../sass/item-grid-view.scss */
+#views-live-preview .view-filters {
+  position: static;
+}
+
+/* line 15, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters {
   z-index: 20;
   position: fixed;
@@ -18,29 +23,29 @@
   background-color: #F3F3F3;
 }
 @media (max-width: 575.8px) {
-  /* line 10, ../sass/item-grid-view.scss */
+  /* line 15, ../sass/item-grid-view.scss */
   .view-hs-item-grid .view-filters {
     padding: 0.2rem;
   }
-  /* line 23, ../sass/item-grid-view.scss */
+  /* line 28, ../sass/item-grid-view.scss */
   .view-hs-item-grid .view-filters .collapsed .filter-header .slideout-arrow {
     font-size: 1.8rem;
   }
 }
-/* line 27, ../sass/item-grid-view.scss */
+/* line 32, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .filter-header {
   display: flex;
   justify-content: space-between;
   position: relative;
 }
-/* line 31, ../sass/item-grid-view.scss */
+/* line 36, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .filter-header::after {
   content: '';
   position: absolute;
   inset: 80% 0 17% 0;
   background-color: #B5B5B5;
 }
-/* line 37, ../sass/item-grid-view.scss */
+/* line 42, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .filter-header h3 {
   color: #505050;
   text-align: center;
@@ -48,63 +53,63 @@
   font-weight: 600;
   font-size: 2.4rem;
 }
-/* line 44, ../sass/item-grid-view.scss */
+/* line 49, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .filter-header .slideout-arrow {
   color: #4888FF;
   transition: color 0.1s linear;
 }
-/* line 47, ../sass/item-grid-view.scss */
+/* line 52, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .filter-header .slideout-arrow:hover {
   cursor: pointer;
   color: #FFDD47;
 }
-/* line 53, ../sass/item-grid-view.scss */
+/* line 58, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .form-item {
   width: 100%;
   margin-top: 0;
 }
-/* line 56, ../sass/item-grid-view.scss */
+/* line 61, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .form-item label {
   color: #303030;
   font-weight: 600;
   margin-left: 1em;
 }
-/* line 62, ../sass/item-grid-view.scss */
+/* line 67, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .form-item-field-item-value-value {
   margin-bottom: 0.1em;
 }
-/* line 66, ../sass/item-grid-view.scss */
+/* line 71, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters #edit-actions input {
   margin-bottom: 0.2em;
   width: 100%;
 }
-/* line 71, ../sass/item-grid-view.scss */
+/* line 76, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .collapsed {
   width: 2rem;
 }
-/* line 73, ../sass/item-grid-view.scss */
+/* line 78, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .collapsed .form-item, .view-hs-item-grid .view-filters .collapsed #edit-actions {
   display: none;
 }
-/* line 76, ../sass/item-grid-view.scss */
+/* line 81, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .collapsed .filter-header {
   flex-direction: column-reverse;
 }
-/* line 78, ../sass/item-grid-view.scss */
+/* line 83, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .collapsed .filter-header::after {
   display: none;
 }
-/* line 81, ../sass/item-grid-view.scss */
+/* line 86, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .collapsed .filter-header .label {
   font-size: 1rem;
   transform: rotate(90deg);
 }
-/* line 85, ../sass/item-grid-view.scss */
+/* line 90, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-filters .collapsed .filter-header .slideout-arrow {
   margin: 0;
 }
 
-/* line 97, ../sass/item-grid-view.scss */
+/* line 102, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row {
   position: relative;
   border-radius: 0.3em 0.3em 0.6em 0.6em;
@@ -112,12 +117,12 @@
   border-bottom: 0.7em solid #4888FF;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-/* line 104, ../sass/item-grid-view.scss */
+/* line 109, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row:hover {
   transform: translateY(-5px);
   box-shadow: 0 3px 8px #B5B5B5;
 }
-/* line 109, ../sass/item-grid-view.scss */
+/* line 114, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-field-item-image {
   display: block;
   flex: 1;
@@ -128,13 +133,13 @@
   margin-bottom: 1.5em;
   border-bottom: 1px solid #F3F3F3;
 }
-/* line 119, ../sass/item-grid-view.scss */
+/* line 124, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-field-item-image:before {
   content: '';
   display: block;
   padding-top: 100%;
 }
-/* line 125, ../sass/item-grid-view.scss */
+/* line 130, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-field-item-image::after {
   content: '';
   position: absolute;
@@ -142,56 +147,56 @@
   border-radius: 100vmax;
   background-color: #F3F3F3;
 }
-/* line 133, ../sass/item-grid-view.scss */
+/* line 138, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-field-item-image .field-content {
   position: absolute;
   inset: 0;
   animation: fade 0.3s forwards;
 }
-/* line 138, ../sass/item-grid-view.scss */
+/* line 143, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-field-item-image .field-content img {
   object-fit: contain;
   height: 100%;
   width: 100%;
 }
-/* line 146, ../sass/item-grid-view.scss */
+/* line 151, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-title {
   margin: 0 1rem;
   height: 3.75em;
   text-align: center;
   overflow: hidden;
 }
-/* line 152, ../sass/item-grid-view.scss */
+/* line 157, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-title .field-content a {
   color: #303030;
   font-size: 1.5em;
   line-height: 0.8em;
   text-decoration: none;
 }
-/* line 158, ../sass/item-grid-view.scss */
+/* line 163, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-title .field-content a::after {
   content: '';
   position: absolute;
   inset: 0;
 }
-/* line 166, ../sass/item-grid-view.scss */
+/* line 171, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-field-item-value {
   display: inline-block;
   margin: 0 0 0.5rem 5%;
   width: 40%;
 }
-/* line 171, ../sass/item-grid-view.scss */
+/* line 176, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-field-item-value .field-content {
   font-size: 1.7em;
 }
-/* line 176, ../sass/item-grid-view.scss */
+/* line 181, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-uid {
   display: inline-block;
   width: 40%;
   margin: 0 10% 0.5rem 0;
   text-align: right;
 }
-/* line 182, ../sass/item-grid-view.scss */
+/* line 187, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-content .views-row .views-field-uid .field-content a {
   color: #4888FF;
   position: absolute;
@@ -199,44 +204,44 @@
   bottom: 0.5rem;
 }
 
-/* line 190, ../sass/item-grid-view.scss */
+/* line 195, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-empty {
   text-align: center;
 }
-/* line 192, ../sass/item-grid-view.scss */
+/* line 197, ../sass/item-grid-view.scss */
 .view-hs-item-grid .view-empty a {
   font-weight: 600;
 }
 
-/* line 200, ../sass/item-grid-view.scss */
+/* line 205, ../sass/item-grid-view.scss */
 .view-hs-item-grid nav {
   margin: 2em 0;
 }
-/* line 202, ../sass/item-grid-view.scss */
+/* line 207, ../sass/item-grid-view.scss */
 .view-hs-item-grid nav .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 0.5em;
 }
-/* line 207, ../sass/item-grid-view.scss */
+/* line 212, ../sass/item-grid-view.scss */
 .view-hs-item-grid nav .pagination .pager__item {
   display: flex;
 }
-/* line 209, ../sass/item-grid-view.scss */
+/* line 214, ../sass/item-grid-view.scss */
 .view-hs-item-grid nav .pagination .pager__item a {
   display: block;
   color: #4888FF;
 }
-/* line 212, ../sass/item-grid-view.scss */
+/* line 217, ../sass/item-grid-view.scss */
 .view-hs-item-grid nav .pagination .pager__item a span {
   display: block;
 }
-/* line 217, ../sass/item-grid-view.scss */
+/* line 222, ../sass/item-grid-view.scss */
 .view-hs-item-grid nav .pagination .pager__item--next, .view-hs-item-grid nav .pagination .pager__item--last {
   color: #4888FF;
 }
-/* line 220, ../sass/item-grid-view.scss */
+/* line 225, ../sass/item-grid-view.scss */
 .view-hs-item-grid nav .pagination .active a {
   color: white;
   background-color: #4888FF;

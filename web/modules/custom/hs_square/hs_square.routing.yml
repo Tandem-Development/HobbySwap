@@ -31,19 +31,11 @@ hs_square.view_customer:
 hs_square.delete_customer:
   path: '/admin/people/customers/{squareid}/delete'
   defaults:
-    _controller: '\Drupal\hs_square\Controller\CustomerViewController::deleteCustomer'
+    _form: '\Drupal\hs_square\Form\DeleteCustomerForm'
   requirements:
     _role: 'administrator'
   options:
     _admin_route: true
-
-hs_square.payment:
-  path: '/payment'
-  defaults:
-    _controller: '\Drupal\hs_square\Controller\PaymentController::payment'
-  methods: [POST]
-  requirements:
-    _access: 'TRUE'
 
 hs_square.payment_form:
   path: '/pay'
@@ -55,9 +47,17 @@ hs_square.payment_form:
     _permission: 'manage own subscription'
 
 hs_square.add_card:
-  path: '/add-card'
+  path: '/card/add'
   defaults:
     _controller: '\Drupal\hs_square\Controller\AddCardController::addCard'
   methods: [POST]
   requirements:
-    _access: 'TRUE'
+    _role: '2fa'
+    _permission: 'manage own subscription'
+
+hs_square.set_default_card:
+  path: '/card/set-default/{index}'
+  defaults:
+    _controller:  '\Drupal\hs_square\Controller\SetDefaultCardController::setDefaultCard'
+  requirements:
+    _role: '2fa+administrator'

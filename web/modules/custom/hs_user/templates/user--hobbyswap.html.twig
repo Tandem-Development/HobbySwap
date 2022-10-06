@@ -23,7 +23,29 @@
         {{- content.user_picture -}}
       </div>
       <div class="info-2">
-        {{- content.name -}}
+        <div class="name--subscription">
+          {{- content.name -}}
+          <div class="subscription--wrapper {{ user.field_subscription.value }}">
+            {% if user.field_subscription.value %}
+            {{ content.field_subscription }}
+            {% else %}
+            <div class="field--name-field-subscription">Unsubscribed</div>
+            {% endif %}
+          </div>
+          {% if current_user == user.id %}
+          <div class="dropdown {{ user.field_subscription.value }}">
+            <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <ul class="dropdown-menu">
+              {% if user.field_subscription.value %}
+              <li><a class="dropdown-item" href="/user/subscribe">Change Plan</a></li>
+              <li><a class="dropdown-item" href="/user/subscribe/cancel">Cancel Subscription</a></li>
+              {% else %}
+              <li><a class="dropdown-item" href="/user/subscribe">Subscribe</a></li>
+              {% endif %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
         {{- content.member_for -}}
         {{- content.hc_balance -}}
       </div>

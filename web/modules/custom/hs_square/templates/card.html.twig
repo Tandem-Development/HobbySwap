@@ -1,5 +1,10 @@
 <div class="card--wrapper">
     <img src="/themes/custom/hobbyswap/logo.png" class="bg-image">
+    {% if is_default %}
+    <a href="#" class="default-card">Default</a>
+    {% else %}
+    <a href="/card/set-default/{{ index }}">Set Default</a>
+    {% endif %}
     <div class="card--info">
         <p class="brand">{{ card.getCardBrand }}</p>
         <p class="last-4">**** **** **** {{ card.getLast4 }}</p>

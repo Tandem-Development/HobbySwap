@@ -2,22 +2,92 @@
 
 namespace Drupal\hs_user;
 
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\user\Entity\User;
 
+/**
+ * Provides a variety of helper methods for managing users' subscription statuses across the site
+ */
 class SubscriptionManager implements SubscriptionManagerInterface{
 
   protected $entityTypeManager;
   protected $currentUser;
   protected $configFactory;
+  protected $time;
 
-  function __construct(EntityTypeManagerInterface $entityTypeManager, AccountProxyInterface $currentUser, ConfigFactoryInterface $configFactory){
+  function __construct(EntityTypeManagerInterface $entityTypeManager, AccountProxyInterface $currentUser, ConfigFactoryInterface $configFactory, TimeInterface $time){
     $this->entityTypeManager = $entityTypeManager;
     $this->currentUser = $currentUser;
     $this->configFactory = $configFactory;
+    $this->time = $time;
   }
+
+
+  /**
+   * Updates a user's subscription to a valid plan defined in the hs_user.subscriptions config
+   */
+  public function setUserSubscription($uid, $plan){
+    $current_time = $this->time->getRequestTime();
+    $user = User::load($uid);
+    //Verify the plan definition exists before attempting an update
+    if($this->isPlanDefined($plan) !== false){
+      //Update the value of 'field_subscription' and when it's update timestamp
+      $user
+        ->set('field_subscription', $plan)
+        ->set('field_subscription_updated', $current_time);
+      //Give the user the 'subscribed' role if they don't already have it
+      if(!$user->hasRole('subscribed')){
+        $user->addRole('subscribed');
+      }
+      $user->save();
+      return $plan;
+    }else{
+      return null;
+    }
+  }
+
+
+  /**
+   * Removes the 'subscribed' role from a user and updates the appropriate user fields
+   */
+  public function removeUserSubscription($uid){
+    //Load the requested user
+    $user = User::load($uid);
+    if(!empty($user)){
+      $current_time = $this->time->getRequestTime();
+      //Set the user's subscription to null, update the timestamp, and remove the 'subscribed' role
+      $user
+        ->set('field_subscription', null)
+        ->set('field_subscription_updated', $current_time)
+        ->removeRole('subscribed');
+      $user->save();
+    }
+  }
+
+
+  /**
+   * Compares the last time a user's subscription was updated to the current time and returns true or false accordingly
+   */
+  public function isUserSubscriptionExpired($uid){
+    $user = User::load($uid);
+    //Return null if the user isn't subscribed at all
+    if(!$user->hasRole('subscribed')){
+      return null;
+    }
+    $current_plan_data = $this->getPlanData($user->get('field_subscription')->value);
+    $subscription_updated = $user->get('field_subscription_updated')->value;
+    $current_time = $this->time->getRequestTime();
+    //If the user's subscription is not expired based on their plan's duration, return true
+    if(($current_time - $subscription_updated) > intval($current_plan_data['duration']) * 2628288){
+      return true;
+    }
+    //Otherwise, return false
+    return false;
+  }
+
 
   /**
    * Compares the provided plan against the configuration to ensure that it's defined and with all the correct attributes
@@ -42,6 +112,7 @@ class SubscriptionManager implements SubscriptionManagerInterface{
     }
   }
 
+
   /**
    * Returns a structured array of a plan and it's attributes if the plan is defined
    */
@@ -54,62 +125,4 @@ class SubscriptionManager implements SubscriptionManagerInterface{
       return null;
     }
   }
-
-  /**
-   * Updates a user's subscription to a valid plan defined in the hs_user.subscriptions config
-   */
-  public function setUserSubscription($uid, $plan){
-    $current_time = \Drupal::time()->getRequestTime();
-    $user = User::load($uid);
-    //Verify the plan definition exists before attempting an update
-    if($this->isPlanDefined($plan) !== false){
-      //Update the value of 'field_subscription' and when it's update timestamp
-      $user
-        ->set('field_subscription', $plan)
-        ->set('field_subscription_updated', $current_time);
-      //Give the user the 'subscribed' role if they don't already have it
-      if(!$user->hasRole('subscribed')){
-        $user->addRole('subscribed');
-      }
-      $user->save();
-      return $plan;
-    }else{
-      return null;
-    }
-  }
-
-  /**
-   * Compares the last time a user's subscription was updated to the current time and returns true or false accordingly
-   */
-  public function isUserSubscriptionExpired($uid){
-    $user = User::load($uid);
-    //Return null if the user isn't subscribed at all
-    if(!$user->hasRole('subscribed')){
-      return null;
-    }
-    $current_plan_data = $this->getPlanData($user->get('field_subscription')->value);
-    $subscription_updated = $user->get('field_subscription_updated')->value;
-    $current_time = \Drupal::time()->getRequestTime();
-    if(($current_time - $subscription_updated) > intval($current_plan_data['duration']) * 2628288){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  /**
-   * Removes the 'subscribed' role from a user and updates the appropriate user fields
-   */
-  public function removeUserSubscription($uid){
-    $user = User::load($uid);
-    if(!empty($user)){
-      $current_time = \Drupal::time()->getRequestTime();
-      $user
-        ->set('field_subscription', null)
-        ->set('field_subscription_updated', $current_time)
-        ->removeRole('subscribed');
-      $user->save();
-    }
-  }
-
 }

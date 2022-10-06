@@ -59,7 +59,7 @@
 }
 /* line 51, ../sass/subscription-form.scss */
 #hs-usersubscription-form #edit-subscription-plans .form-item label .subscription-plan-details.current-plan::after {
-  content: 'Current Plan';
+  content: 'Your Current Plan';
   position: absolute;
   bottom: 0;
   right: 0;

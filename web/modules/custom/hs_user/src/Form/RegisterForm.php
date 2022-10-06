@@ -103,6 +103,7 @@ class RegisterForm extends \Drupal\user\AccountForm {
 
     //Create square customer profile
     \Drupal::service('hs_square.square_manager')->createCustomer($account->id());
+    //Keep customer management table updated
     \Drupal::service('cache_tags.invalidator')->invalidateTags(['manage_square_customers']);
 
     $form_state->set('user', $account);

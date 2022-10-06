@@ -8,6 +8,9 @@ use Psr\Container\ContainerInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 
+/**
+ * Displays all Square customers in a table format for admin management
+ */
 class ManageCustomersController extends ControllerBase{
 
   protected $squareManager;
@@ -23,7 +26,7 @@ class ManageCustomersController extends ControllerBase{
   }
 
   public function displayCustomers(){
-
+    //Retrieve all Square customers for this environment
     $customers = $this->squareManager->retrieveCustomers()->getCustomers();
     $header = [
       $this->t('Name'),
@@ -34,22 +37,26 @@ class ManageCustomersController extends ControllerBase{
       $this->t('Delete')
     ];
     $row = [];
-    foreach($customers as $customer){
-      $row[] = [
-        $customer->getGivenName().' '.$customer->getFamilyName(),
-        Link::fromTextAndUrl(
-          $customer->getReferenceId(),
-          Url::fromRoute('hs_square.view_customer', ['squareid' => $customer->getId()])
-        ),
-        $customer->getId(),
-        $customer->getPhoneNumber(),
-        $customer->getEmailAddress(),
-        Link::fromTextAndUrl(
-          'Delete',
-          Url::fromRoute('hs_square.delete_customer', ['squareid' => $customer->getId()])
-        )
-      ];
+    //Loop through each customer and append their data to the table as a row
+    if(!empty($customers)){
+      foreach($customers as $customer){
+        $row[] = [
+          $customer->getGivenName().' '.$customer->getFamilyName(),
+          Link::fromTextAndUrl(
+            $customer->getReferenceId(),
+            Url::fromRoute('hs_square.view_customer', ['squareid' => $customer->getId()])
+          ),
+          $customer->getId(),
+          $customer->getPhoneNumber(),
+          $customer->getEmailAddress(),
+          Link::fromTextAndUrl(
+            'Delete',
+            Url::fromRoute('hs_square.delete_customer', ['squareid' => $customer->getId()])
+          )
+        ];
+      }
     }
+    //Return the data with a custom cache tag. To prevent redundant API calls, this cache tag should NEVER be removed
     return[
       '#theme' => 'table',
       '#header' => $header,

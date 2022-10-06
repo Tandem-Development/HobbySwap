@@ -22,6 +22,8 @@ function hs_square_theme($existing, $type, $theme, $path){
     'card' => [
       'variables' => [
         'card' => NULL,
+        'index' => NULL,
+        'is_default' => NULL,
       ],
     ],
     'checkout_summary' => [

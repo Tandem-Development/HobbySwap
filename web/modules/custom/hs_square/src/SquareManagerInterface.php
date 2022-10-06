@@ -2,13 +2,17 @@
 
 namespace Drupal\hs_square;
 
+use Square\Models\Customer;
+
 interface SquareManagerInterface{
 
   public function openClient();
 
+  public function retrieveThisLocationId();
+
   public function handleResponse($api_response);
 
-  public function addCardToCustomer($uid, $card_data, $source_id);
+  public function addCardToCustomer(Customer $customer, $card_data, $source_id);
 
   public function retrieveCustomerByUid($uid);
 
@@ -18,10 +22,10 @@ interface SquareManagerInterface{
 
   public function deleteCustomer($squareid);
 
-  public function retrieveThisLocationId();
+  public function createPayment($source_id, $amount, Customer $customer);
 
-  public function createPayment($source_id, $amount, $uid);
+  public function getDefaultCardIndex(Customer $customer);
 
-  public function getDefaultCardIdByUid($uid);
+  public function setDefaultCard(Customer $customer, $index);
 
 }

@@ -43,6 +43,7 @@ form#hs-usersubscription-payment-form {
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
+  margin-bottom: 4rem;
 }
 @media (max-width: 767.8px) {
   /* line 36, ../sass/payment-form.scss */
@@ -50,52 +51,52 @@ form#hs-usersubscription-payment-form {
     order: 2;
   }
 }
-/* line 43, ../sass/payment-form.scss */
+/* line 44, ../sass/payment-form.scss */
 form#hs-usersubscription-payment-form fieldset#edit-cards--wrapper {
   width: fit-content;
 }
-/* line 45, ../sass/payment-form.scss */
+/* line 46, ../sass/payment-form.scss */
 form#hs-usersubscription-payment-form fieldset#edit-cards--wrapper #edit-cards {
   width: fit-content;
 }
-/* line 47, ../sass/payment-form.scss */
+/* line 48, ../sass/payment-form.scss */
 form#hs-usersubscription-payment-form fieldset#edit-cards--wrapper #edit-cards .form-item {
   position: relative;
   margin-top: 1rem;
 }
-/* line 50, ../sass/payment-form.scss */
+/* line 51, ../sass/payment-form.scss */
 form#hs-usersubscription-payment-form fieldset#edit-cards--wrapper #edit-cards .form-item input {
   position: absolute;
   bottom: 20px;
   left: 20px;
   z-index: 10;
 }
-/* line 56, ../sass/payment-form.scss */
+/* line 57, ../sass/payment-form.scss */
 form#hs-usersubscription-payment-form fieldset#edit-cards--wrapper #edit-cards .form-item label {
   position: relative;
   z-index: 0;
 }
-/* line 63, ../sass/payment-form.scss */
+/* line 64, ../sass/payment-form.scss */
 form#hs-usersubscription-payment-form .checkout-summary--wrapper {
   padding: 1rem;
 }
-/* line 65, ../sass/payment-form.scss */
+/* line 66, ../sass/payment-form.scss */
 form#hs-usersubscription-payment-form .checkout-summary--wrapper legend {
   border-bottom: 2px solid #B5B5B5;
 }
-/* line 69, ../sass/payment-form.scss */
+/* line 70, ../sass/payment-form.scss */
 form#hs-usersubscription-payment-form .checkout-summary--wrapper .checkout-info .total {
   color: #303030;
   font-weight: 500;
 }
-/* line 75, ../sass/payment-form.scss */
+/* line 76, ../sass/payment-form.scss */
 form#hs-usersubscription-payment-form #edit-submit {
   font-size: 1.2rem;
   border-radius: 1.3rem;
   margin: 0;
 }
 
-/* line 81, ../sass/payment-form.scss */
+/* line 82, ../sass/payment-form.scss */
 form#hs-squareadd-card-form {
   flex: 1;
 }

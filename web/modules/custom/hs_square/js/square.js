@@ -33,7 +33,7 @@
             throw new Error('Required field missing');
         }
         body = JSON.stringify(body);
-        const paymentResponse = await fetch('/add-card', {
+        const paymentResponse = await fetch('/card/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

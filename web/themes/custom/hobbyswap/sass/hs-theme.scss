@@ -92,6 +92,9 @@ body{
 a{
   color: $hs-blue;
   text-decoration: none;
+  &:hover{
+    color: $hs-gray3;
+  }
 }
 h1, h2, h3, h4, h5, h6{
   font-weight: 300;
@@ -550,7 +553,7 @@ p{
 
 
 // 8 - Form Elements
-input.btn{
+input.btn, button.btn{
   border: none;
   border-radius: 0.2em;
   font-weight: 600;
@@ -558,39 +561,39 @@ input.btn{
   margin: auto;
   text-align: center;
   transition: all 0.25s ease;
-  &:hover, &:focus{
+  &:hover{
     transform: translateY(-0.1em);
     box-shadow: 0 0.3em 10px rgba(0, 0, 0, 0.3);
   }
 }
-input.btn-blue, input.btn-primary{
+input.btn-blue, input.btn-primary, button.btn-blue, button.btn-primary{
   color: white;
   background-color: $hs-blue;
-  &:hover, &:focus{
+  &:hover{
     color: $hs-gray4;
     background-color: $hs-gray1;
   }
 }
-input.btn-yellow, input.btn-secondary{
+input.btn-yellow, input.btn-secondary, button.btn-yellow, button.btn-secondary{
   color: $hs-gray4;
   background-color: $hs-yellow;
-  &:hover, &:focus{
+  &:hover{
     color: white;
     background-color: $hs-gray4;
   }
 }
-input.btn-gray1{
+input.btn-gray1, button.btn-gray1{
   color: $hs-gray4;
   background-color: $hs-gray1;
-  &:hover, &:focus{
+  &:hover{
     color: white;
     background-color: $hs-gray4;
   }
 }
-input.btn-gray4{
+input.btn-gray4, button.btn-gray4{
   color: white;
   background-color: $hs-gray4;
-  &:hover, &:focus{
+  &:hover{
     color: $hs-gray4;
     background-color: $hs-gray1;
   }
@@ -612,6 +615,10 @@ form.form--widget{
 input.form-submit.is-disabled, button.is-disabled{
   background-color: $hs-gray2;
   color: $hs-gray3;
+}
+
+a.dropdown-item:focus{
+  background-color: $hs-gray3;
 }
 
 // 9 - Tabbed Content Switcher

@@ -3,6 +3,7 @@
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * Implements hook_theme().
@@ -131,7 +132,7 @@ function hs_trade_preprocess(&$variables, $hook) {
 
   //Attach 'hs_trade/item-grid-view' library to grid views
   if($hook === 'views_view') {
-    if($variables['view']->id() === 'hs_item_grid') {
+    if($variables['view']->id() === 'hs_item_grid' && $variables['is_admin'] === false) {
       $variables['#attached']['library'] = ['hs_trade/item-grid-view'];
     };
   }
@@ -222,5 +223,15 @@ function hs_trade_mail($key, &$message, $params){
       $message['subject'] = 'Transaction Summary #'.$params['tid'];
       $message['body'][] = twig_render_template('/modules/custom/hs_trade/templates/email--transaction-summary.html.twig', $params);
       break;
+  }
+}
+
+/**
+ * Implements hook_node_access()
+ */
+function hs_trade_node_access(\Drupal\node\NodeInterface $node, $op, \Drupal\Core\Session\AccountInterface $account){
+  //Apply the 'view published items' permission
+  if($node->bundle() === 'item' && $op === 'view' && !$account->hasPermission('view published items')){
+    return AccessResult::forbidden();
   }
 }
