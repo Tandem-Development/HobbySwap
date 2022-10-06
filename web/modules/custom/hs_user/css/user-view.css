@@ -32,18 +32,22 @@
 #block-hobbyswap-content article .user-info .info-1 {
   text-align: center;
   width: fit-content;
+  padding: 0;
 }
-/* line 22, ../sass/user-view.scss */
+/* line 23, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-1 .field--name-user-picture img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
   border: 4px solid #4888FF;
   border-radius: 100%;
 }
-/* line 27, ../sass/user-view.scss */
+/* line 31, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 {
   text-align: left;
   width: fit-content;
 }
-/* line 30, ../sass/user-view.scss */
+/* line 34, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription {
   display: flex;
   align-items: center;
@@ -51,87 +55,87 @@
   gap: 0.3rem;
 }
 @media (max-width: 767.8px) {
-  /* line 30, ../sass/user-view.scss */
+  /* line 34, ../sass/user-view.scss */
   #block-hobbyswap-content article .user-info .info-2 .name--subscription {
     justify-content: center;
     margin-top: 0.7rem;
   }
 }
-/* line 39, ../sass/user-view.scss */
+/* line 43, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .field--name-name {
   color: #303030;
   font-size: 2rem;
   height: fit-content;
 }
 @media (max-width: 767.8px) {
-  /* line 39, ../sass/user-view.scss */
+  /* line 43, ../sass/user-view.scss */
   #block-hobbyswap-content article .user-info .info-2 .name--subscription .field--name-name {
     flex-basis: 100%;
     text-align: center;
   }
 }
-/* line 48, ../sass/user-view.scss */
+/* line 52, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .subscription--wrapper {
   background-color: #303030;
   font-size: 1rem;
   border-radius: 0.4em;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
-/* line 53, ../sass/user-view.scss */
+/* line 57, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .subscription--wrapper.supporter {
   animation: rainbowbarf 0.4s linear 0s infinite normal;
 }
-/* line 55, ../sass/user-view.scss */
+/* line 59, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .subscription--wrapper.supporter .field--name-field-subscription {
   color: white;
 }
-/* line 59, ../sass/user-view.scss */
+/* line 63, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .subscription--wrapper .field--name-field-subscription {
   font-weight: bold;
   line-height: 1em;
   color: #4888FF;
   padding: 0.5em 1em;
 }
-/* line 66, ../sass/user-view.scss */
+/* line 70, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .dropdown {
   background-color: #303030;
   font-size: 1rem;
   border-radius: 0.4em;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
-/* line 71, ../sass/user-view.scss */
+/* line 75, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .dropdown.supporter {
   animation: rainbowbarf 0.4s linear 0s infinite normal;
 }
-/* line 73, ../sass/user-view.scss */
+/* line 77, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .dropdown.supporter .dropdown-toggle {
   color: white;
 }
-/* line 77, ../sass/user-view.scss */
+/* line 81, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .dropdown .dropdown-toggle {
   color: #4888FF;
   padding: 0.3em 1em;
 }
-/* line 80, ../sass/user-view.scss */
+/* line 84, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .name--subscription .dropdown .dropdown-toggle:focus {
   box-shadow: none;
 }
-/* line 87, ../sass/user-view.scss */
+/* line 91, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .form-item {
   font-size: 1rem;
   margin: 0;
 }
-/* line 90, ../sass/user-view.scss */
+/* line 94, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .form-item .label {
   font-weight: normal;
 }
 @media (max-width: 767.8px) {
-  /* line 87, ../sass/user-view.scss */
+  /* line 91, ../sass/user-view.scss */
   #block-hobbyswap-content article .user-info .info-2 .form-item {
     text-align: center;
   }
 }
-/* line 97, ../sass/user-view.scss */
+/* line 101, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .field--name-hc-balance {
   display: flex;
   align-items: center;
@@ -139,22 +143,22 @@
   border-top: 1px solid #B5B5B5;
   width: fit-content;
 }
-/* line 103, ../sass/user-view.scss */
+/* line 107, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .field--name-hc-balance .field--label {
   font-size: 1.75rem;
   margin-right: 0.5em;
   color: #303030;
 }
-/* line 108, ../sass/user-view.scss */
+/* line 112, ../sass/user-view.scss */
 #block-hobbyswap-content article .user-info .info-2 .field--name-hc-balance .field--item h2 {
   font-size: 1.75rem;
 }
 
-/* line 120, ../sass/user-view.scss */
+/* line 124, ../sass/user-view.scss */
 .field--name-field-user-items {
   margin: 0 1rem;
 }
-/* line 122, ../sass/user-view.scss */
+/* line 126, ../sass/user-view.scss */
 .field--name-field-user-items .field__label {
   position: relative;
   font-size: 2rem;
@@ -165,7 +169,7 @@
   border-radius: 0.3em 0.3em 0 0;
   color: white;
 }
-/* line 134, ../sass/user-view.scss */
+/* line 138, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item {
   border-right: 0.5rem solid #F3F3F3;
   border-left: 0.5rem solid #F3F3F3;
@@ -175,43 +179,43 @@
   box-shadow: 0 2px 4px #B5B5B5;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-/* line 142, ../sass/user-view.scss */
+/* line 146, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item:hover {
   box-shadow: 0 6px 4px #B5B5B5;
   transform: translateY(-0.3em);
 }
-/* line 146, ../sass/user-view.scss */
+/* line 150, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image {
   position: relative;
   padding: 0;
 }
-/* line 149, ../sass/user-view.scss */
+/* line 153, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image ul {
   position: relative;
   background-color: white;
   border: 1px solid #B5B5B5;
   margin-bottom: 0;
 }
-/* line 154, ../sass/user-view.scss */
+/* line 158, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image ul::before {
   content: '';
   display: block;
   padding-bottom: 100%;
 }
-/* line 159, ../sass/user-view.scss */
+/* line 163, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image ul li {
   display: none;
   position: absolute;
   margin: 0;
   inset: 0;
 }
-/* line 164, ../sass/user-view.scss */
+/* line 168, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image ul li img {
   object-fit: contain;
   height: 100%;
   width: 100%;
 }
-/* line 171, ../sass/user-view.scss */
+/* line 175, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image .prev, .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image .next {
   cursor: pointer;
   position: absolute;
@@ -228,22 +232,22 @@
   opacity: 0.6;
   background-color: #505050;
 }
-/* line 187, ../sass/user-view.scss */
+/* line 191, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image .prev {
   border-radius: 0 100vmax 100vmax 0;
   padding-left: 10px;
 }
-/* line 191, ../sass/user-view.scss */
+/* line 195, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-image .next {
   right: 0;
   border-radius: 100vmax 0 0 100vmax;
   padding-right: 10px;
 }
-/* line 197, ../sass/user-view.scss */
+/* line 201, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info {
   padding: 0 1rem;
 }
-/* line 199, ../sass/user-view.scss */
+/* line 203, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 {
   display: flex;
   justify-content: space-between;
@@ -252,21 +256,21 @@
   padding: 1rem 0;
   border-bottom: 1px solid #B5B5B5;
 }
-/* line 206, ../sass/user-view.scss */
+/* line 210, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 .field-item-title {
   margin-bottom: 0;
   flex-basis: 80%;
 }
-/* line 210, ../sass/user-view.scss */
+/* line 214, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 .field-item-value {
   font-size: 2rem;
 }
 @media (max-width: 991.8px) {
-  /* line 199, ../sass/user-view.scss */
+  /* line 203, ../sass/user-view.scss */
   .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 {
     justify-content: center;
   }
-  /* line 215, ../sass/user-view.scss */
+  /* line 219, ../sass/user-view.scss */
   .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-1 .field-item-title {
     text-align: center;
     flex-basis: 100%;
@@ -274,28 +278,28 @@
     font-size: 1.8rem;
   }
 }
-/* line 226, ../sass/user-view.scss */
+/* line 230, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-2 {
   margin: 1rem 0;
 }
-/* line 228, ../sass/user-view.scss */
+/* line 232, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-2 h6 {
   font-size: 1rem;
   border-left: 1px solid #505050;
   padding-left: 0.2em;
 }
-/* line 232, ../sass/user-view.scss */
+/* line 236, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-2 h6 span {
   font-weight: bold;
   color: #505050;
 }
-/* line 238, ../sass/user-view.scss */
+/* line 242, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-3 {
   max-height: 280px;
   overflow: hidden;
   position: relative;
 }
-/* line 242, ../sass/user-view.scss */
+/* line 246, ../sass/user-view.scss */
 .field--name-field-user-items .field__item .view-user-items .hs--user-item .item-info .section-3::after {
   content: '';
   position: absolute;

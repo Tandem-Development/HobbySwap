@@ -47,6 +47,15 @@ function hs_user_preprocess(&$variables, $hook){
     $variables['#attached']['library'] = ['hs_user/user-view'];
     $variables['current_user'] = \Drupal::currentUser()->id();
   }
+
+  if($hook === 'page' && \Drupal::routeMatch()->getRouteName() !== 'hs_user.two_factor_authentication'){
+    $current_user = \Drupal::currentUser();
+    if(!in_array('2fa', $current_user->getRoles()) && $current_user->isAuthenticated()){
+      $url = \Drupal\Core\Url::fromRoute('hs_user.two_factor_authentication');
+      $link = \Drupal\Core\Link::fromTextAndUrl(t('HERE'), $url)->toRenderable();
+      \Drupal::messenger()->addError(t('Your account is not authenticated. To Authenticate and unlock your account, click '.\Drupal::service('renderer')->render($link).'.'));
+    }
+  }
 }
 
 /**
