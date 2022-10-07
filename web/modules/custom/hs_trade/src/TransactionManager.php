@@ -296,6 +296,11 @@ class TransactionManager implements TransactionManagerInterface{
         }
       }
 
+      //If either user's account has been deleted, remove all action links
+      if($requester->id() === 0 || $responder->id() === 0){
+        unset($trans_final[$tid]['action_links']);
+      }
+
       $trans_final[$tid]['action_links']['message'] = [
         'url' => '/private-messages/'.$transaction->get('message_thread')->value,
         'icon_path' => '/sites/default/files/icons/message.svg',

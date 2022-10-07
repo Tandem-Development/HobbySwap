@@ -84,8 +84,8 @@ class TransactionListBuilder extends EntityListBuilder{
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\hs_trade\Entity\Transaction */
 
-    $responder = \Drupal::entityTypeManager()->getStorage('user')->load($entity->responder_uid->value);
-    $requester = \Drupal::entityTypeManager()->getStorage('user')->load($entity->requester_uid->value);
+    $responder = $entity->getResponder();
+    $requester = $entity->getRequester();
 
     if($entity->residual->value < 0){
       $residual = 'Req: '.abs($entity->residual->value);

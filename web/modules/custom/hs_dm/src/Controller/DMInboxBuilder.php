@@ -3,7 +3,9 @@
 namespace Drupal\hs_dm\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\private_message\Service\PrivateMessageServiceInterface;
+use Drupal\user\Entity\User;
 use Psr\Container\ContainerInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\hs_trade\TransactionManagerInterface;
@@ -12,27 +14,31 @@ use Drupal\Core\Url;
 
 class DMInboxBuilder extends ControllerBase{
 
-  private $privateMessageService;
-  private $dateFormatter;
-  private $transactionManager;
+  protected $privateMessageService;
+  protected $dateFormatter;
+  protected $transactionManager;
   protected $csrfToken;
+  protected $currentUser;
   function __construct(
     PrivateMessageServiceInterface $privateMessageService,
     DateFormatterInterface $dateFormatter,
     TransactionManagerInterface $transactionManager,
-    CsrfTokenGenerator $csrfToken
+    CsrfTokenGenerator $csrfToken,
+    AccountProxyInterface $currentUser
   ){
     $this->privateMessageService = $privateMessageService;
     $this->dateFormatter = $dateFormatter;
     $this->transactionManager = $transactionManager;
     $this->csrfToken = $csrfToken;
+    $this->currentUser = $currentUser;
   }
   public static function create(ContainerInterface $container){
     return new static(
       $container->get('private_message.service'),
       $container->get('date.formatter'),
       $container->get('hs_trade.transaction_manager'),
-      $container->get('csrf_token')
+      $container->get('csrf_token'),
+      $container->get('current_user')
     );
   }
 
@@ -68,24 +74,36 @@ class DMInboxBuilder extends ControllerBase{
     $threads = $this->privateMessageService->getThreadsForUser(0);
 
     $threads = array_map(function($thread){
-      $other_member = NULL;
-      foreach($thread->getMembers() as $member){
-        if($member->id() !== \Drupal::currentUser()->id()){
-          $other_member = $member;
-        }
-      }
-      $other_member_image = NULL;
-      if(!empty($other_member->user_picture->entity)){
-        $other_member_image = $other_member->user_picture->entity->createFileUrl();
-      }
+      //Get the users involved in the thread
+      $thread_members = $thread->getMembers();
+      $current_user = $this->currentUser->id();
+
       $messages = $thread->getMessages();
       $newest_message = end($messages);
-      $newest_message_text = $newest_message->getOwner()->id() === \Drupal::currentUser()->id() ? 'You: ' : '';
+      $other_member_image = '/themes/custom/hobbyswap/logo.png';
+
+      //If a user left the thread or had their account deleted, create a placeholder User entity to prevent null errors
+      if(count($thread_members) === 1){
+        $other_member = User::create(['uid' => 0, 'name' => 'MISSING']);
+        $newest_message->setOwner($other_member);
+      }else{
+        //If the user is still present in the thread, save that user to retrieve its values
+        $member_ids = array_map(function ($member){
+          return $member->id();
+        }, $thread_members);
+        unset($thread_members[array_search($current_user, $member_ids)]);
+        $other_member = reset($thread_members);
+        if(!empty($other_member->user_picture->entity)){
+          $other_member_image = $other_member->user_picture->entity->createFileUrl();
+        }
+      }
+
+      $newest_message_text = ($newest_message->getOwner()->id() === $current_user) ? 'You: ' : '';
       $newest_message_text .= strip_tags($newest_message->getMessage());
 
       $is_unread = FALSE;
-      if($thread->getUpdatedTime() > $thread->getLastAccessTimestamp(\Drupal::currentUser())){
-        if($newest_message->getOwner()->id() !== \Drupal::currentUser()->id()){
+      if($thread->getUpdatedTime() > $thread->getLastAccessTimestamp($this->currentUser)){
+        if($newest_message->getOwner()->id() !== $current_user){
           $is_unread = TRUE;
         }
       }
@@ -93,11 +111,8 @@ class DMInboxBuilder extends ControllerBase{
       return[
         'id' => $thread->id(),
         'unread' => $is_unread,
-        'other_member' => [
-          'id' => $other_member->id(),
-          'name' => $other_member->getDisplayName(),
-          'image' =>  $other_member_image,
-        ],
+        'other_member' => $other_member,
+        'other_member_image' =>  $other_member_image,
         'newest_message' => $newest_message_text,
         'newest_message_time' => $this->dateFormatter->format($newest_message->getCreatedTime(), 'short'),
         'transaction' => $this->transactionManager->getPMTransactionId($thread->id()),

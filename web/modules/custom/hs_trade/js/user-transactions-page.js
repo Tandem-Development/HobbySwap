@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings, window) {
+(function ($, Drupal, drupalSettings) {
 
   let incomingTab = document.querySelector('.hs--incoming--label');
   let outgoingTab = document.querySelector('.hs--outgoing--label');
@@ -9,23 +9,26 @@
     $.ajax({
       url: drupalSettings.getRenderedTransactions,
       success: function(response){
+        console.log('Ajax called');
         //Only replace the markup if a transaction has been altered
-        if($('.hs--incoming-container').html() === response[2].incoming_transactions){
-          return;
-        }else{
+        if($('.hs--incoming-container').html().trim() !== response[1].incoming_transactions.trim()){
           //Update transactions
-          $('.hs--incoming-container').html(response[2].incoming_transactions);
-          $('.hs--outgoing-container').html(response[2].outgoing_transactions);
-          //Update incoming and outgoing transaction count
+          $('.hs--incoming-container').html(response[1].incoming_transactions);
+          //Update incomingtransaction count
           let newIncomingCount = document.querySelectorAll('.hs--incoming-container .hs--transaction').length;
-          let newOutgoingCount = document.querySelectorAll('.hs--outgoing-container .hs--transaction').length;
           $('.hs--incoming--label span').html(newIncomingCount);
+        }
+        if($('.hs--outgoing-container').html().trim() !== response[1].outgoing_transactions.trim()){
+          //Update transactions
+          $('.hs--outgoing-container').html(response[1].outgoing_transactions);
+          //Update outgoing transaction count
+          let newOutgoingCount = document.querySelectorAll('.hs--outgoing-container .hs--transaction').length;
           $('.hs--outgoing--label span').html(newOutgoingCount);
         }
       }
     });
   }
-  setInterval(renderTransactions, 20000);
+  setInterval(renderTransactions, 5000);
 
   incomingTab.addEventListener('click', () => {
     if(!incomingTab.classList.contains('active')){
@@ -44,5 +47,5 @@
     }
   });
 
-})(jQuery, Drupal, drupalSettings, window);
+})(jQuery, Drupal, drupalSettings);
 

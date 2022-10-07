@@ -5,6 +5,9 @@ inbox:
       css/inbox.css: {}
   js:
     js/inbox-ajax.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
 
 private-message-thread:
   version: 1.x

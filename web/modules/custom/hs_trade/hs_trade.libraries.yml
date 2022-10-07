@@ -19,8 +19,6 @@ hs-transactions:
   css:
     theme:
       css/hs-transactions.css: {}
-  js:
-    js/hs-transactions-ajax.js: {}
 
 item-grid-view:
   version: 1.x
@@ -37,8 +35,14 @@ ajax-update-notifications:
       css/notifications-block.css: { }
   js:
     js/ajax-update-notifications.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
 
 user-transactions-view:
   version: 1.x
   js:
     js/user-transactions-page.js: { }
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

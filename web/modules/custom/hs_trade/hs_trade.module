@@ -108,8 +108,6 @@ function hs_trade_theme_suggestions_alter(array &$suggestions, array $variables,
  */
 function hs_trade_preprocess(&$variables, $hook) {
 
-
-
   //Attach 'hs_trade/trade-page' library to 'item' nodes
   if($hook === 'node') {
     $node = $variables['elements']['#node'];
@@ -132,7 +130,8 @@ function hs_trade_preprocess(&$variables, $hook) {
 
   //Attach 'hs_trade/item-grid-view' library to grid views
   if($hook === 'views_view') {
-    if($variables['view']->id() === 'hs_item_grid' && $variables['is_admin'] === false) {
+    $route_options = \Drupal::routeMatch()->getRouteObject()->getOptions();
+    if($variables['view']->id() === 'hs_item_grid' && !isset($route_options['_admin_route'])) {
       $variables['#attached']['library'] = ['hs_trade/item-grid-view'];
     };
   }

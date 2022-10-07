@@ -8,6 +8,7 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\hs_trade\TransactionInterface;
 use Drupal\user\UserInterface;
+use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityChangedTrait;
 
 /**
@@ -73,7 +74,14 @@ class Transaction extends ContentEntityBase implements TransactionInterface{
   }
 
   public function getResponder(){
-    return \Drupal::entityTypeManager()->getStorage('user')->load($this->get('responder_uid')->value);
+    $responder = User::load($this->get('responder_uid')->value);
+    if(empty($responder)){
+      return User::create([
+        'uid' => 0,
+        'name' => 'USER MISSING',
+      ]);
+    }
+    return $responder;
   }
 
   public function setRequesterUID($uid) {
@@ -82,7 +90,14 @@ class Transaction extends ContentEntityBase implements TransactionInterface{
   }
 
   public function getRequester(){
-    return \Drupal::entityTypeManager()->getStorage('user')->load($this->get('requester_uid')->value);
+    $requester = User::load($this->get('requester_uid')->value);
+    if(empty($requester)){
+      return User::create([
+        'uid' => 0,
+        'name' => 'USER MISSING',
+      ]);
+    }
+    return $requester;
   }
 
   public function setResponderItems(array $items) {
