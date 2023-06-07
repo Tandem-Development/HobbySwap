@@ -1,158 +1,162 @@
 <?php
 
 /**
- * This controller is responsible for the following:
- * - 'hs_trade.transaction_accept' route default controller for handling offer acceptance
- * - 'hs_trade.transaction_decline' route default controller for handling offer declination
- * - 'hs_trade.transaction_counter' route default controller for handling counter offers
+ * A single controller that houses all the logic for users to interact with a transaction that they're involved in.
+ * Also implements custom access controllers to ensure that the proper users are performing allowed actions
  */
 
 namespace Drupal\hs_trade\Controller;
 
 use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
 use Psr\Container\ContainerInterface;
 use Drupal\hs_trade\TransactionManagerInterface;
+use Drupal\Core\Form\FormBuilderInterface;
 
-class RequestInteractController extends ControllerBase {
+class AlterTransactionController extends ControllerBase {
 
   /**
    * @var \Drupal\Core\Cache\CacheTagsInvalidatorInterface
    * Boilerplate for cache invalidation service
    */
-  private $cacheTagsInvalidator;
+  protected $cacheTagsInvalidator;
   /**
    * @var \Drupal\hs_trade\TransactionManagerInterface
    */
-  private $transactionManager;
+  protected $transactionManager;
+  /**
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+  /**
+   * @var \Drupal\Core\Form\FormBuilderInterface
+   */
+  protected $formBuilder;
 
-  function __construct(CacheTagsInvalidatorInterface $cacheTagsInvalidator, TransactionManagerInterface $transactionManager) {
+  function __construct(
+    CacheTagsInvalidatorInterface $cacheTagsInvalidator,
+    TransactionManagerInterface $transactionManager,
+    AccountProxyInterface $currentUser,
+    FormBuilderInterface $formBuilder
+  ) {
     $this->cacheTagsInvalidator = $cacheTagsInvalidator;
     $this->transactionManager = $transactionManager;
+    $this->currentUser = $currentUser;
+    $this->formBuilder = $formBuilder;
   }
 
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('cache_tags.invalidator'),
-      $container->get('hs_trade.transaction_manager')
+      $container->get('hs_trade.transaction_manager'),
+      $container->get('current_user'),
+      $container->get('form_builder')
     );
   }
 
 
   /**
-   * RequestInteractController::interactionAccess is the access controller for all stage 1 request interaction routes
-   * - $account is the account object for the current user
-   * - $hs_trade_transaction is the ID of the relevant transaction
-   * - Is applied to all three stage 1 interaction routes ('decline', 'accept', and 'counter')
-   * - Determines access based on current user and transaction status
+   * Custom access handler for hs_trade.transaction_accept route
    */
-  public function interactionAccess(AccountInterface $account, $hs_trade_transaction) {
+  public function acceptAccess(AccountInterface $account, $hs_trade_transaction) {
     //Retrieve relevant transaction and get its status and responder_uid
     $transaction = $this->transactionManager->getTransaction($hs_trade_transaction);
-    $status = $transaction->getStatus();
 
-    //Don't even consider transaction status if the current user doesn't have the right permission and isn't the responder
-    if($account->hasPermission('use trade system') && $account->id() === $transaction->getResponder()->id()){
-      //Simple way of managing all possible transaction statuses
-      switch ($status){
-        //Allow interaction if pending or if pending counter offer
-        case 'pending':
-        case 'countered':
-          return AccessResult::allowed();
-          break;
-        //Forbid interaction if closed with declination
-        case 'declined':
-          return AccessResult::forbidden();
-          break;
-        default:
-          return AccessResult::forbidden();
+    switch ($transaction->getStatus()){
+      //Allow acceptance if transaction is pending or countered and the current user is the responder
+      case 'pending':
+      case 'countered':
+      if($account->id() === $transaction->getResponder()->id()){
+        return AccessResult::allowed();
       }
-    }else{
-      //Forbid if user doesn't have permission or isn't the responder
-      return AccessResult::forbidden();
     }
+    return AccessResult::forbidden();
   }
 
-
   /**
-   * RequestInteractController::declinationAccess is the sole access controller for a transaction's declination
-   * - $account is the account object for the current user
-   * - $hs_trade_transaction is the ID of the relevant transaction
-   * - This is necessary as the responder should be able to decline at any point during the transaction until it's been finally confirmed
-   * - No other interaction controller has unique needs like this
+   * Custom access handler for hs_trade.transaction_decline route
    */
-  public function declinationAccess(AccountInterface $account, $hs_trade_transaction) {
+  public function declineAccess(AccountInterface $account, $hs_trade_transaction) {
     //Retrieve relevant transaction
     $transaction = $this->transactionManager->getTransaction($hs_trade_transaction);
-
     //Allow the responder to decline at any point unless the transaction has been finally confirmed
-    if($account->id() === $transaction->getResponder()->id() && $transaction->getStatus() !== 'confirmed') {
-      return AccessResult::allowed();
-    }else{
-      return AccessResult::forbidden();
+    switch($transaction->getStatus()){
+      case 'pending':
+      case 'countered':
+      case 'requester confirmed':
+        if($account->id() === $transaction->getResponder()->id()){
+          return AccessResult::allowed();
+        }
+        break;
+      case 'accepted':
+        if($account->id() === $transaction->getRequester()->id()){
+          return AccessResult::allowed();
+        }
     }
-
+    return AccessResult::forbidden();
   }
 
+  /**
+   * Custom access handler for hs_trade.transaction_counter route
+   */
+  public function counterAccess(AccountInterface $account, $hs_trade_transaction) {
+    //Retrieve relevant transaction
+    $transaction = $this->transactionManager->getTransaction($hs_trade_transaction);
+    $status = $transaction->getStatus();
+    //Behaves just like the decline access controller, but allows users to counter the offer even after declination
+    switch($status){
+      case 'pending':
+      case 'countered':
+      case 'requester confirmed':
+        if($account->id() === $transaction->getResponder()->id()){
+          return AccessResult::allowed();
+        }
+        break;
+      case 'accepted':
+        if($account->id() === $transaction->getRequester()->id()){
+          return AccessResult::allowed();
+        }
+        break;
+      case 'declined':
+        return AccessResult::allowed();
+    }
+    return AccessResult::forbidden();
+  }
 
   /**
-   * RequestInteractController::confirmationAccess is the access controller for the request confirmation route (stage 2)
-   * - $account is the account object for the current user
-   * - $hs_trade_transaction is the ID of the relevant transaction
-   * - Is applied to the 'confirm' interaction route
-   * - Determines access based on current user and transaction status
+   * Custom access handler for hs_trade.transaction_confirm
    */
-  public function confirmationAccess(AccountInterface $account, $hs_trade_transaction) {
+  public function confirmAccess(AccountInterface $account, $hs_trade_transaction) {
     //Retrieve relevant transaction
     $transaction = $this->transactionManager->getTransaction($hs_trade_transaction);
 
     //Don't even consider transaction status if the current user doesn't have the right permission
-    if($account->hasPermission('use trade system')){
-      switch ($transaction->getStatus()){
-        //After acceptance, the requester must be the first to confirm
-        //Once the requester has confirmed the transaction, the responder must complete final confirmation
-        case 'declined':
-        case 'requester confirmed':
-          if($account->id() === $transaction->getResponder()->id()) {
-            return AccessResult::allowed();
-          }else{
-            return AccessResult::forbidden();
-          }
-          break;
-        //After acceptance, the requester must be the first to confirm
-        case 'accepted':
-          if($account->id() === $transaction->getRequester()->id()) {
-            return AccessResult::allowed();
-          }else{
-            return AccessResult::forbidden();
-          }
-          break;
-        //Restrict all transaction interaction once the transaction has been finally confirmed
-        case 'confirmed':
-          return AccessResult::forbidden();
-          break;
-        default:
-          return AccessResult::forbidden();
-      }
-    }else{
-      //Forbid if user doesn't have permission ('interact transaction requests')
-      return AccessResult::forbidden();
+    switch ($transaction->getStatus()){
+      case 'accepted':
+        //The requester performs initial confirmation
+        if($account->id() === $transaction->getRequester()->id()){
+          return AccessResult::allowed();
+        }
+        break;
+      case 'requester confirmed':
+        //The responder performs final confirmation
+        if($account->id() === $transaction->getResponder()->id()){
+          return AccessResult::allowed();
+        }
     }
+    //pending, countered, declined, and confirmed are always forbidden
+    return AccessResult::forbidden();
   }
 
-
-
   /**
-   * RequestInteractController::acceptRequest is the default controller for the 'hs_trade.transaction_accept' route
-   * - Handles functionality of a user accepting an offer request
-   * - $hs_trade_transaction is the ID of the relevant transaction
-   * - Purely functional, displays nothing
+   * Controlling method for hs_trade.transaction_accept route
    */
-  public function acceptRequest($hs_trade_transaction) {
+  public function accept($hs_trade_transaction) {
     //Load the relevant transaction
     $transaction = $this->transactionManager->getTransaction($hs_trade_transaction);
     //Set transaction status to 'accepted'
@@ -171,7 +175,7 @@ class RequestInteractController extends ControllerBase {
     $this->cacheTagsInvalidator->invalidateTags(['hs_trade.user_transactions_view']);
 
     //Redirect the user back to their transactions view page without displaying anything
-    $user_url = Url::fromRoute('hs_trade.user_view_transactions', ['user' => \Drupal::currentUser()->id()]);
+    $user_url = Url::fromRoute('hs_trade.user_view_transactions', ['user' => $this->currentUser->id()]);
     $user_path = $user_url->getInternalPath();
     $response = new RedirectResponse('/'.$user_path);
     $response->send();
@@ -179,15 +183,10 @@ class RequestInteractController extends ControllerBase {
     return[];
   }
 
-
-
   /**
-   * RequestInteractController::declineRequest is the default controller for the 'hs_trade.transaction_decline' route
-   * - Handles functionality for a user declining an offer request
-   * - $hs_trade_transaction is the ID of the relevant transaction
-   * - Purely functional, displays nothing
+   * Controlling method for hs_trade.transaction_decline route
    */
-  public function declineRequest($hs_trade_transaction) {
+  public function decline($hs_trade_transaction) {
     //Retrieve the transaction entity, set the status to 'declined', and save it
     $transaction = $this->transactionManager->getTransaction($hs_trade_transaction);
     $transaction->setStatus('declined');
@@ -205,23 +204,17 @@ class RequestInteractController extends ControllerBase {
     );
 
     //Redirect the user back to their transactions view page without displaying anything
-    $user_url = Url::fromRoute('hs_trade.user_view_transactions', ['user' => \Drupal::currentUser()->id()]);
+    $user_url = Url::fromRoute('hs_trade.user_view_transactions', ['user' => $this->currentUser->id()]);
     $user_path = $user_url->getInternalPath();
     $response = new RedirectResponse('/'.$user_path);
     $response->send();
     return[];
   }
 
-
-
   /**
-   * RequestInteractController::counterRequest is the default controller for the 'hs_trade.transaction_counter' route
-   * - Facilitates the process of a user making a counter offer
-   * - $hs_trade_transaction is the ID of the relevant transaction
-   * - Displays the form '\Drupal\hs_trade\Form\MakeOfferForm'
-   * - Form submission is handled in '\Drupal\hs_trade\Form\MakeOfferForm'
+   * Controlling method for hs_trade.transaction_counter route
    */
-  public function counterRequest($hs_trade_transaction) {
+  public function counter($hs_trade_transaction) {
     //Load the transaction to be countered
     $transaction = $this->transactionManager->getTransaction($hs_trade_transaction);
 
@@ -236,7 +229,7 @@ class RequestInteractController extends ControllerBase {
     //Transaction notifications are handled in the submitForm method of 'MakeOfferForm'
 
     //Load 'MakeOfferForm', pass in $controller_data, attach a library for styling, and display the form
-    $form = \Drupal::formBuilder()->getForm('\Drupal\hs_trade\Form\MakeOfferForm', $controller_data);
+    $form = $this->formBuilder->getForm('\Drupal\hs_trade\Form\MakeOfferForm', $controller_data);
     $form['#attached']['library'][] = 'hs_trade/trade-page';
     $form['#attributes']['class'][] = 'row';
     return[
@@ -244,18 +237,10 @@ class RequestInteractController extends ControllerBase {
     ];
   }
 
-
-
   /**
-   * RequestInteractController::confirmRequest is the default controller for the 'hs_trade.transaction_confirm' route
-   * - All final item/transaction processing happens in this method
-   * - Behaves differently depending on current user and transaction status
-   * - Upon final confirmation:
-   *  - All involved items will be unpublished and marked as 'Traded'
-   *  - The transaction status will be set to 'confirmed' and closed to all user interaction
-   *  - User HC balances will be adjusted to account for value imbalances
+   * Controlling method for hs_trade.transaction_confirm route
    */
-  public function confirmationRequest($hs_trade_transaction) {
+  public function confirm($hs_trade_transaction) {
 
     //Load relevant transaction entity
     $transaction = $this->transactionManager->getTransaction($hs_trade_transaction);
@@ -268,7 +253,7 @@ class RequestInteractController extends ControllerBase {
     $residual = $transaction->getResidual();
 
     //Create RedirectResponse object to redirect users under various circumstances
-    $user_url = Url::fromRoute('hs_trade.user_view_transactions', ['user' => \Drupal::currentUser()->id()]);
+    $user_url = Url::fromRoute('hs_trade.user_view_transactions', ['user' => $this->currentUser->id()]);
     $user_path = $user_url->getInternalPath();
     $user_response = new RedirectResponse('/'.$user_path);
 
@@ -277,7 +262,7 @@ class RequestInteractController extends ControllerBase {
 
     //The access controller handles restricting user interaction, but checking the current user allows for custom behavior when the user is allowed
     //All following scenarios assume that the access controller appropriately forbade/allowed the user
-    switch(\Drupal::currentUser()->id()) {
+    switch($this->currentUser->id()) {
       //If the requester is confirming
       case $transaction->getRequester()->id():
         //If the residual is greater than 0, the requester owes residual
@@ -333,11 +318,9 @@ class RequestInteractController extends ControllerBase {
             $this->transactionManager->notifyRequester($hs_trade_transaction);
             $this->transactionManager->sendTransactionPM($hs_trade_transaction, 'I completed final confirmation marking the completion of our trade!', $responder->id());
             $this->transactionManager->mailTransactionSummary($hs_trade_transaction);
-            //!!!COMMENTED OUT FOR DEVELOPMENT PURPOSES!!!
             //Set status of all items involved to 'Traded' and unpublish them
+            //UNCOMMENT BEFORE PUSHING
             //$this->transactionManager->tradeItems($hs_trade_transaction);
-
-
 
             $user_response->send();
           }
@@ -352,8 +335,8 @@ class RequestInteractController extends ControllerBase {
           $this->transactionManager->notifyRequester($hs_trade_transaction);
           $this->transactionManager->sendTransactionPM($hs_trade_transaction, 'I completed final confirmation marking the completion of our trade!', $responder->id());
           $this->transactionManager->mailTransactionSummary($hs_trade_transaction);
-          //!!!COMMENTED OUT FOR DEVELOPMENT PURPOSES!!!
           //Set status of all items involved to 'Traded' and unpublish them
+          //UNCOMMENT BEFORE PUSHING
           //$this->transactionManager->tradeItems($hs_trade_transaction);
 
           $user_response->send();
@@ -363,10 +346,22 @@ class RequestInteractController extends ControllerBase {
       default:
         //Catches any potential unaccounted for scenarios and redirects the user to their transaction view
         $user_response->send();
-
     }
     //The controller is required to return something even though no markup is needed
     return [];
+  }
+
+  /**
+   * Acts as a helper redirect route by sending a user to the relevant transaction's message thread
+   */
+  public function message($hs_trade_transaction){
+    //Get the transaction's thread id
+    $thread = $this->transactionManager->getTransaction($hs_trade_transaction)->get('message_thread')->value;
+    //Generate a URL from the thread and send the user there
+    $url = Url::fromRoute('entity.private_message_thread.canonical', ['private_message_thread' => $thread]);
+    $response = new RedirectResponse($url->toString());
+    $response->send();
+    return[];
   }
 
 }

@@ -106,10 +106,9 @@ function hs_user_cron(){
       //Load the user if their subscription has expired
       $user = User::load($uid);
       $customer = $square_manager->retrieveCustomerByUid($uid);
-      $card_index = $square_manager->getDefaultCardIndex($customer);
-      if($card_index !== null){
+      $card_id = $square_manager->getDefaultCardId($customer);
+      if($card_id !== null){
         //Renew the subscription
-        $card_id = $customer->getCards()[$card_index]->getId();
         $current_plan = $user->get('field_subscription')->value;
         $plan_cost = $subscription_manager->getPlanData($current_plan)['cost'];
         $api_response = $square_manager->createPayment($card_id, $plan_cost, $customer);
@@ -135,4 +134,14 @@ function hs_user_cron(){
 function hs_user_entity_type_alter(&$entity_types){
   //Change the namespacing for the user registration form to add custom behavior
   $entity_types['user']->setFormClass('register', 'Drupal\hs_user\Form\RegisterForm');
+}
+
+/**
+ * Implements hook_form_alter()
+ */
+function hs_user_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+  //Adjust styling for login and password reset forms
+  if($form_id === 'user_login_form' || $form_id === 'user_pass'){
+    $form['#attributes']['class'] = ['form--widget col-md-6 offset-md-3 mb-4'];
+  }
 }

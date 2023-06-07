@@ -78,7 +78,7 @@ class PaymentForm extends FormBase{
     //Get the current user's customer profile, their cards, and their default card's index
     $customer = $this->squareManager->retrieveCustomerByUid($this->currentUser()->id());
     $cards = $customer->getCards();
-    $default_card_index = $this->squareManager->getDefaultCardIndex($customer);
+    $default_card_id = $this->squareManager->getDefaultCardId($customer);
     if(!empty($cards)) {
       //If the user has a card(s) saved to their account, populate the card selector with that card(s)
       foreach($cards as $index => $card){
@@ -86,7 +86,7 @@ class PaymentForm extends FormBase{
           '#theme' => 'card',
           '#card' => $card,
           '#index' => $index,
-          '#is_default' => ($default_card_index == $index),
+          '#is_default' => ($default_card_id == $card->getId()),
         ];
         $form['cards']['#options'][$index] = $this->renderer->render($card_render_array);
       }

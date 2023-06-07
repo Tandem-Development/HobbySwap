@@ -2,10 +2,12 @@
 
 namespace Drupal\hs_trade;
 
+use Drupal\Core\Access\AccessManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Access\CsrfTokenGenerator;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Mail\MailManager;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
 
 class TransactionManager implements TransactionManagerInterface{
@@ -14,23 +16,29 @@ class TransactionManager implements TransactionManagerInterface{
   protected $csrfToken;
   protected $dateFormatter;
   protected $mailManager;
+  protected $currentUser;
+  protected $accessManager;
   function __construct(
     EntityTypeManagerInterface $entityTypeManager,
     CsrfTokenGenerator $csrfToken,
     DateFormatterInterface $dateFormatter,
-    MailManager $mailManager
+    MailManager $mailManager,
+    AccountProxyInterface $currentUser,
+    AccessManagerInterface $accessManager
   ){
     $this->entityTypeManager = $entityTypeManager;
     $this->csrfToken = $csrfToken;
     $this->dateFormatter = $dateFormatter;
     $this->mailManager = $mailManager;
+    $this->currentUser = $currentUser;
+    $this->accessManager = $accessManager;
   }
 
   /**
    * getTransaction() simplifies the process of getting a transaction entity
    */
   public function getTransaction($tid){
-    return \Drupal::entityTypeManager()->getStorage('hs_trade_transaction')->load($tid);
+    return $this->entityTypeManager->getStorage('hs_trade_transaction')->load($tid);
   }
 
   /**
@@ -40,7 +48,7 @@ class TransactionManager implements TransactionManagerInterface{
     $transaction = $this->getTransaction($tid);
     $responder_items = $transaction->getResponderItems();
     $requester_items = $transaction->getRequesterItems();
-    $items = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple(array_merge($responder_items, $requester_items));
+    $items = $this->entityTypeManager->getStorage('node')->loadMultiple(array_merge($responder_items, $requester_items));
     foreach($items as $item){
       $item->set('field_item_status', 'Traded')
             ->setPublished(FALSE)
@@ -77,8 +85,8 @@ class TransactionManager implements TransactionManagerInterface{
    * calculateResidual() retrieves HC values for a set of items and calculates the potential residual of a transaction
    */
   public function calculateResidual(array $responder_item_ids, array $requester_item_ids){
-    $responder_items = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($responder_item_ids);
-    $requester_items = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($requester_item_ids);
+    $responder_items = $this->entityTypeManager->getStorage('node')->loadMultiple($responder_item_ids);
+    $requester_items = $this->entityTypeManager->getStorage('node')->loadMultiple($requester_item_ids);
     $total_responder_value = 0;
     $total_requester_value = 0;
     foreach($responder_items as $item) {
@@ -102,21 +110,21 @@ class TransactionManager implements TransactionManagerInterface{
    */
   public function makeNewOffer(array $data){
 
-    $responder = \Drupal::entityTypeManager()->getStorage('user')->load($data['responder_uid']);
+    $responder = $this->entityTypeManager->getStorage('user')->load($data['responder_uid']);
 
-    $new_message = \Drupal::entityTypeManager()->getStorage('private_message')->create([
+    $new_message = $this->entityTypeManager->getStorage('private_message')->create([
       'message' => 'Hey '.$responder->getDisplayName().', I just made an offer on your items, and you should go check it out!',
       'owner' => $data['requester_uid']
     ]);
     $new_message->save();
-    $new_thread = \Drupal::entityTypeManager()->getStorage('private_message_thread')
+    $new_thread = $this->entityTypeManager->getStorage('private_message_thread')
       ->create([
         'members' => [$data['responder_uid'], $data['requester_uid']],
         'private_messages' => [$new_message->id()],
       ]);
     $new_thread->save();
 
-    $transaction = \Drupal::entityTypeManager()->getStorage('hs_trade_transaction')
+    $transaction = $this->entityTypeManager->getStorage('hs_trade_transaction')
       ->create([
         'responder_uid' => $data['responder_uid'],
         'requester_uid' => $data['requester_uid'],
@@ -163,8 +171,8 @@ class TransactionManager implements TransactionManagerInterface{
    * - Returns FALSE if the item isn't involved in any transactions, and returns an array of involved transaction IDs if it is
    */
   public function isItemInTransaction($nid){
-    $query = \Drupal::entityTypeManager()->getStorage('hs_trade_transaction')->getQuery()->execute();
-    $transactions = \Drupal::entityTypeManager()->getStorage('hs_trade_transaction')->loadMultiple($query);
+    $query = $this->entityTypeManager->getStorage('hs_trade_transaction')->getQuery()->execute();
+    $transactions = $this->entityTypeManager->getStorage('hs_trade_transaction')->loadMultiple($query);
     $involved_transactions = [];
     foreach($transactions as $transaction){
       foreach($transaction->getResponderItems() as $item){
@@ -189,7 +197,7 @@ class TransactionManager implements TransactionManagerInterface{
    * - Returns the related transaction's ID if found and returns NULL if thread isn't part of a transaction
    */
   public function getPMTransactionId($pmid){
-    $results = \Drupal::entityTypeManager()->getStorage('hs_trade_transaction')
+    $results = $this->entityTypeManager->getStorage('hs_trade_transaction')
       ->getQuery()
       ->condition('message_thread', $pmid)
       ->execute();
@@ -203,12 +211,12 @@ class TransactionManager implements TransactionManagerInterface{
   public function sendTransactionPM($tid, $message, $owner){
     $transaction = $this->getTransaction($tid);
     $pmid = $transaction->get('message_thread')->value;
-    $new_message = \Drupal::entityTypeManager()->getStorage('private_message')->create([
+    $new_message = $this->entityTypeManager->getStorage('private_message')->create([
       'message' => $message,
       'owner' => $owner
     ]);
     $new_message->save();
-    $thread = \Drupal::entityTypeManager()->getStorage('private_message_thread')->load($pmid);
+    $thread = $this->entityTypeManager->getStorage('private_message_thread')->load($pmid);
     $thread->addMessageById($new_message->id());
     $thread->save();
   }
@@ -240,119 +248,45 @@ class TransactionManager implements TransactionManagerInterface{
       $trans_final[$tid]['requester']['url'] = $requester->toUrl();
       $trans_final[$tid]['requester']['name'] = $mode === 'outgoing' ? 'You' : $requester->getDisplayName();
 
-      //Create array elements for each of the action links to be displayed
-      $trans_final[$tid]['action_links'] = [
-        'accept' => [
-          'url' => $transaction_url.'/accept',
-          'icon_path' => '/sites/default/files/icons/accept.svg',
-          'text' => 'Accept',
-        ],
-        'decline' => [
-          'url' => $transaction_url.'/decline',
-          'icon_path' => '/sites/default/files/icons/decline.svg',
-          'text' => 'Decline',
-        ],
-        'counter' => [
-          'url' => $transaction_url.'/counter',
-          'icon_path' => '/sites/default/files/icons/counter.svg',
-          'text' => 'Counter',
-        ],
-        'confirm' => [
-          'url' => $transaction_url.'/confirm',
-          'icon_path' => '/sites/default/files/icons/confirm.svg',
-          'text' => 'Confirm',
-        ],
-      ];
-
-      //Depending on current user and status, unset the appropriate action links before passing them to the theme
-      //This is purely for front-end purposes as access is already restricted for the controlling routes
-      if(\Drupal::currentUser()->id() === $requester->id()){
-        switch ($status) {
-          case 'accepted':
-            unset($trans_final[$tid]['action_links']['accept'],
-              $trans_final[$tid]['action_links']['decline'],
-              $trans_final[$tid]['action_links']['counter']);
-            break;
-          default:
-            unset($trans_final[$tid]['action_links']);
-            break;
-        }
-      }else if(\Drupal::currentUser()->id() === $responder->id()){
-        switch ($status){
-          case 'pending':
-          case 'countered':
-            unset($trans_final[$tid]['action_links']['confirm']);
-            break;
-          case 'accepted':
-          case 'declined':
-          case 'confirmed':
-            unset($trans_final[$tid]['action_links']);
-            break;
-          case 'requester confirmed':
-            unset($trans_final[$tid]['action_links']['accept'],
-              $trans_final[$tid]['action_links']['decline'],
-              $trans_final[$tid]['action_links']['counter']);
-            break;
-        }
-      }
+      //Dynamically check if the current user has access to transaction actions and pass the necessary render data if they do
+      $action_links = ['accept', 'decline', 'counter', 'confirm', 'message'];
+      $action_links = array_filter($action_links, function($action) use ($tid){
+        return $this->accessManager->checkNamedRoute('hs_trade.transaction_'.$action, ['hs_trade_transaction' => $tid], $this->currentUser);
+      });
+      $trans_final[$tid]['action_links'] = array_map(function($action) use ($tid){
+        $url = Url::fromRoute('hs_trade.transaction_'.$action, ['hs_trade_transaction' => $tid])->toString();
+        return [
+          'url' => $url,
+          'icon_path' => '/sites/default/files/icons/'.$action.'.svg',
+          'text' => $action,
+        ];
+      }, $action_links);
 
       //If either user's account has been deleted, remove all action links
       if($requester->id() === 0 || $responder->id() === 0){
         unset($trans_final[$tid]['action_links']);
       }
 
-      $trans_final[$tid]['action_links']['message'] = [
-        'url' => '/private-messages/'.$transaction->get('message_thread')->value,
-        'icon_path' => '/sites/default/files/icons/message.svg',
-        'text' => 'Message',
-      ];
-
       //Retrieve transaction items for processing and addition to returned array
-      $requester_ids_arr = $transaction->get('requester_items')->getValue();
-      $responder_ids_arr = $transaction->get('responder_items')->getValue();
-
-      //Build requester item arrays
-      foreach($requester_ids_arr as $id) {
-        if($id['value'] != 0){
-          $requester_item = $this->entityTypeManager->getStorage('node')->load($id['value']);
-          if($requester_item !== NULL){
-            $requester_item_image = $this->entityTypeManager->getStorage('file')->load($requester_item->get('field_item_image')->getValue()[0]['target_id']);
-            $trans_final[$tid]['requester_items'][] = [
-              'id' => $id['value'],
-              'name' => $requester_item->getTitle(),
-              'value' => $requester_item->get('field_item_value')->value,
-              'image' => $requester_item_image->createFileUrl(),
-              'url' => $requester_item->toUrl(),
+      $owners = ['responder_items' => 'getResponderItems', 'requester_items' => 'getRequesterItems'];
+      foreach($owners as $owner => $item_method){
+        $item_ids = $transaction->{$item_method}();
+        $items = $this->entityTypeManager->getStorage('node')->loadMultiple($item_ids);
+        foreach($items as $item) {
+          if(!empty($item)){
+            $trans_final[$tid][$owner][] = [
+              'id' => $item->id(),
+              'name' => $item->getTitle(),
+              'value' => $item->get('field_item_value')->value,
+              'image' => $item->get('field_item_image')->entity->createFileUrl(),
+              'url' => $item->toUrl(),
             ];
           }else{
-            $trans_final[$tid]['requester_items'][] = [
+            $trans_final[$tid][$owner][] = [
               'name' => 'ITEM DELETED',
               'value' => 0,
               'image' => '/themes/custom/hobbyswap/logo.png',
-              'url' => 'javascript:void(0)'
-            ];
-          }
-        }
-      }
-      //Build responder item arrays
-      foreach($responder_ids_arr as $id) {
-        if($id['value'] != 0){
-          $responder_item = $this->entityTypeManager->getStorage('node')->load($id['value']);
-          if($responder_item !== NULL){
-            $responder_item_image = $this->entityTypeManager->getStorage('file')->load($responder_item->get('field_item_image')->getValue()[0]['target_id']);
-            $trans_final[$tid]['responder_items'][] = [
-              'id' => $id['value'],
-              'name' => $responder_item->getTitle(),
-              'value' => $responder_item->get('field_item_value')->value,
-              'image' => $responder_item_image->createFileUrl(),
-              'url' => $responder_item->toUrl(),
-            ];
-          }else{
-            $trans_final[$tid]['responder_items'][] = [
-              'name' => 'ITEM DELETED',
-              'value' => 0,
-              'image' => '/themes/custom/hobbyswap/logo.png',
-              'url' => 'javascript:void(0)'
+              'url' => 'javascript:void(0)',
             ];
           }
         }

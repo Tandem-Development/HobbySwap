@@ -24,7 +24,7 @@ interface SquareManagerInterface{
 
   public function createPayment($source_id, $amount, Customer $customer);
 
-  public function getDefaultCardIndex(Customer $customer);
+  public function getDefaultCardId(Customer $customer);
 
   public function setDefaultCard(Customer $customer, $index);
 

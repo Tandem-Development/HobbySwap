@@ -78,31 +78,30 @@ li.nav-item .nav-link {
 /* line 66, ../sass/navbar.scss */
 .nav-item.link-text {
   line-height: 1.5rem;
-  padding: 0.5em 1em;
+  padding: 0;
 }
 /* line 69, ../sass/navbar.scss */
 .nav-item.link-text .nav-link {
+  padding: 0.5em 1em;
   display: block;
-  height: 1.5rem;
   margin: 0;
-  padding: 0;
   color: #4888FF;
   text-transform: uppercase;
 }
 
-/* line 79, ../sass/navbar.scss */
+/* line 78, ../sass/navbar.scss */
 .nav-item.link-full {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.5em 1em;
 }
-/* line 84, ../sass/navbar.scss */
+/* line 83, ../sass/navbar.scss */
 .nav-item.link-full img {
   height: 1.5rem;
   margin: 0;
 }
-/* line 88, ../sass/navbar.scss */
+/* line 87, ../sass/navbar.scss */
 .nav-item.link-full .nav-link {
   display: block;
   height: auto;
@@ -112,7 +111,7 @@ li.nav-item .nav-link {
   color: #4888FF;
   text-transform: uppercase;
 }
-/* line 96, ../sass/navbar.scss */
+/* line 95, ../sass/navbar.scss */
 .nav-item.link-full .nav-link::after {
   content: '';
   position: absolute;

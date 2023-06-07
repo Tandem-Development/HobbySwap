@@ -1,4 +1,4 @@
-entity.hs_trade_transaction.collection:
+rouentity.hs_trade_transaction.collection:
   title: 'Transactions'
   route_name: entity.hs_trade_transaction.collection
   menu_name: admin

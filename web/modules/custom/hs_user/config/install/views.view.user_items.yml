@@ -83,6 +83,8 @@ display:
           settings:
             image_link: ''
             image_style: ''
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -511,7 +513,20 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: "<h3 class=\"h3-responsive text-center\">It looks like you haven't posted any items yet. Click <a href=\"/node/add/item\">HERE</a> to list your first item.</h3>\r\n"
+            format: full_html
+          tokenize: false
       sorts:
         created:
           id: created

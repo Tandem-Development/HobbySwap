@@ -11,6 +11,7 @@
 // 7 - Local Task Tabs
 // 8 - Form Elements
 // 9 - Tabbed Content Switcher
+// 10 - Drupal Messenger
 
 // 1 - Colors and Implementations
 
@@ -660,5 +661,22 @@ a.dropdown-item:focus{
     & > *{
       display: none;
     }
+  }
+}
+
+
+// 10 - Drupal Messenger
+.alert{
+  color: $hs-gray4;
+  font-size: 1.2rem;
+  background-color: white;
+  &.alert-status{
+    border: 0.3rem solid #009d16;
+  }
+  &.alert-warning{
+    border: 0.3rem solid #ea9804;
+  }
+  &.alert-error{
+    border: 0.3rem solid #c70000;
   }
 }

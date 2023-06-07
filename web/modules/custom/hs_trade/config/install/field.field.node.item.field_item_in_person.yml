@@ -10,7 +10,7 @@ entity_type: node
 bundle: item
 label: In-Person
 description: 'By checking this box, the item will be marked as available for an in-person meetup and exchange of items'
-required: true
+required: false
 translatable: false
 default_value:
   -

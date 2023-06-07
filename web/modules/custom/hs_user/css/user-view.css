@@ -306,3 +306,9 @@
   inset: 85% 0 0 0;
   background: linear-gradient(to top, white, transparent);
 }
+/* line 257, ../sass/user-view.scss */
+.field--name-field-user-items .view-empty {
+  padding: 3rem 5vw;
+  border: 1rem solid #F3F3F3;
+  border-radius: 0.5rem;
+}

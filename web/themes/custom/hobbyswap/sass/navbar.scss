@@ -65,12 +65,11 @@ li.nav-item{
 
 .nav-item.link-text{
   line-height: 1.5rem;
-  padding: 0.5em 1em;
+  padding: 0;
   .nav-link{
+    padding: 0.5em 1em;
     display: block;
-    height: 1.5rem;
     margin: 0;
-    padding: 0;
     color: $hs-blue;
     text-transform: uppercase;
   }

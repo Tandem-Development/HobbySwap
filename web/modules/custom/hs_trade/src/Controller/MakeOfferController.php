@@ -13,14 +13,13 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class ItemTradeController extends ControllerBase{
+class MakeOfferController extends ControllerBase{
 
   public function tradeAccess(AccountInterface $account, $id) {
     $item = $this->entityTypeManager()->getStorage('node')->load($id);
-    if(\Drupal::currentUser()->id() === $item->getOwner()->id()){
+    if($account->id() === $item->getOwner()->id()){
       return AccessResult::forbidden();
     }
-
     return AccessResult::allowed();
   }
 
@@ -28,7 +27,7 @@ class ItemTradeController extends ControllerBase{
    * Sets the title of the page
    */
   public function tradeTitle($id){
-    return 'MAKE AN OFFER';
+    return 'Make an Offer';
   }
 
   /**
@@ -44,7 +43,7 @@ class ItemTradeController extends ControllerBase{
       'offer_type' => 'new',
       'responder_uid' => $item['responder']['id'],
       'requester_uid' => \Drupal::currentUser()->id(),
-      'first_item_id' => $id,
+      'selected_item' => $id
     ];
 
     //Loads MakeOfferForm and passes in $controller_data to apply desired form behavior

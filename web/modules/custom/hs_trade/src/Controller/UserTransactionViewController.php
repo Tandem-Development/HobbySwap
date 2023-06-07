@@ -110,7 +110,7 @@ class UserTransactionViewController extends ControllerBase {
    */
   public function viewUserTransactionsAccess(AccountInterface $account, $user){
     //Only allow the current user to view their transactions
-    if($account->id() === $user && $account->isAuthenticated()){
+    if($account->id() === $user && $account->hasPermission('use trade system')){
       return AccessResult::allowed();
     }else if(in_array('administrator', $account->getRoles())){
       //Allow admins to view any user's transactions view

@@ -218,8 +218,9 @@
 .hs--transaction .hs--transaction-body .hs--action-links .action-link a {
   color: white;
   text-decoration: none;
+  text-transform: capitalize;
 }
-/* line 186, ../sass/hs-transactions.scss */
+/* line 187, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--action-links .action-link a::after {
   content: '';
   position: absolute;
@@ -228,22 +229,22 @@
   bottom: 0;
   left: 0;
 }
-/* line 195, ../sass/hs-transactions.scss */
+/* line 196, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--action-links .action-link img {
   width: 1.2em;
 }
-/* line 200, ../sass/hs-transactions.scss */
+/* line 201, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items {
   position: relative;
   display: flex;
   flex-direction: column;
   padding: 1em 0.2em;
 }
-/* line 205, ../sass/hs-transactions.scss */
+/* line 206, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item--link:hover {
   text-decoration: none;
 }
-/* line 208, ../sass/hs-transactions.scss */
+/* line 209, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .wants {
   position: relative;
   font-size: 1.5em;
@@ -255,15 +256,15 @@
   background-color: #4888FF;
   border-radius: 0.3em 0.3em 0 0;
 }
-/* line 218, ../sass/hs-transactions.scss */
+/* line 219, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .wants a {
   color: white;
 }
-/* line 220, ../sass/hs-transactions.scss */
+/* line 221, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .wants a:hover {
   color: #B5B5B5;
 }
-/* line 225, ../sass/hs-transactions.scss */
+/* line 226, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item {
   display: flex;
   align-items: center;
@@ -275,36 +276,36 @@
   border-right: 6px solid #808080;
   transition: all 0.2s;
 }
-/* line 235, ../sass/hs-transactions.scss */
+/* line 236, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item:hover {
   box-shadow: 1px 1px 10px #B5B5B5;
   transform: translateY(-0.3em);
 }
-/* line 239, ../sass/hs-transactions.scss */
+/* line 240, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--image {
   position: relative;
   flex-basis: 30%;
   background-color: white;
   border: 1px solid #B5B5B5;
 }
-/* line 244, ../sass/hs-transactions.scss */
+/* line 245, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--image:before {
   content: '';
   display: block;
   padding-bottom: 100%;
 }
-/* line 249, ../sass/hs-transactions.scss */
+/* line 250, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--image .image-spacer {
   position: absolute;
   inset: 0;
 }
-/* line 252, ../sass/hs-transactions.scss */
+/* line 253, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--image .image-spacer img {
   object-fit: contain;
   height: 100%;
   width: 100%;
 }
-/* line 259, ../sass/hs-transactions.scss */
+/* line 260, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--info {
   flex-basis: 70%;
   display: flex;
@@ -313,7 +314,7 @@
   align-items: flex-end;
   padding: 0 1em;
 }
-/* line 266, ../sass/hs-transactions.scss */
+/* line 267, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--info .responder-item--name {
   width: 100%;
   text-align: right;
@@ -323,12 +324,12 @@
   border-bottom: 1px solid #B5B5B5;
   margin-bottom: 0;
 }
-/* line 275, ../sass/hs-transactions.scss */
+/* line 276, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .responder-item .responder-item--info .responder-item--value {
   font-size: 1.75em;
   margin-top: 0.5em;
 }
-/* line 281, ../sass/hs-transactions.scss */
+/* line 282, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .residual {
   text-align: center;
   background-color: #F3F3F3;
@@ -337,7 +338,7 @@
   border-radius: 0.3em;
   border-right: 6px solid #FFDD47;
 }
-/* line 288, ../sass/hs-transactions.scss */
+/* line 289, ../sass/hs-transactions.scss */
 .hs--transaction .hs--transaction-body .hs--responder-items .residual h3 {
   font-size: 2.5rem;
   margin: auto;
@@ -345,7 +346,7 @@
 
 /*Styling for transactions END*/
 /*Styling for user transaction view START*/
-/* line 299, ../sass/hs-transactions.scss */
+/* line 300, ../sass/hs-transactions.scss */
 .hs--no-transactions {
   text-align: center;
   font-size: 1.5rem;
@@ -357,12 +358,12 @@
   box-shadow: 2px 2px 5px #B5B5B5;
 }
 
-/* line 309, ../sass/hs-transactions.scss */
+/* line 310, ../sass/hs-transactions.scss */
 .hs--transactions-tabs {
   display: flex;
   padding: 0 1em;
 }
-/* line 312, ../sass/hs-transactions.scss */
+/* line 313, ../sass/hs-transactions.scss */
 .hs--transactions-tabs .hs--incoming--label {
   flex: 1;
   color: #505050;
@@ -375,17 +376,17 @@
   border-radius: 0.3em 0 0 0;
   transition: all 0.25s cubic-bezier(0.95, 0.35, 0.04, 1.65), filter 0.15s linear;
 }
-/* line 323, ../sass/hs-transactions.scss */
+/* line 324, ../sass/hs-transactions.scss */
 .hs--transactions-tabs .hs--incoming--label:hover {
   cursor: pointer;
   filter: brightness(0.9);
 }
-/* line 327, ../sass/hs-transactions.scss */
+/* line 328, ../sass/hs-transactions.scss */
 .hs--transactions-tabs .hs--incoming--label.active {
   background-color: #4888FF;
   color: white;
 }
-/* line 331, ../sass/hs-transactions.scss */
+/* line 332, ../sass/hs-transactions.scss */
 .hs--transactions-tabs .hs--incoming--label span {
   background-color: white;
   color: #505050;
@@ -396,7 +397,7 @@
   padding: 0.1em 0.3em;
   box-shadow: 0 0 3px #B5B5B5 inset;
 }
-/* line 342, ../sass/hs-transactions.scss */
+/* line 343, ../sass/hs-transactions.scss */
 .hs--transactions-tabs .hs--outgoing--label {
   flex: 1;
   color: #505050;
@@ -409,17 +410,17 @@
   margin-bottom: 0;
   transition: all 0.25s cubic-bezier(0.95, 0.35, 0.04, 1.65), filter 0.15s linear;
 }
-/* line 353, ../sass/hs-transactions.scss */
+/* line 354, ../sass/hs-transactions.scss */
 .hs--transactions-tabs .hs--outgoing--label:hover {
   cursor: pointer;
   filter: brightness(0.9);
 }
-/* line 357, ../sass/hs-transactions.scss */
+/* line 358, ../sass/hs-transactions.scss */
 .hs--transactions-tabs .hs--outgoing--label.active {
   background-color: #4888FF;
   color: white;
 }
-/* line 361, ../sass/hs-transactions.scss */
+/* line 362, ../sass/hs-transactions.scss */
 .hs--transactions-tabs .hs--outgoing--label span {
   background-color: white;
   color: #505050;
@@ -431,27 +432,27 @@
   box-shadow: 0 0 3px #B5B5B5 inset;
 }
 
-/* line 373, ../sass/hs-transactions.scss */
+/* line 374, ../sass/hs-transactions.scss */
 .hs--outgoing-container {
   display: none;
   margin-bottom: 6rem;
 }
 
-/* line 377, ../sass/hs-transactions.scss */
+/* line 378, ../sass/hs-transactions.scss */
 .hs--incoming-container {
   margin-bottom: 6rem;
 }
 
 @media (max-width: 767.8px) {
-  /* line 381, ../sass/hs-transactions.scss */
+  /* line 382, ../sass/hs-transactions.scss */
   .hs--transactions-tabs {
     flex-direction: column;
   }
-  /* line 383, ../sass/hs-transactions.scss */
+  /* line 384, ../sass/hs-transactions.scss */
   .hs--transactions-tabs .hs--incoming--label {
     border-radius: 0.3em 0.3em 0 0;
   }
-  /* line 386, ../sass/hs-transactions.scss */
+  /* line 387, ../sass/hs-transactions.scss */
   .hs--transactions-tabs .hs--outgoing--label {
     border-radius: 0;
   }

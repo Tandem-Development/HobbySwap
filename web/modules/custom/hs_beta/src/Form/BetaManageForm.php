@@ -2,14 +2,35 @@
 
 namespace Drupal\hs_beta\Form;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
- * BetaManageForm is called by the route hs_beta.manage
- * - Handles the opening and closing of the beta program
+ * Provides a form for administrators to open and close the beta program
  */
 class BetaManageForm extends FormBase{
+
+  protected $entityTypeManager;
+  protected $messenger;
+  protected $mailManager;
+
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, MessengerInterface $messenger, MailManagerInterface $mailManager){
+    $this->entityTypeManager = $entityTypeManager;
+    $this->messenger = $messenger;
+    $this->mailManager = $mailManager;
+  }
+
+  public static function create(ContainerInterface $container){
+    return new static(
+      $container->get('entity_type.manager'),
+      $container->get('messenger'),
+      $container->get('plugin.manager.mail')
+    );
+  }
 
   public function getFormId() {
     return 'hs_beta.open';
@@ -17,6 +38,7 @@ class BetaManageForm extends FormBase{
 
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    //Build the form with two primary submit buttons: one to open the beta and one to close it
     $form['#attached']['library'] = ['hs_beta/manage-form'];
 
     $form['open_set'] = [
@@ -63,6 +85,7 @@ class BetaManageForm extends FormBase{
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
 
+    //Require the admin to enter a string to prevent accidental opening or closing of the beta
     if($form_state->getTriggeringElement()['#value'] === 'Open Beta'){
       if($form_state->getValue('open_text') != 'openbeta'){
         $form_state->setErrorByName('open_text', $this->t('Please enter the correct confirmation text to perform this action'));
@@ -72,43 +95,45 @@ class BetaManageForm extends FormBase{
         $form_state->setErrorByName('close_text', $this->t('Please enter the correct confirmation text to perform this action'));
       }
     }
-
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    $mail_manager = \Drupal::service('plugin.manager.mail');
-
-    $user_storage = \Drupal::entityTypeManager()->getStorage('user');
-    $query = $user_storage->getQuery();
+    //Regardless of selected action, all beta user accounts are needed
+    $user_storage = $this->entityTypeManager->getStorage('user');
+    $query = $user_storage->getQuery()
+      ->condition('uid', '0', '>')
+      ->condition('roles', 'beta', 'CONTAINS');
     $users = $user_storage->loadMultiple($query->execute());
 
     if($form_state->getTriggeringElement()['#value'] === 'Open Beta'){
-      foreach($users as $id => $user){
-        if($user->hasRole('beta')){
-          //Generate and set user's password
-          $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-          $charactersLength = strlen($characters);
-          $password = '';
-          for ($i = 0; $i < 15; $i++) {
-            $password .= $characters[rand(0, $charactersLength - 1)];
-          }
-          $user->set('status', TRUE)->setPassword($password)->save();
-          $params['username'] = $user->getDisplayName();
-          $params['password'] = $password;
-          $mail_manager->mail('hs_beta', 'beta_open', $user->get('mail')->value, 'en', $params, NULL, TRUE);
+      //Run this code if 'Open Beta' was clicked
+      foreach($users as $user){
+        //Generate and the user's new password
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $password = '';
+        for ($i = 0; $i < 15; $i++) {
+          $password .= $characters[rand(0, $charactersLength - 1)];
         }
+        //Set the new password
+        $user->set('status', TRUE)->setPassword($password)->save();
+        //Prepare email parameters to send each user their account info
+        $params['username'] = $user->getDisplayName();
+        $params['password'] = $password;
+        //Send the user their info
+        $this->mailManager->mail('hs_beta', 'beta_open', $user->get('mail')->value, 'en', $params, NULL, TRUE);
       }
-      \Drupal::messenger()->addMessage('All beta accounts have been activated');
+      $this->messenger->addMessage('All beta accounts have been activated');
 
     }else if($form_state->getTriggeringElement()['#value'] === 'Close Beta'){
-      foreach($users as $id => $user){
-        if($user->hasRole('beta')){
-          $user->set('status', FALSE)->save();
-          $mail_manager->mail('hs_beta', 'beta_close', $user->get('mail')->value, 'en', [], NULL, TRUE);
-        }
+      //Run this code if 'Close Beta' was clicked
+      foreach($users as $user){
+        //Block all accounts to prevent them from logging in
+        $user->set('status', FALSE)->save();
+        $this->mailManager->mail('hs_beta', 'beta_close', $user->get('mail')->value, 'en', [], NULL, TRUE);
       }
-      \Drupal::messenger()->addMessage('All beta accounts have been deactivated');
+      $this->messenger->addMessage('All beta accounts have been deactivated');
     }
   }
 

@@ -36,6 +36,7 @@ class RegisterForm extends \Drupal\user\AccountForm {
     ];
 
     $form['#attached']['library'][] = 'core/drupal.form';
+    $form['#attributes']['class'] = ['form--widget col-md-6 offset-md-3 mb-4'];
 
     // For non-admin users, populate the form fields using data from the
     // browser.

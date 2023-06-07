@@ -2,10 +2,11 @@
 hs_trade.item_trade:
   path: '/node/{id}/trade'
   defaults:
-    _controller: 'Drupal\hs_trade\Controller\ItemTradeController::viewTrade'
-    _title_callback: 'Drupal\hs_trade\Controller\ItemTradeController::tradeTitle'
+    _controller: 'Drupal\hs_trade\Controller\MakeOfferController::viewTrade'
+    _title_callback: 'Drupal\hs_trade\Controller\MakeOfferController::tradeTitle'
   requirements:
-    _custom_access: 'Drupal\hs_trade\Controller\ItemTradeController::tradeAccess'
+    _permission: 'use trade system'
+    _custom_access: 'Drupal\hs_trade\Controller\MakeOfferController::tradeAccess'
 
 #Displays current user's involved transactions as a local task
 hs_trade.user_view_transactions:
@@ -14,6 +15,7 @@ hs_trade.user_view_transactions:
     _controller: 'Drupal\hs_trade\Controller\UserTransactionViewController::viewUserTransactions'
     _title: 'Your Transactions'
   requirements:
+    _permission: 'use trade system'
     _custom_access: 'Drupal\hs_trade\Controller\UserTransactionViewController::viewUserTransactionsAccess'
   options:
     no_cache: 'TRUE'
@@ -23,44 +25,47 @@ hs_trade.user_view_transactions_alias:
   defaults:
     _controller: 'Drupal\hs_trade\Controller\UserTransactionViewController::userTransactionsAlias'
   requirements:
-    _permission: 'access content'
+    _permission: 'use trade system'
 
 #Routes for request interactions
 hs_trade.transaction_accept:
   path: "/transaction/{hs_trade_transaction}/accept"
   defaults:
-    _controller: 'Drupal\hs_trade\Controller\RequestInteractController::acceptRequest'
+    _controller: 'Drupal\hs_trade\Controller\AlterTransactionController::accept'
   requirements:
-    _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::interactionAccess'
-  options:
-    no_cache: 'TRUE'
+    _permission: 'use trade system'
+    _custom_access: 'Drupal\hs_trade\Controller\AlterTransactionController::acceptAccess'
 
 hs_trade.transaction_decline:
   path: "/transaction/{hs_trade_transaction}/decline"
   defaults:
-    _controller: 'Drupal\hs_trade\Controller\RequestInteractController::declineRequest'
+    _controller: 'Drupal\hs_trade\Controller\AlterTransactionController::decline'
   requirements:
-    _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::declinationAccess'
-  options:
-    no_cache: 'TRUE'
+    _permission: 'use trade system'
+    _custom_access: 'Drupal\hs_trade\Controller\AlterTransactionController::declineAccess'
 
 hs_trade.transaction_counter:
   path: "/transaction/{hs_trade_transaction}/counter"
   defaults:
-    _controller: 'Drupal\hs_trade\Controller\RequestInteractController::counterRequest'
+    _controller: 'Drupal\hs_trade\Controller\AlterTransactionController::counter'
   requirements:
-    _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::interactionAccess'
-  options:
-    no_cache: 'TRUE'
+    _permission: 'use trade system'
+    _custom_access: 'Drupal\hs_trade\Controller\AlterTransactionController::counterAccess'
 
 hs_trade.transaction_confirm:
   path: "/transaction/{hs_trade_transaction}/confirm"
   defaults:
-    _controller: 'Drupal\hs_trade\Controller\RequestInteractController::confirmationRequest'
+    _controller: 'Drupal\hs_trade\Controller\AlterTransactionController::confirm'
   requirements:
-    _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::confirmationAccess'
-  options:
-    no_cache: 'TRUE'
+    _permission: 'use trade system'
+    _custom_access: 'Drupal\hs_trade\Controller\AlterTransactionController::confirmAccess'
+
+hs_trade.transaction_message:
+  path: '/transaction/{hs_trade_transaction}/message'
+  defaults:
+    _controller: 'Drupal\hs_trade\Controller\AlterTransactionController::message'
+  requirements:
+    _permission: 'use trade system'
 
 #Route that enables users to purchase HobbyCoin if their balance is insufficient
 hs_trade.purchase_hobbycoin:
@@ -68,6 +73,7 @@ hs_trade.purchase_hobbycoin:
   defaults:
     _controller: 'Drupal\hs_trade\Controller\PurchaseHobbyCoinController::purchase'
   requirements:
+    _permission: 'use trade system'
     _custom_access: 'Drupal\hs_trade\Controller\RequestInteractController::confirmationAccess'
 
 #Routes for Transaction content entity

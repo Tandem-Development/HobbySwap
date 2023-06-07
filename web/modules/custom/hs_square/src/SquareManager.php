@@ -215,11 +215,11 @@ class SquareManager implements SquareManagerInterface {
   /**
    * Returns a given customer's default card id
    */
-  public function getDefaultCardIndex(Customer $customer){
+  public function getDefaultCardId(Customer $customer){
     $index = $customer->getNote();
-    $reg = '/default_card_index:(\w+)/';
+    $reg = '/".*?"/';
     if(preg_match($reg, $index, $m)){
-      return $m[1];
+      return trim($m[0], '"');
     }
     return null;
   }
@@ -231,7 +231,8 @@ class SquareManager implements SquareManagerInterface {
    */
   public function setDefaultCard(Customer $customer, $index){
     $body = new UpdateCustomerRequest();
-    $body->setNote('default_card_index:'.$index);
+    $card_id = $customer->getCards()[$index]->getId();
+    $body->setNote('default_card_id:"'.$card_id.'"');
     return $this->openClient()->getCustomersApi()->updateCustomer($customer->getId(), $body);
   }
 

@@ -28,7 +28,7 @@
       }
     });
   }
-  setInterval(renderTransactions, 5000);
+  setInterval(renderTransactions, 20000);
 
   incomingTab.addEventListener('click', () => {
     if(!incomingTab.classList.contains('active')){
