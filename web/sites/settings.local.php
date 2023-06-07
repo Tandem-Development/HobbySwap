@@ -154,8 +154,7 @@ $settings['skip_permissions_hardening'] = TRUE;
  */
 # $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy'];
 
-
-$config['system.logging']['error_level'] = 'verbose';$databases['default']['default'] = array (
+$databases['default']['default'] = array (
     'database' => 'hobbyswapdb',
     'username' => 'admin',
     'password' => 'MEGAMIND',

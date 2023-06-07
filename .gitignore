@@ -100,3 +100,12 @@
 
 # To fix an update script bug, viewsreference will not be ignored
 !/web/modules/contrib/viewsreference/*
+
+# Database backups
+/db_backups
+
+# Ignore all node stuff
+**/node_modules
+
+# Ignore Apple. They're criminals
+**/.DS_Store

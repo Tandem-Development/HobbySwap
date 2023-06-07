@@ -23,5 +23,5 @@ regions:
   page_bottom: 'Page bottom'
 
 libraries:
-  - 'hobbyswap/global-styling'
+  - 'hobbyswap/global'
 

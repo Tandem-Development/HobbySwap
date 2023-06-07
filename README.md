@@ -1,22 +1,30 @@
-# Composer-enabled Drupal template
+# HobbySwap
 
-This is Pantheon's recommended starting point for forking new [Drupal](https://www.drupal.org/) upstreams
-that work with the Platform's Integrated Composer build process. It is also the
-Platform's standard Drupal 9 upstream.
+---
 
-Unlike with earlier Pantheon upstreams, files such as Drupal Core that you are
-unlikely to adjust while building sites are not in the main branch of the 
-repository. Instead, they are referenced as dependencies that are installed by
-Composer.
+## Local Installation
 
-For more information and detailed installation guides, please visit the
-Integrated Composer Pantheon documentation: https://pantheon.io/docs/integrated-composer
+- Clone the repo with `git clone git@github.com:Tandem-Development/HobbySwap.git`
+- Make sure the latest version of Lando is installed on your machine. If it isn't already, go [here](https://lando.dev/download/).
+- Spin up your environment with `lando start`
+- Install Drupal and all necessary vendor files with `lando composer install`
+- Acquire a database backup file and follow the steps listed below to import it.
+- Finally, copy/paste `web/sites/settings.local.php` to `web/sites/default/settings.local.php`
 
-## Contributing
+## Importing database backups
 
-Contributions are welcome in the form of GitHub pull requests. However, the
-`pantheon-upstreams/drupal-composer-managed` repository is a mirror that does not
-directly accept pull requests.
+- All database backups should reside in the `db_backups` folder at this project's root. If you don't have the folder, make it
+- Lando's included `db-import` command does the job just fine.
+- Simply run `lando db-import db_backups/<file>`
+- There's no reason to unzip any backups. Lando handles decompression for you.
 
-Instead, to propose a change, please fork [pantheon-systems/drupal-composer-managed](https://github.com/pantheon-systems/drupal-composer-managed)
-and submit a PR to that repository.
+## Compiling Sass
+
+- It's super simple! For a one-time build, run `lando build-theme`
+- During development, keep the compiler running with `lando watch-theme`
+
+## Deploying to Pantheon
+
+- If you haven't already, add the Pantheon repository as a remote with `git remote add pantheon ssh://codeserver.dev.2ba2461a-22d0-4cf7-8c9d-8e2a2f4cc052@codeserver.dev.2ba2461a-22d0-4cf7-8c9d-8e2a2f4cc052.drush.in:2222/~/repository.git`
+- Run `git checkout master && git pull origin master` to make sure your local repo is up-to-date.
+- Push to pantheon with `git push pantheon master`. Provided everything goes well, Pantheon will automatically begin deployment.
